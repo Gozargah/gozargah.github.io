@@ -23,7 +23,7 @@ const persianThemeConfig = {
     copyright: 'توسعه داده شده در کارگروه گذرگاه',
   },
   editLink: {
-    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/fa/:path',
+    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/marzban/fa/:path',
     text: 'ویرایش این صفحه در گیت‌هاب',
   },
 }
@@ -49,7 +49,7 @@ const englishThemeConfig = {
     copyright: 'Copyright © 2023-present Gozargah',
   },
   editLink: {
-    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/:path',
+    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/marzban/:path',
     text: 'Edit this page on GitHub',
   },
 }
