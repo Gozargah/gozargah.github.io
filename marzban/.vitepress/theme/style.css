@@ -114,6 +114,10 @@ html[dir] .VPImage.logo {
 	margin-left: 10px;
 }
 
+html[dir="ltr"] .VPImage.logo {
+	margin-bottom: 4px;
+}
+
 html[dir] .container .name {
 	margin-bottom: 10px !important;
 }

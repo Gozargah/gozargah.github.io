@@ -19,11 +19,11 @@ const persianThemeConfig = {
   ],
 
   footer: {
-    message: 'منشر شده تحت لایسنس AGPL-3.0',
+    message: 'منتشر شده تحت لایسنس AGPL-3.0',
     copyright: 'توسعه داده شده در کارگروه گذرگاه',
   },
   editLink: {
-    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/main/fa/:path',
+    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/fa/:path',
     text: 'ویرایش این صفحه در گیت‌هاب',
   },
 }
@@ -49,7 +49,7 @@ const englishThemeConfig = {
     copyright: 'Copyright © 2023-present Gozargah',
   },
   editLink: {
-    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/main/:path',
+    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/:path',
     text: 'Edit this page on GitHub',
   },
 }
