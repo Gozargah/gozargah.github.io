@@ -29,7 +29,7 @@ jobs:
       - name: Copy files to /marzban path
         run: |
           mkdir -p dist/marzban
-          cp marzban/.vitepress/dist/* dist/marzban
+          cp -r marzban/.vitepress/dist/* dist/marzban
       - uses: actions/upload-pages-artifact@v1
         with:
           path: dist
