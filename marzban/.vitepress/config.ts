@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 
-export const BASE = '/'
+export const BASE = '/marzban'
 
 const persianThemeConfig = {
   sidebar: [
