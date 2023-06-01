@@ -4,35 +4,39 @@ export const BASE = '/marzban'
 
 const persianThemeConfig = {
   sidebar: [
-    {
-      text: 'Examples',
-      items: [
-        { text: 'Markdown Examples', link: '/documentation/' },
-        { text: 'Runtime API Examples', link: '/examples/' },
-      ],
-    },
+    // {
+    //   text: 'Examples',
+    //   items: [
+    //     { text: 'Markdown Examples', link: '/documentation/' },
+    //     { text: 'Runtime API Examples', link: '/examples/' },
+    //   ],
+    // },
   ],
   nav: [
-    { text: 'Home', link: '/' },
-    { text: 'Documentation', link: '/documentation/' },
-    { text: 'Examples', link: '/examples/' },
+    { text: 'خانه', link: '/' },
+    { text: 'مستندات', link: '/documentation/' },
+    { text: 'نمونه‌ها', link: '/examples/' },
   ],
 
   footer: {
-    message: 'تحت لایسنس AGPL-3.0.',
-    copyright: 'کپی‌رایت © 2023-تا حال گذرگاه',
+    message: 'منشر شده تحت لایسنس AGPL-3.0',
+    copyright: 'توسعه داده شده در کارگروه گذرگاه',
+  },
+  editLink: {
+    pattern: 'https://github.com/gozargah/gozargah-docs/edit/main/fa/:path',
+    text: 'ویرایش این صفحه در گیت‌هاب',
   },
 }
 
 const englishThemeConfig = {
   sidebar: [
-    {
-      text: 'Examples',
-      items: [
-        { text: 'Markdown Examples', link: '/en/documentation/' },
-        { text: 'Runtime API Examples', link: '/en/examples/' },
-      ],
-    },
+    // {
+    //   text: 'Examples',
+    //   items: [
+    //     { text: 'Markdown Examples', link: '/en/documentation/' },
+    //     { text: 'Runtime API Examples', link: '/en/examples/' },
+    //   ],
+    // },
   ],
   nav: [
     { text: 'Home', link: '/en/' },
@@ -43,6 +47,10 @@ const englishThemeConfig = {
   footer: {
     message: 'Released under AGPL-3.0 License.',
     copyright: 'Copyright © 2023-present Gozargah',
+  },
+  editLink: {
+    pattern: 'https://github.com/gozargah/gozargah-docs/edit/main/:path',
+    text: 'Edit this page on GitHub',
   },
 }
 
@@ -79,12 +87,7 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     i18nRouting: true,
-    editLink: {
-      pattern: 'https://github.com/gozargah/gozargah-docs/edit/main/:path',
-      text: 'Edit this page on GitHub',
-    },
     logo: '/images/logo-dark.png',
-
     socialLinks: [{ icon: 'github', link: 'https://github.com/gozargah/marzban' }],
   },
 })

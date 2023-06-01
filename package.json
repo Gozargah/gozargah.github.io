@@ -9,9 +9,11 @@
   },
   "author": "",
   "devDependencies": {
+    "postcss": "^8.4.24",
     "vitepress": "^1.0.0-beta.1"
   },
   "dependencies": {
+    "postcss-rtl": "^2.0.0",
     "vue": "^3.3.4"
   }
 }
