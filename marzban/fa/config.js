@@ -3,9 +3,18 @@ export const config = {
     {
       text: 'مقدمه',
       items: [
-        { text: 'معرفی مرزبان', link: '/docs/introduction' },
-        { text: 'شروع سریع', link: '/quick-start' },
-        { text: 'پیکربندی', link: '/quick-start' },
+        {
+          text: 'معرفی مرزبان',
+          link: '/docs/introduction',
+        },
+        {
+          text: 'راه‌اندازی',
+          link: '/docs/quick-start',
+        },
+        {
+          text: 'پیکربندی',
+          link: '/docs/configuration',
+        },
       ],
     },
     {
@@ -14,6 +23,7 @@ export const config = {
         { text: 'تنظیمات هاست', link: '' },
         { text: 'سابسکریپشن', link: '' },
         { text: 'مرزبان نود ✨', link: '' },
+        { text: 'اسکریپت مرزبان', link: '/docs/marzban-script' },
         { text: 'خط فرمان (CLI)', link: '' },
       ],
     },

@@ -125,3 +125,51 @@ html[dir] .container .name {
 html[dir="rtl"] .container .tagline {
 	margin-top: 10px !important;
 }
+
+/* rtl:ignore */
+code {
+	direction: ltr !important;
+	text-align: left !important;
+}
+
+/* rtl:ignore */
+span.lang {
+	right: 8px;
+}
+
+/* rtl:ignore */
+.copy {
+	right: 8px;
+}
+
+/* rtl:ignore */
+.vp-doc [class*='language-']>button.copy.copied::before,
+.vp-doc [class*='language-']>button.copy:hover.copied::before {
+	left: -39px !important;
+	right: unset !important;
+	border-right: 0 !important;
+	border-left: 1px solid var(--vp-code-copy-code-hover-border-color) !important;
+	border-radius: 4px 0 0 4px !important;
+}
+
+/* rtl:ignore */
+[dir=rtl] .vp-doc [class*='language-']>button.copy.copied,
+[dir=rtl] .vp-doc [class*='language-']>button.copy:hover.copied {
+	border-radius: 0 4px 4px 0 !important;
+}
+
+/* rtl:ignore */
+[dir=rtl] pre,
+[dir=rtl] code {
+	direction: ltr !important;
+}
+
+[dir=rtl] code {
+	display: inline-block;
+	line-height: normal;
+}
+
+/* rtl:ignore */
+.vp-code-group .tabs {
+	direction: ltr;
+}
