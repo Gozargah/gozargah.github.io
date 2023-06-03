@@ -9,7 +9,7 @@ export const config = {
         },
         {
           text: 'راه‌اندازی',
-          link: '/docs/quick-start',
+          link: '/docs/installation',
         },
         {
           text: 'پیکربندی',
