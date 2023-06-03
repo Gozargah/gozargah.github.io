@@ -41,9 +41,6 @@ marzban --help
 نصب مرزبان به صورت دستی به افراد غیر حرفه‌ای پیشنهاد نمیشه. اگر حوصله مطالعه مستندات را دارید و یا با محیط برنامه نویسی و لینوکس آشنایی دارید نصب به این روش رو امتحان کنید.
 :::
 
-<details style="display: inline">
-<summary><h3 style="display: inline; cursor: pointer">مشاهده ادامه</h3></summary>
-
 ابتدا باید Xray را بر روی ماشین خود نصب کنید.
 پیشنهاد میشه با اسکریپت [Xray-install](https://github.com/XTLS/Xray-install) این کار را انجام دهید.
 
@@ -143,5 +140,3 @@ server {
 }
 ```
 :::
-
-</details>
