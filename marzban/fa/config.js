@@ -37,7 +37,7 @@ export const config = {
   ],
   nav: [
     { text: 'خانه', link: '/' },
-    { text: 'مستندات', link: '/introduction' },
+    { text: 'مستندات', link: '/docs/introduction' },
     { text: 'نمونه‌ها', link: '/examples' },
   ],
 
