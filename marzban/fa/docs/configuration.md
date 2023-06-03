@@ -39,12 +39,12 @@ title: پیکربندی
 
 آدرس فایل certificate گواهی SSL
 
-(مثال: `/var/lib/marzban/certs/example.com/fullchain.pem`)
+(مثال: `/path/to/example.com/fullchain.pem`)
 
 ## UVICORN_SSL_KEYFILE
 آدرس فایل key گواهی SSL
 
-(مثال: `/var/lib/marzban/certs/example.com/key.pem`)
+(مثال: `/path/to/example.com/key.pem`)
 
 
 ## XRAY_JSON
