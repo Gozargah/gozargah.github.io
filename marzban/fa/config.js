@@ -20,18 +20,22 @@ export const config = {
     {
       text: 'مستندات',
       items: [
-        { text: 'تنظیمات هاست', link: '' },
-        { text: 'سابسکریپشن', link: '' },
-        { text: 'مرزبان نود ✨', link: '' },
+        { text: 'تنظیمات هاست', link: '/docs/host-settings' },
+        { text: 'سابسکریپشن', link: '/docs/subscription' },
+        { text: 'مرزبان نود ✨', link: '/docs/marzban-node' },
+        { text: 'ربات تلگرام', link: '/docs/telegram-bot'},
         { text: 'اسکریپت مرزبان', link: '/docs/marzban-script' },
-        { text: 'خط فرمان (CLI)', link: '' },
+        { text: 'خط فرمان (CLI)', link: '/docs/marzban-cli' },
+        { text: 'API', link: '/docs/api' },
+        { text: 'Webhook', link: '/docs/webhook' },
       ],
     },
     {
       text: 'آموزش‌ها',
       items: [
-        { text: 'فعالسازی SSL برای داشبورد', link: '' },
-        { text: 'ریالیتی - Reality', link: '' },
+        { text: 'ساخت گواهی SSL', link: '/examples/issue-ssl-certificate' },
+        
+        { text: 'فعال‌سازی SSL در مرزبان', link: '/examples/marzban-ssl' },
       ],
     },
   ],
