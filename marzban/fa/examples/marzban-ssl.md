@@ -112,18 +112,18 @@ XRAY_SUBSCRIPTION_URL_PREFIX = https://YOUR_DOMAIN
 - فایل `docker-compose.yml` به شکل زیر تغییر دهید.
 
 ::: code-group
-```yml{8-9,11-20} [docker-compose.yml]
-marzban:
-    image: gozargah/marzban:latest
-    restart: always
-    env_file: .env
-    network_mode: host
-    volumes:
-      - /var/lib/marzban:/var/lib/marzban
-    depends_on:
-      - haproxy
-
+```yml{9-10,12-20} [docker-compose.yml]
 services:
+  marzban:
+      image: gozargah/marzban:latest
+      restart: always
+      env_file: .env
+      network_mode: host
+      volumes:
+        - /var/lib/marzban:/var/lib/marzban
+      depends_on:
+        - haproxy
+    
   haproxy:
     image: haproxy:latest
     restart: always
