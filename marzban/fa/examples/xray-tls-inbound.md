@@ -30,3 +30,7 @@ title: فعال‌سازی TLS
     }
 }
 ```
+
+::: info tlsSettings
+مستندات مربوط به تنظیمات tls را می‌توانید در [اینجا](https://xtls.github.io/config/transport.html#tlsobject) مشاهده کنید 
+:::
