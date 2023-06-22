@@ -40,7 +40,7 @@ export const config = {
         { text: 'فعال‌سازی Cloudflare Warp', link: '/examples/warp' },
         { text: 'مسدودسازی سایت ها', link: '/examples/blocking-rules' },
         { text: 'همه چیز روی یک پورت', link: '/examples/all-on-one-port' },
-        { text: 'مهاجرت به MySQL', link: '/examples/migrate-to-mysql' },
+        { text: 'راه‌اندازی MySQL', link: '/examples/mysql' },
         { text: 'بک‌آپ گرفتن', link: '/examples/backup' },
       ],
     },
