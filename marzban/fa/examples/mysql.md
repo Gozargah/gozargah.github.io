@@ -124,7 +124,7 @@ marzban restart
 - پس از ری‌استارت شدن مرزبان، دستور زیر را اجرا کنید تا از دیتابیس قبلی خروجی بسازید.
 
 ``` bash
-sqlite3 /var/lib/marzban/db.sqlite3 '.dump --data-only' | sed 's/INSERT INTO/REPLACE INTO/g' > /tmp/dump.sql
+sqlite3 /var/lib/marzban/db.sqlite3 '.dump --data-only' | sed "s/INSERT INTO \([^ ]*\)/REPLACE INTO \`\\1\`/g" > /tmp/dump.sql
 ```
 
 - وارد دایرکتوری `/opt/marzban` شوید.
