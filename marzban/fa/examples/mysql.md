@@ -66,6 +66,7 @@ services:
     restart: always
     env_file: .env
     network_mode: host
+    command: --bind-address=127.0.0.1 --mysqlx-bind-address=127.0.0.1
     environment:
       MYSQL_DATABASE: marzban
     volumes:
