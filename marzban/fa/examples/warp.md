@@ -31,8 +31,8 @@ title: فعال سازی CloudFlare Warp
 ::: warning توجه
 این روش فقط برای نسخه Xray 1.8.3 و یا بالاتر پینهاد میشود ، در نسخه های قدیمی تر احتمالا با مشکل Memory Leak مواجه خواهید شد.
 :::
-- وارد بخش Core Setting در پنل مرزبان میشیم
-- ابتدا یک outbound همانند نمونه اضاغه می کنیم و اطلاعات فایل `wgcf-profile.conf` را در آن جایگذاری می کنیم.
+- وارد بخش Core Setting در پنل مرزبان شوید
+- ابتدا یک outbound همانند نمونه اضافه می کنیم و اطلاعات فایل `wgcf-profile.conf` را در آن جایگذاری می کنیم.
 ```json
     {
         "tag":"warp",
@@ -54,9 +54,74 @@ title: فعال سازی CloudFlare Warp
     }
 ```
 ::: tip نکته
-در صئرتی که میخواهید تمام ترافیک به صورت پیش فرض از Warp عبور کنید این Outbound رو اول قرار بدید و دیگه نیازی به انجام مرجله بعد نیست
+در صورتی که میخواهید تمام ترافیک به صورت پیش فرض از Warp عبور کنید این Outbound رو اول قرار بدید و دیگه نیازی به انجام مرحله بعد نیست
 :::
-حال باید وب سایت هایی که میخواهیم از Warp عبور کنند رو در بخش Routing مشخص کنیم
+
+
+## روش دوم : با استفاده از هسته Wireguard
+ابتدا باید پیش نیاز های استفاده از Wireguard رو روی سرور نصب کنید.
+```bash
+sudo apt install wireguard-dkms wireguard-tools resolvconf
+```
+سپس باید خط `Table = off` رو مثل نمونه به فایل Wireguard اضافه کنید.
+```conf
+Interface]
+PrivateKey = Your_Private_Key
+Address = 172.16.0.2/32
+Address = 2606:4700:110:8a1a:85ef:da37:b891:8d01/128
+DNS = 1.1.1.1
+MTU = 1280
+Table = off
+[Peer]
+PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+AllowedIPs = 0.0.0.0/0
+AllowedIPs = ::/0
+Endpoint = engage.cloudflareclient.com:2408
+```
+::: warning توجه
+در صورت عدم اضافه کردن `Tabel=off` دسترسی شما به سرور قطع خواهد شد و دیگر نمیتوانید به سرور متصل شوید و باید از طریق وب سایت دیتاسنتر خود به سرور وارد شده و اتصال به `Warp` رو قطع کنید تا بتونید دوباره به صورت عادی ارتباط برقرار کنید.
+:::
+- سپس نام فایل رو از `wgcf-profile.conf` به `warp.conf` تغییر بدید.
+- فایل رو در پوشه `/etc/Wireguard` در سرور قرار بدید.
+- با دستور پایین Wireguard رو فعال کنید.
+```bash
+sudo systemctl enable --now wg-quick@warp
+```
+با این دستور نیز می‌توانید `Warp` را غیر فعال کنید
+```bash
+sudo systemctl disable --now wg-quick@warp
+```
+- وارد بخش Core Setting در پنل مرزبان شوید
+- ابتدا یک outbound همانند نمونه اضافه می کنیم.
+```json
+{
+    "tag": "direct",
+    "protocol": "freedom",
+    "streamSettings": {
+        "sockopt": {
+            "tcpFastOpen": true,
+            "interface": "warp"
+        }
+    }
+}
+```
+::: tip نکته
+در صورتی که میخواهید تمام ترافیک به صورت پیش فرض از Warp عبور کنید این Outbound رو اول قرار بدید و دیگه نیازی به انجام مرحله بعد نیست.
+:::
+
+# قدم چهارم : تنظیمات بخش routing
+
+ابتدا یک `rule` در بخش `routing` همانند نمونه اضافه می کنیم.
+
+```json
+{
+    "outboundTag": "warp",
+    "domain": [
+    ],
+    "type": "field"
+}
+```
+حال باید وب سایت های دلخواه خودتون رو مثل نمونه اضافه کنید.
 
 ```json
 {
@@ -72,6 +137,9 @@ title: فعال سازی CloudFlare Warp
     "type": "field"
 }
 ```
-تغییرات رو ذخیره می کنیم ، هم اکنون میتوانید از Warp استفاده کنید.
+تغییرات رو ذخیره می کنیم ، هم اکنون میتوانید از `Warp` استفاده کنید.
 
-## روش دوم : با استفاده از هسته Wireguard
+#Marzban-Node
+- در صورتی که با کمک هسته xray از `Warp` استفاده می کنید نیاز به انجام تغییر در نود ندارید و به صورت اتوماتیک در نود نیز اعمال می شود.
+
+- در صورتی که از هسته `Wireguard` استفاده می کنید باید مرحله سوم ، روش دوم رو روی نود هم انجام دهید.
