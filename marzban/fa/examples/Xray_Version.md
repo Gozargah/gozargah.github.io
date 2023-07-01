@@ -31,6 +31,9 @@ cd /var/lib/xray
 wget https://github.com/XTLS/Xray-core/releases/download/v1.8.3/Xray-linux-64.zip
 ```
 سپس فایل رو از حالت Zip خارج می کنیم.
+```bash
+unzip Xray-linux-64.zip
+```
 
 # قدم دوم : تغییر در فایل های مرزبان
 
