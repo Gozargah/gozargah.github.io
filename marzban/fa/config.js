@@ -42,6 +42,7 @@ export const config = {
         { text: 'همه چیز روی یک پورت', link: '/examples/all-on-one-port' },
         { text: 'راه‌اندازی MySQL', link: '/examples/mysql' },
         { text: 'بک‌آپ گرفتن', link: '/examples/backup' },
+        { text: 'تغییر ورژن Xray-core', link: '/examples/change-xray-version' },
       ],
     },
   ],
