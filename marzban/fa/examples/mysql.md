@@ -23,16 +23,6 @@ MySQL در نسخه `v0.3.2` و بالاتر پشتیبانی می‌شود.
 ::: code-group
 ```yml{9-10,12-20} [docker-compose.yml]
 services:
-  marzban:
-    image: gozargah/marzban:dev
-    restart: always
-    env_file: .env
-    network_mode: host
-    volumes:
-      - /var/lib/marzban:/var/lib/marzban
-    depends_on:
-      - mysql
-
   mysql:
     image: mysql:latest
     restart: always
@@ -42,6 +32,16 @@ services:
       MYSQL_DATABASE: marzban
     volumes:
       - /var/lib/marzban/mysql:/var/lib/mysql
+
+  marzban:
+    image: gozargah/marzban:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    volumes:
+      - /var/lib/marzban:/var/lib/marzban
+    depends_on:
+      - mysql
 ```
 :::
 
@@ -51,16 +51,6 @@ services:
 ::: code-group
 ```yml{22-31} [docker-compose.yml]
 services:
-  marzban:
-    image: gozargah/marzban:dev
-    restart: always
-    env_file: .env
-    network_mode: host
-    volumes:
-      - /var/lib/marzban:/var/lib/marzban
-    depends_on:
-      - mysql
-
   mysql:
     image: mysql:latest
     restart: always
@@ -71,6 +61,16 @@ services:
       MYSQL_DATABASE: marzban
     volumes:
       - /var/lib/marzban/mysql:/var/lib/mysql
+      
+  marzban:
+    image: gozargah/marzban:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    volumes:
+      - /var/lib/marzban:/var/lib/marzban
+    depends_on:
+      - mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
