@@ -138,6 +138,54 @@ sudo systemctl disable --now wg-quick@warp
 }
 ```
 تغییرات رو ذخیره می کنیم ، هم اکنون میتوانید از `Warp` استفاده کنید.
+# استفاده از Warp socks5
+اگر قبلا warp روی سرور شما نصب است با دستور زیر آن رو پاک میکنیم
+```bash
+warp u
+```
+و وارپ پروکسی رو با اسکریپت زیر نصب میکنیم
+```bash
+bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/install_warp_proxy.sh)
+```
+اختیاری : بعد از نصب میتونیم با دستور `warp a` اکانت + Warp رو فعال کنیم
+
+وارد تنظیمات Core مرزبان میشویم و داخل outbounds وارپ رو با پروتوکل socks اضافه میکنیم
+
+```json
+{
+      "tag": "WARP",
+      "protocol": "socks",
+      "settings": {
+        "servers": [
+          {
+            "address": "127.0.0.1",
+            "port": 40000
+          }
+        ]
+      }
+    },
+```
+پورت پیشفرض موقع نصب Warp Proxy همان 40000 است.
+
+سپس یک rule داخل بخش routing میسازیم و سایت هایی که میخواهیم از warp استفاده بکنند رو اضافه میکنیم
+```json
+{
+        "type": "field",
+        "outboundTag": "WARP",
+        "domain": [
+          "spotify.com",
+          "whatismyipaddress.com",
+          "speedtest.net",
+          "whatismyip.com",
+          "whatsmyip.org",
+          "nordvpn.com",
+          "geosite:google",
+          "geosite:openai"
+        ]
+      },
+```
+با دستور `warp y` میتوان warp proxy را غیر فعال کرد
+
 
 # Marzban-Node
 - در صورتی که با کمک هسته xray از `Warp` استفاده می کنید نیاز به انجام تغییر در نود ندارید و به صورت اتوماتیک در نود نیز اعمال می شود.
