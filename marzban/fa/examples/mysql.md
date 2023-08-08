@@ -24,7 +24,7 @@ MySQL در نسخه `v0.3.2` و بالاتر پشتیبانی می‌شود.
 ```yml{9-10,12-20} [docker-compose.yml]
 services:
   marzban:
-    image: gozargah/marzban:dev
+    image: gozargah/marzban:latest
     restart: always
     env_file: .env
     network_mode: host
@@ -52,7 +52,7 @@ services:
 ```yml{22-31} [docker-compose.yml]
 services:
   marzban:
-    image: gozargah/marzban:dev
+    image: gozargah/marzban:latest
     restart: always
     env_file: .env
     network_mode: host
@@ -101,6 +101,10 @@ services:
 ```env
 SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:DB_PASSWORD@127.0.0.1/marzban"
 MYSQL_ROOT_PASSWORD = DB_PASSWORD
+```
+- بعد کد زیر رو که مربوط به دیتابیس sqlite هست رو با اضافه کردن # به اول آن کامنت کنین.
+```
+#SQLALCHEMY_DATABASE_URL = "sqlite:////var/lib/marzban/db.sqlite3"
 ```
 
 - مرزبان را ری‌استارت کنید.
