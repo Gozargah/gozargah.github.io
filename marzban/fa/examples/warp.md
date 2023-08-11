@@ -35,6 +35,7 @@ wget https://github.com/ViRb3/wgcf/releases/download/v2.2.18/wgcf_2.2.18_linux_a
 مسیر فایل رو به `/usr/bin/` تغییر داده و اسم اون رو به `wgcf` تغییر بدید.
 ```bash
 mv wgcf_2.2.18_linux_amd64 /usr/bin/wgcf
+chmod +x /usr/bin/wgcf
 ```
 سپس با استفاده از این 2 دستور کانفیگ رو ایجاد کنید.
 ```bash
