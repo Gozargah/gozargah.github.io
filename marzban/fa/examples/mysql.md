@@ -66,7 +66,7 @@ services:
     restart: always
     env_file: .env
     network_mode: host
-    command: --bind-address=127.0.0.1 --mysqlx-bind-address=127.0.0.1
+    command: --bind-address=127.0.0.1 --mysqlx-bind-address=127.0.0.1 --disable-log-bin
     environment:
       MYSQL_DATABASE: marzban
     volumes:
@@ -80,6 +80,7 @@ services:
     environment:
       PMA_HOST: 127.0.0.1
       APACHE_PORT: 8010
+      UPLOAD_LIMIT: 1024M
     depends_on:
       - mysql
 ```
