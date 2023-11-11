@@ -178,7 +178,7 @@ sudo systemctl disable --now wg-quick@warp
 {
     "outboundTag": "warp",
     "domain": [
-        "geosite:google"
+        "geosite:google",
         "openai.com",
         "ai.com",
         "ipinfo.io",
