@@ -30,11 +30,11 @@ title: فعال سازی CloudFlare Warp
 - ابتدا باید `Asset` مورد نیاز رو از بخش [releases](https://github.com/ViRb3/wgcf/releases) دانلود کنید ، این فایل بسته به پردازنده متفاوت می باشد.
 - با دستور `wget` میتوانید این کار را انجام دهید.
 ```bash
-wget https://github.com/ViRb3/wgcf/releases/download/v2.2.18/wgcf_2.2.18_linux_amd64
+wget https://github.com/ViRb3/wgcf/releases/download/v2.2.19/wgcf_2.2.19_linux_amd64
 ```
 مسیر فایل رو به `/usr/bin/` تغییر داده و اسم اون رو به `wgcf` تغییر بدید.
 ```bash
-mv wgcf_2.2.18_linux_amd64 /usr/bin/wgcf
+mv wgcf_2.2.19_linux_amd64 /usr/bin/wgcf
 chmod +x /usr/bin/wgcf
 ```
 سپس با استفاده از این 2 دستور کانفیگ رو ایجاد کنید.
@@ -178,7 +178,7 @@ sudo systemctl disable --now wg-quick@warp
 {
     "outboundTag": "warp",
     "domain": [
-        "geosite:google"
+        "geosite:google",
         "openai.com",
         "ai.com",
         "ipinfo.io",
