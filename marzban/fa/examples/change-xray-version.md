@@ -31,7 +31,7 @@ sudo yum install wget unzip
 
 ابتدا در صفحه [دانلود های Xray-core](https://github.com/XTLS/Xray-core/releases) لینک دانلود نسخه مورد نظر خود را کپی کرده و آن را در سرور در مسیر `/var/lib/marzban/xray-core` دانلود کنید.
 
-به عنوان مثال، برای دانلود نسخه `1.8.3` مراحل زیر را انجام دهید.
+به عنوان مثال، برای دانلود نسخه `1.8.6` مراحل زیر را انجام دهید.
 
 - یک پوشه برای `Xray` ایجاد کنید و وارد آن شوید. 
 ```bash
@@ -39,7 +39,7 @@ mkdir -p /var/lib/marzban/xray-core && cd /var/lib/marzban/xray-core
 ```
 - فایل `Xray` را به کمک `wget` دانلود کنید.
 ```bash
-wget https://github.com/XTLS/Xray-core/releases/download/v1.8.3/Xray-linux-64.zip
+wget https://github.com/XTLS/Xray-core/releases/download/v1.8.6/Xray-linux-64.zip
 ```
 - فایل را از حالت فشرده خارج کنید و فایل فشرده رو پاک کنید.
 ```bash
