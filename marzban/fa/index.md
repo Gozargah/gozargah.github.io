@@ -17,7 +17,7 @@ hero:
       link: './docs/introduction'
     - theme: alt
       text: نمونه‌ها
-      link: './examples/'
+      link: './examples/issue-ssl-certificate'
 
 features:
   - icon: 💎
