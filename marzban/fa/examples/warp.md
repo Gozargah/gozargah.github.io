@@ -88,7 +88,8 @@ wgcf generate
         "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
         "endpoint": "engage.cloudflareclient.com:2408"
       }
-    ]
+    ],
+    "kernelMode": false
   }
 }
 ```
