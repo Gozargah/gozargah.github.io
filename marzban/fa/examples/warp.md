@@ -73,7 +73,22 @@ wgcf generate
 :::
 
 - وارد بخش Core Setting در پنل مرزبان شوید.
-- ابتدا یک outbound همانند نمونه اضافه می کنیم و اطلاعات فایل `wgcf-profile.conf` را در آن جایگذاری می کنیم.
+
+- ابتدا باید outbound اصلی با نام freedom را به شکل زیر تغییر دهیم:
+
+```json
+
+{
+  "protocol": "freedom",
+  "settings": {
+    "domainStrategy": "UseIP"
+  },
+  "tag": "DIRECT"
+}
+
+```
+
+- سپس یک outbound همانند نمونه اضافه می کنیم و اطلاعات فایل `wgcf-profile.conf` را در آن جایگذاری می کنیم.
 
 ```json
 {
@@ -89,7 +104,10 @@ wgcf generate
         "endpoint": "engage.cloudflareclient.com:2408"
       }
     ],
-    "kernelMode": false
+    "kernelMode": false,
+    "reserved": [0, 0, 0],
+    "mtu": 1280,
+    "domainStrategy": "ForceIPv4"
   }
 }
 ```
