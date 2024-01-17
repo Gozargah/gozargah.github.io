@@ -74,20 +74,6 @@ wgcf generate
 
 - وارد بخش Core Setting در پنل مرزبان شوید.
 
-- ابتدا باید outbound اصلی با نام freedom را به شکل زیر تغییر دهیم:
-
-```json
-
-{
-  "protocol": "freedom",
-  "settings": {
-    "domainStrategy": "UseIP"
-  },
-  "tag": "DIRECT"
-}
-
-```
-
 - سپس یک outbound همانند نمونه اضافه می کنیم و اطلاعات فایل `wgcf-profile.conf` را در آن جایگذاری می کنیم.
 
 ```json
