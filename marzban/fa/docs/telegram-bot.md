@@ -75,7 +75,7 @@ title: ربات تلگرام
 style="display:block; margin:auto; width:100%" />
 
 - ربات استارت کنید 
-<img src="https://github.com/Ebi-xd/Test/blob/main/InShot_20240122_002251256.jpg" style="display:block; margin:auto; width:100%" />
+<img src="https://github.com/Ebi-xd/gozargah.github.io/blob/master/marzban/public/images/InShot_20240122_002251256.jpg" style="display:block; margin:auto; width:100%" />
 
 - در خروجی پیامی حاویYour ID  دریافت میکنیم
 - این مقدار را یادداشت کنیم و به تنظیمات بعدی برویم
