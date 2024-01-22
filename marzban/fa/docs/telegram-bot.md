@@ -23,7 +23,7 @@ title: ربات تلگرام
   
 - ما اینجا دوتا را معرفی میکنیم
 
--1 بات تلگرام [میرزا](https://github.com/mahdigholipour3/botmirzapanel) [ رایگان و اشتراکی ]
+1- بات تلگرام [میرزا](https://github.com/mahdigholipour3/botmirzapanel) [ رایگان و اشتراکی ]
 
 -2 بات تلگرام [govfuck](https://github.com/govfvck/Marzbot-free) [ رایگان و اشتراکی ]
 
