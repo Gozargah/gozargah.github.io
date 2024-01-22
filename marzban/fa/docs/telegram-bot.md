@@ -31,7 +31,7 @@ title: ربات تلگرام
 
 
 
-   <img src="https://i.imgocean.com/InShot_20240122_2302492662db8fdc1d1166bb4.jpeg" style="display:block; margin:auto; width:100%" />
+   <img src="https://i.imgocean.com/InShot_20240122_2302492662db8fdc1d1166bb4.jpeg" style="display:block; margin:auto; width:80%" />
 
 - در خروجی پیامی حاوی یک نشانی یا(توکن) دریافت میکنیم.
 
@@ -60,11 +60,12 @@ title: ربات تلگرام
   
 | متغیر                    |  معنی  |
 |----------------:|-----------:|
-| `TELEGRAM_API_TOKEN`           | توکن API دریافت شده در BotFather لازم       |       
-| `TELEGRAM_ADMIN_ID`       | شناسه سرپرست الزامی است ، اگر نیاز به دسترسی به چندین سرپرست دارید، شناسه آنها را مشخص کنید و با کاما `,`از هم جدا کنید       |
+| `TELEGRAM_API_TOKEN`           | توکن ربات تلگرام|       
+| `TELEGRAM_ADMIN_ID`       |آیدی عددی ادمین در تلگرام.
+شناسه سرپرست الزامی است ، اگر نیاز به دسترسی به چندین سرپرست دارید، شناسه آنها را مشخص کنید و با کاما `,`از هم جدا کنید       |
 | `TELEGRAM_LOGGER_CHANNEL_ID` | کانال اختیاری برای لاگ های پنل        |  
 | `TELGRAM_DEFAULT_VLESS_FLOW`  | اختیاری ، مقدار flow برای اینباند VLESS فعال میکند   |    
-| `TELEGRAM_PROXY_URL`       | آدرس پروکسی TG اختیاری
+| `TELEGRAM_PROXY_URL`       | اجرای ربات از طریق پروکسی |
  
 <br>
 
