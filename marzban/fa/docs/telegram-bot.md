@@ -71,7 +71,7 @@ title: ربات تلگرام
 
   دریافت آیدی تلگرام از ربات [ID Bot](https://t.me/username_to_id_bot) استفاده می کنیم
 
-<img src="https://github.com/Ebi-xd/Test/blob/main/IMG_20240122_002516_573.jpg"
+<img src="https://github.com/Ebi-xd/gozargah.github.io/blob/master/marzban/public/images/IMG_20240122_002516_573.jpg"
 style="display:block; margin:auto; width:100%" />
 
 - ربات استارت کنید 
