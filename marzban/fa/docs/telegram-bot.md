@@ -67,7 +67,7 @@ title: ربات تلگرام
 
 :::
 
-- ایدی کانال
+- مثال ایدی کانال
   
   <img src="https://i.imgocean.com/IMG_20240123_001836_10472d8859c7505ed79.jpeg" style="display:block; margin:auto; width:100%" />
 
