@@ -44,7 +44,7 @@ title: ربات تلگرام
 برای ایجاد ربات و دریافت توکن، از ربات استاندارد [BotFather](https://t.me/BotFather) استفاده می کنیم
 
  
- <img src="https://github.com/Ebi-xd/Test/blob/main/IMG_20240121_231537_105.jpg" style="display:block; margin:auto; width:100%" />
+ <img src="https://github.com/Ebi-xd/gozargah.github.io/blob/master/marzban/fa/docs/telegram-bot.md" style="display:block; margin:auto; width:100%" />
 
  
 
