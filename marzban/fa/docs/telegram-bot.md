@@ -31,7 +31,7 @@ title: ربات تلگرام
 
 
 
-   <img src="https://github.com/Ebi-xd/gozargah.github.io/blob/master/marzban/public/images/InShot_20240122_000824372.jpg" style="display:block; margin:auto; width:100%" />
+   <img src="https://i.imgocean.com/InShot_20240122_2302492662db8fdc1d1166bb4.jpeg" style="display:block; margin:auto; width:100%" />
 
 - در خروجی پیامی حاوی یک نشانی یا به اصطلاح (توکن) دریافت میکنیم.
 
