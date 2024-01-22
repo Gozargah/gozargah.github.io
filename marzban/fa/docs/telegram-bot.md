@@ -35,7 +35,7 @@ title: ربات تلگرام
 
 - در خروجی پیامی حاوی یک نشانی یا به اصطلاح (توکن) دریافت میکنیم.
 
- <img src="https://www.imgocean.com/image/InShot-20240122-000735286.iR02" style="display:block; margin:auto; width:100%" />
+ <img src="https://i.imgocean.com/InShot_20240122_0007352867cd5018e340e6f2b.jpeg" style="display:block; margin:auto; width:100%" />
  
 - این مقدار را یادداشت کنیم و به تنظیمات بعدی برویم.
 ## دریافت شناسه (های) مدیر
