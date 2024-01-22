@@ -45,7 +45,7 @@ title: ربات تلگرام
 
 
 - ربات استارت کنید 
-<img src="https://www.imgocean.com/image/InShot-20240122-000735286.iR02" style="display:block; margin:auto; width:100%" />
+<img src="https://i.imgocean.com/IMG_20240122_231102_6644592eebb9068d275.jpeg" style="display:block; margin:auto; width:100%" />
 
 - در خروجی پیامی حاویYour ID  دریافت میکنیم.
 - این مقدار را یادداشت کنیم و به تنظیمات بعدی برویم.
