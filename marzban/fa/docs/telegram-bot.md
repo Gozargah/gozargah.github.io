@@ -108,5 +108,5 @@ style="display:block; margin:auto; width:100%" />
 
 - پس از راه اندازی مجدد مرزبان، می توانید به رباتی که قبلا ساخته اید بروید وشروع به استفاده کنید
 
-<img src="https://github.com/Ebi-xd/gozargah.github.io/blob/master/marzban/public/images/InShot_20240122_000735286.jpg" style="display:block; margin:auto; width:100%" />
+<img src="https://github.com/Ebi-xd/gozargah.github.io/blob/master/marzban/public/images/InShot_20240122_002846368.jpg" style="display:block; margin:auto; width:100%" />
   
