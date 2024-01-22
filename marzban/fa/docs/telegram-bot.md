@@ -18,7 +18,12 @@ title: ربات تلگرام
 
 - این ربات برای فروش اشتراک در نظر گرفته نشده است
 
-- اگر می خواهید فعالیت های تجاری انجام دهید، از ربات های پیشنهادی استفاده کنید [میرزا](https://github.com/mahdigholipour3/botmirzapanel) [govfuck](https://github.com/govfvck/Marzbot-free).
+- اگر می خواهید فعالیت های تجاری انجام دهید
+- چندین بات تلگرام برای مرزبان وجود داره که بعضی رایگان و بعضی پولی هستند
+
+
+
+[govfuck](https://github.com/govfvck/Marzbot-free).
 
 ::: 
 
