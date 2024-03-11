@@ -217,6 +217,24 @@ services:
 | `Inbound Ports` | 2053 <br> 2054 | 2096 <br> 2097 |
 
 
+## آپدیت کردن مرزبان نود
+
+- وارد فولدر مرزبان نود می شویم.
+```bash
+cd Marzban-node
+```
+
+- با دستور زیر مرزبان نود را آپدیت می کنیم.
+```bash
+docker compose pull
+```
+
+- در نهایت با دستور زیر مرزبان نود را ریستارت می کنیم.
+```bash
+docker compose down --remove-orphans; docker compose up -d
+```
+
+
 ## نکات تکمیلی
 
 ::: tip نکته اول
@@ -241,4 +259,8 @@ services:
 cd ~/Marzban-node
 docker compose down --remove-orphans; docker compose up -d
 ```
+:::
+
+::: tip نکته ششم
+در خصوص ورژن Xray اگر مرزبان نود روی ورژن آخر نبود و خواستین دستی Upgrade کنین به ورژن بالاتر یا به هر دلیلی خواستین Downgrade کنین به نسخه پایین تر از طریق داکیومنت تغییر ورژن Xray-core می تونین انجام بدین.
 :::
