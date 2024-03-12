@@ -140,7 +140,7 @@ wget -O /var/lib/marzban/assets/geoip.dat https://github.com/v2fly/geoip/release
 wget -O /var/lib/marzban/assets/iran.dat https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran.dat
 ```
 
- ### قدم سوم: تنظیم فایل docker-sompose.yml
+ ### قدم سوم: تنظیم فایل docker-compose.yml
 
  وارد پوشه `Marzban-node` شوید.
 
