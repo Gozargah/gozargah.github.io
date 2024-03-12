@@ -62,6 +62,12 @@ title: پیکربندی
 :::
 
 
+## XRAY_SUBSCRIPTION_PATH
+- مقدار پیش‌فرض: `sub`
+
+path لینک سابسکریپشن
+
+
 ## XRAY_EXECUTABLE_PATH
 - مقدار پیش‌فرض: `/usr/local/bin/xray`
 
@@ -95,6 +101,18 @@ title: پیکربندی
 آیدی عددی ادمین در تلگرام (دریافت از [@userinfobot](https://t.me/userinfobot))
 
 
+## TELEGRAM_LOGGER_CHANNEL_ID
+آیدی عددی کانال Logهای ربات تلگرام
+
+در صورت مقداردهی، Logهای مربوط به ربات تلگرام در این کانال ارسال خواهند شد. ربات تلگرام مرزبان باید در این کانال ادمین باشد.
+
+
+## TELEGRAM_DEFAULT_VLESS_FLOW
+تعیین flow پیش‌فرض برای پروتکل Vless در ربات تلگرام
+
+(مثال: `"xtls-rprx-vision"`)
+
+
 ## TELEGRAM_PROXY_URL
 
 برای اجرای ربات تلگرام با پروکسی (در صورتی که در سرور شما سرور های تلگرام مسدود شده‌اند.)
@@ -102,8 +120,13 @@ title: پیکربندی
 (مثال: `"socks5://127.0.0.1:1080"`)
 
 
+## DISCORD_WEBHOOK_URL
+آدرس Webhook دیسکورد
+
+
 ## CUSTOM_TEMPLATES_DIRECTORY
 - مقدار پیش‌فرض: `app/templates`
+
 پوشه‌ی فایل های template
 
 
@@ -130,6 +153,27 @@ template مورد استفاده برای صفحه اصلی
 
 (مثال: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/home/index.html))
 
+
+## SUB_PROFILE_TITLE
+- مقدار پیش‌فرض: `Subscription`
+
+عنوان سابسکریپشن در کلاینت
+
+در صورت پشتیبانی کلاینت از این قابلیت و عدم انتخاب عنوان برای سابسکریپشن توسط کاربر، این مقدار برای عنوان سابسکریپشن انتخاب می‌شود.
+
+
+## SUB_SUPPORT_URL
+آدرس ارتباط با پشتیبانی در لینک سابسکریپشن
+
+(مثال: `"https://t.me/support"`)
+
+
+## SUB_UPDATE_INTERVAL
+- مقدار پیش‌فرض: `12`
+
+فاصله زمانی بین آپدیت‌های خودکار سابسکریپشن (به واحد ساعت)
+
+در صورت پشتیبانی کلاینت از این قابلیت، سابسکریپشن هر 12 ساعت آپدیت می‌شود.
 
 
 ## SQLALCHEMY_DATABASE_URL
