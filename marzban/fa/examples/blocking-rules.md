@@ -2,38 +2,44 @@
 title: مسدود سازی سایت ها
 ---
 
-# مسدود سازی سایت های ایرانی 
-به کمک این آموزش میتونید سایت های ایرانی رو مسدود بکنید هدف از این کار جلوگیری از لو رفتن آیپی سرور شما و فیلتر شدنش هست برای این کار کافیه مراحل زیر رو برای سرور اصلی و یا node که در آخر صفحه توضیح داده شده انجام بدید.
+# مسدود سازی سایت‌های ایرانی 
+به کمک این آموزش می‌توانید سایت‌های ایرانی را مسدود کنید. هدف از این کار جلوگیری از لو رفتن آیپی سرور شما و فیلتر شدن آن است برای این کار کافی‌ست مراحل زیر را برای سرور مستر و سرور مرزبان نود که در آخر آموزش توضیح داده شده انجام دهید.
 
-## دستورات سرور اصلی
-### قدم اول: دانلود فایل ها و ساخت پوشه های مورد نیاز
-ابتدا با دستور زیر پوشه `assets` رو ایجاد کنید.
+## دستورات سرور مستر
+
+### قدم اول: دانلود فایل‌ها و ساخت پوشه‌های مورد نیاز
+
+ابتدا با دستور زیر پوشه `assets` را ایجاد کنید.
+
 ``` bash
 mkdir -p /var/lib/marzban/assets/
 ```
-### قدم دوم: دانلود فایل ها و تنظیم فایل env
-سپس دستورات زیر رو برای دانلود فایل های مورد نظر در ترمینال سرور وارد کنید.
+
+### قدم دوم: دانلود فایل‌ها و تنظیم فایل env
+
+سپس دستورات زیر را برای دانلود فایل‌های مورد نظر در ترمینال سرور وارد کنید.
 ``` bash
 wget -O /var/lib/marzban/assets/geosite.dat https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
 wget -O /var/lib/marzban/assets/geoip.dat https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
 wget -O /var/lib/marzban/assets/iran.dat https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran.dat
 ```
-حالا فایل `.env` رو باید ویرایش کنین و مقدار متغیر `XRAY_ASSETS_PATH` رو به `"/var/lib/marzban/assets/"` تغییر بدید برای این کار میتونین از دستور nano و یا vim در لینوکس استفاده کنید.
-``` bash
+
+حالا با دستور زیر فایل `.env` را باز کنید.
+
+```bash
 nano /opt/marzban/.env
 ```
+مقدار متغیر `XRAY_ASSETS_PATH` را به مقدار تعیین شده در کد زیر تغییر دهید.
+
 ``` bash
 XRAY_ASSETS_PATH = "/var/lib/marzban/assets/"
 ```
 
-::: tip نکته
-اگر دستور nano براتون فعال نبود داخل توزیع های دبیان بیس ( اوبونتو و ... ) میتونید با دستور زیر nano رو نصب بکنید
-apt install nano
-:::
-
 ### قدم سوم: تنظیم و جایگذاری قوانین
-دیگه وقت تنظیم کردن مرزبانه :) وارد پنلتون بشید و در قسمت `Core Settings` به قسمت `routing` برید و بخش `routing` رو مطابق نمونه زیر پر کنید یا کلا بخش `routing` رو پاک کنید و مقدار زیر رو جایگزین کنید.
-(توجه کنید که فقط بخش routing رو باید پاک کنید. اگر کلا تا انتهای فایل پاک کردین باید یدونه { به آخرش اضافه کنید. )
+
+دیگه وقت تنظیم کردن مرزبانه :) وارد پنل‌تون بشین و در قسمت `Core Settings` به قسمت `routing` برید و بخش `routing` را مطابق نمونه زیر پر کنید یا کلا بخش `routing` را پاک کنید و مقدار زیر را جایگزین کنید.
+(توجه کنید که فقط بخش routing را باید پاک کنید. اگر کلا تا انتهای فایل پاک کردین باید یدونه { به آخرش اضافه کنید.)
+
 ``` json
     "routing": {
         "domainStrategy": "IPIfNonMatch",
@@ -108,45 +114,50 @@ apt install nano
 :::
 
 ### قدم چهارم: اعمال تغییرات
-الان همه کارها انجام شده و برای اینکه تغییرات اعمال بشه باید مرزبان ری استارت بشه برای این کار از دستور زیر استفاده کنید.
+
+در نهایت برای اعمال تغییرات با دستور زیر مرزبان را ریستارت کنید.
+
 ``` bash
 marzban restart
 ```
 
-## دستورات سرور node
+## دستورات سرور مرزبان نود
 
-### قدم اول: دانلود فایل ها و ساخت پوشه های مورد نیاز
-ابتدا با دستور زیر پوشه `assets` رو ایجاد کنید.
+### قدم اول: دانلود فایل‌ها و ساخت پوشه‌های مورد نیاز
+
+ابتدا با دستور زیر پوشه `assets` را ایجاد کنید.
 ``` bash
 mkdir -p /var/lib/marzban/assets/
 ```
-### قدم دوم: دانلود فایل ها
-سپس دستورات زیر رو برای دانلود فایل های مورد نظر در ترمینال سرور وارد کنید.
+
+### قدم دوم: دانلود فایل‌ها
+
+سپس دستورات زیر را برای دانلود فایل های مورد نظر در ترمینال سرور وارد کنید.
+
 ``` bash
 wget -O /var/lib/marzban/assets/geosite.dat https://github.com/v2fly/domain-list-community/releases/latest/download/dlc.dat
 wget -O /var/lib/marzban/assets/geoip.dat https://github.com/v2fly/geoip/releases/latest/download/geoip.dat
 wget -O /var/lib/marzban/assets/iran.dat https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran.dat
 ```
+
  ### قدم سوم: تنظیم فایل docker-sompose.yml
- وارد پوشه `Marzban-node` بشید
+
+ وارد پوشه `Marzban-node` شوید.
+
 ``` bash
 cd Marzban-node
 ```
-با دستور زیر فایل `docker-compose.yml` رو باز کنید
+
+با دستور زیر فایل `docker-compose.yml` را باز کنید.
+
 ``` bash
 nano docker-compose.yml
 ```
-محتوای فایل `docker-compose.yml` رو همانند زیر تنظیم و یا حذف و مقادیر زیر رو اعمال کنید
+
+فقط بخش `volumes` را در فایل `docker-compose.yml` مانند زیر تنظیم کنید.
 
 ::: code-group
 ``` [docker-compose.yml]
-services:
-  marzban-node:
-    # build: .
-    image: gozargah/marzban-node:latest
-    restart: always
-    network_mode: host
-
     volumes:
       - /var/lib/marzban-node:/var/lib/marzban-node
       - /var/lib/marzban/assets:/usr/local/share/xray
@@ -154,7 +165,9 @@ services:
 :::
 
 ### قدم چهارم: اعمال تغییرات
-الان همه کارها انجام شده و برای اینکه تغییرات اعمال بشه باید مرزبان ری استارت بشه برای این کار از دستور زیر استفاده کنید.
+
+در نهایت برای اعمال تغییرات با دستور زیر مرزبان را ریستارت کنید.
+
 ``` bash
 marzban restart
 ```
