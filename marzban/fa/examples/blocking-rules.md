@@ -154,14 +154,35 @@ cd Marzban-node
 nano docker-compose.yml
 ```
 
-فقط بخش `volumes` را در فایل `docker-compose.yml` مانند زیر تنظیم کنید.
+خط زیر را مانند نمونه به بخش `volumes` در فایل `docker-compose.yml` اضافه کنید.
 
 ::: code-group
-``` [docker-compose.yml]
+```yml [docker-compose.yml]
+      - /var/lib/marzban/assets:/usr/local/share/xray
+```
+:::
+
+::: details نمونه پیکربندی فایل `docker-compose.yml`
+::: code-group
+```yml{13} [docker-compose.yml]
+services:
+  marzban-node:
+    # build: .
+    image: gozargah/marzban-node:latest
+    restart: always
+    network_mode: host
+
+    environment:
+      SSL_CLIENT_CERT_FILE: "/var/lib/marzban-node/ssl_client_cert.pem"
+
     volumes:
       - /var/lib/marzban-node:/var/lib/marzban-node
       - /var/lib/marzban/assets:/usr/local/share/xray
 ```
+:::
+
+::: warning توجه 
+فایل `docker-compose.yml` به راستای خطوط و فاصله‌گذاری‌ها حساس است.
 :::
 
 ### قدم چهارم: اعمال تغییرات
