@@ -1,10 +1,12 @@
-import { defineConfig } from 'vitepress'
+import { DefaultTheme, LocaleSpecificConfig, defineConfig } from 'vitepress'
 import englishThemeConfig from '../en/config'
 import persianThemeConfig from '../fa/config'
 
+type ThemeConfig = LocaleSpecificConfig<DefaultTheme.Config> & { label: string; link?: string }
+
 export const BASE = '/marzban'
 
-const persianLang = {
+const persianLang: ThemeConfig = {
   label: 'فارسی',
   lang: 'fa',
   dir: 'rtl',
@@ -14,12 +16,12 @@ const persianLang = {
   themeConfig: persianThemeConfig,
 }
 
-const englishLang = {
+const englishLang: ThemeConfig = {
   title: 'Marzban',
   description: '',
   label: 'English',
   lang: 'en',
-  link: '/en/',
+  link: '/',
   themeConfig: englishThemeConfig,
 }
 
@@ -31,17 +33,22 @@ export default defineConfig({
   cleanUrls: true,
   lang: 'fa',
   locales: {
-    root: persianLang,
+    root: englishLang,
     fa: {
       ...persianLang,
       link: '/fa/',
     },
-    en: englishLang,
+    en: { ...englishLang, link: '/en/' },
   },
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     i18nRouting: true,
     logo: '/images/logo-dark.png',
     socialLinks: [{ icon: 'github', link: 'https://github.com/gozargah/marzban' }],
+    search: {
+      provider: 'local',
+    },
+  },
+  sitemap: {
+    hostname: 'https://gozargah.github.io',
   },
 })

@@ -1,5 +1,4 @@
 import fs from 'fs'
-import * as v from 'vitepress'
 
 var walk = function (dir) {
   var results = []
@@ -22,14 +21,14 @@ import {withBase, useRouter} from 'vitepress'
 
 const {go} = useRouter();
 console.log(go)
-go(withBase('/fa/${location}'))
+go(withBase('/en/${location}'))
 </script>
 `
 
 export default {
   async paths() {
-    return walk('./marzban/fa').map((filePath) => {
-      const path = filePath.replace('./marzban/fa/', '').replace('.md', '')
+    return walk('./marzban/en').map((filePath) => {
+      const path = filePath.replace('./marzban/en/', '').replace('.md', '')
       return {
         params: { path },
         content: process.env.NODE_ENV === 'development' ? developmentContent(path) : fs.readFileSync(filePath, { encoding: 'utf8' }),
