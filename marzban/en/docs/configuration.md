@@ -1,238 +1,238 @@
 ---
-title: پیکربندی
+title: Configuration
 ---
 
-# پیکربندی
+# Configuration
 
-لیست تمامی متغیرهای محیطی مرزبان را در این صفحه مشاهده میکنید. شما می‌توانید تمام این متغیرها در فایل `.env` مقداردهی کنید.
+You can find a list of all Marzban's environment variables on this page. You can assign values to all these variables in the `.env` file.
 
-::: tip مسیر فایل `.env` در نصب سریع
-اگر به روش نصب سریع مرزبان را نصب کرده‌اید، فایل `.env` را می‌توانید در مسیر `/opt/marzban/.env` پیدا کنید. 
+::: tip Quick Installation Path
+If you have installed Marzban using the quick installation method, you can find the `.env` file at `/opt/marzban/.env`.
 :::
 
 
 ## UVICORN_HOST
-- مقدار پیش‌فرض: `0.0.0.0`
+- Default value: `0.0.0.0`
 
-آیپی آدرسی که مرزبان روی آن اجرا میشود.
+The IP addresses the marzban should listen on.
 
-::: tip نکته
-`0.0.0.0` به معنای تمام آدرس های موجود ماشین است.
+::: tip Note
+`0.0.0.0` means all available addresses on the machine.
 :::
 
 ## UVICORN_PORT
-- مقدار پیش‌فرض: `8000`
+- Default value: `8000`
 
-پورتی که مرزبان روی آن اجرا میشود.
+The port Marzban should listen on.
 
 
 ## UVICORN_UDS
 
-آدرس unix domain socket که مرزبان روی آن اجرا میشود.
+The unix domain socket address which Marzban should listen on.
 
-::: tip نکته
-در صورت مقداردهی، متغیر های `UVICORN_HOST` و `UVICORN_PORT` نادیده گرفته می‌شوند.
+::: tip Note
+If this variable is assigned a value, the `UVICORN_HOST` and `UVICORN_PORT` variables will be ignored.
 :::
 
 
 ## UVICORN_SSL_CERTFILE
 
-آدرس فایل certificate گواهی SSL
+The path to the SSL certificate file.
 
-(مثال: `/path/to/example.com/fullchain.pem`)
+(Example: `/path/to/example.com/fullchain.pem`)
 
 ## UVICORN_SSL_KEYFILE
-آدرس فایل key گواهی SSL
 
-(مثال: `/path/to/example.com/key.pem`)
+The path to the SSL key file.
+
+(Example: `/path/to/example.com/key.pem`)
 
 
 ## XRAY_JSON
-- مقدار پیش‌فرض: `xray_config.json`
+- Default value: `xray_config.json`
 
-آدرس فایل json پیکربندی xray
+The path to the xray configuration JSON file.
 
 
 ## XRAY_SUBSCRIPTION_URL_PREFIX
 
-آدرس پیشوند لینک سابسکریپشن
+The prefix URL for subscription links.
 
-::: warning توجه
-در صورتی که این متغیر تعیین نشود، لینک سابسکریپشن ها در ربات تلگرام به درستی ارسال نخواهد شد.
+::: warning Note
+If this variable is not set, subscription links will not be sent correctly in the Telegram bot.
 :::
 
 
 ## XRAY_SUBSCRIPTION_PATH
-- مقدار پیش‌فرض: `sub`
+- Default value: `sub`
 
-path لینک سابسکریپشن
+The path for subscription links.
 
 
 ## XRAY_EXECUTABLE_PATH
-- مقدار پیش‌فرض: `/usr/local/bin/xray`
+- Default value: `/usr/local/bin/xray`
 
-آدرس فایل اجرایی xray
+The path to the xray executable file.
 
 
 ## XRAY_ASSETS_PATH
-- مقدار پیش‌فرض: `/usr/local/share/xray`
+- Default value: `/usr/local/share/xray`
 
-آدرس پوشه فایل های asset برای xray (فایل های `geoip.dat` و `geosite.dat`)
+The path to the asset files directory for xray (`geoip.dat` and `geosite.dat` files).
 
 
 ## XRAY_EXCLUDE_INBOUND_TAGS
 
-تگ inboundهایی که نیازی به مدیریت و وجود آنها در لیست پروکسی ها نیست.
+The inbound tags that should not be included in the proxy list and don't require any management.
 
-(مثال: `"IBOUND_X INBOUND_Y INBOUND_Z"`)
+(Example: `"IBOUND_X INBOUND_Y INBOUND_Z"`)
 
 
 ## XRAY_FALLBACKS_INBOUND_TAG
-در صورتی که از یک inbound با تعدادی fallback استفاده میکنید، تگ آن را در اینجا وارد کنید.
+If you are using an inbound with multiple fallbacks, enter the tag here.
 
 
 ## TELEGRAM_API_TOKEN
 
-توکن ربات تلگرام (دریافت از [@botfather](https://t.me/botfather))	
-
+The Telegram bot token (obtained from [@botfather](https://t.me/botfather))
 
 ## TELEGRAM_ADMIN_ID
 
-آیدی عددی ادمین در تلگرام (دریافت از [@userinfobot](https://t.me/userinfobot))
+The numeric ID of the admin in Telegram (obtained from [@userinfobot](https://t.me/userinfobot))
 
 
 ## TELEGRAM_LOGGER_CHANNEL_ID
-آیدی عددی کانال Logهای ربات تلگرام
+The numeric ID of the Telegram bot's log channel.
 
-در صورت مقداردهی، Logهای مربوط به ربات تلگرام در این کانال ارسال خواهند شد. ربات تلگرام مرزبان باید در این کانال ادمین باشد.
+If assigned a value, the logs related to the Marzban Telegram bot will be sent to this channel. The Marzban Telegram bot must be an admin in this channel.
 
 
 ## TELEGRAM_DEFAULT_VLESS_FLOW
-تعیین flow پیش‌فرض برای پروتکل Vless در ربات تلگرام
+The default flow for the Vless protocol in the Telegram bot.
 
-(مثال: `"xtls-rprx-vision"`)
+(Example: `"xtls-rprx-vision"`)
 
 
 ## TELEGRAM_PROXY_URL
 
-برای اجرای ربات تلگرام با پروکسی (در صورتی که در سرور شما سرور های تلگرام مسدود شده‌اند.)
+To run the Telegram bot with a proxy (in case Telegram servers are blocked on your server).
 
-(مثال: `"socks5://127.0.0.1:1080"`)
+(Example: `"socks5://127.0.0.1:1080"`)
 
 
 ## DISCORD_WEBHOOK_URL
-آدرس Webhook دیسکورد
+The Discord webhook address.
 
 
 ## CUSTOM_TEMPLATES_DIRECTORY
-- مقدار پیش‌فرض: `app/templates`
+- Default value: `app/templates`
 
-پوشه‌ی فایل های template
+The directory for template files.
 
 
 ## CLASH_SUBSCRIPTION_TEMPLATE
-- مقدار پیش‌فرض: `clash/default.yml`
+- Default value: `clash/default.yml`
 
-template مورد استفاده برای تولید کانفیگ های Clash
+The template used to generate Clash configurations.
 
-(مثال: [default.yml](https://github.com/Gozargah/Marzban/blob/master/app/templates/clash/default.yml))
+(Example: [default.yml](https://github.com/Gozargah/Marzban/blob/master/app/templates/clash/default.yml))
 
 
 ## SUBSCRIPTION_PAGE_TEMPLATE
-- مقدار پیش‌فرض: `subscription/index.html`
+- Default value: `subscription/index.html`
 
-template مورد استفاده برای صفحه اطلاعات سابسکریپشن
+The template used for the subscription information page.
 
-(مثال: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/subscription/index.html))
+(Example: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/subscription/index.html))
 
 
 ## HOME_PAGE_TEMPLATE
-- مقدار پیش‌فرض: `home/index.html`
+- Default value: `home/index.html`
 
-template مورد استفاده برای صفحه اصلی
+The template used for the home page.
 
-(مثال: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/home/index.html))
+(Example: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/home/index.html))
 
 
 ## SUB_PROFILE_TITLE
-- مقدار پیش‌فرض: `Subscription`
+- Default value: `Subscription`
 
-عنوان سابسکریپشن در کلاینت
+The title of the subscription in the client.
 
-در صورت پشتیبانی کلاینت از این قابلیت و عدم انتخاب عنوان برای سابسکریپشن توسط کاربر، این مقدار برای عنوان سابسکریپشن انتخاب می‌شود.
+If the client supports this feature and the user does not select a title for the subscription, this value will be used as the subscription title.
 
 
 ## SUB_SUPPORT_URL
-آدرس ارتباط با پشتیبانی در لینک سابسکریپشن
+The support contact address in the subscription link.
 
-(مثال: `"https://t.me/support"`)
+(Example: `"https://t.me/support"`)
 
 
 ## SUB_UPDATE_INTERVAL
-- مقدار پیش‌فرض: `12`
+- Default value: `12`
 
-فاصله زمانی بین آپدیت‌های خودکار سابسکریپشن (به واحد ساعت)
+The time interval between automatic subscription updates (in hours).
 
-در صورت پشتیبانی کلاینت از این قابلیت، سابسکریپشن هر 12 ساعت آپدیت می‌شود.
+If the client supports this feature, the subscription will be updated every 12 hours.
 
 
 ## SQLALCHEMY_DATABASE_URL
-- مقدار پیش‌فرض: `sqlite:///db.sqlite3`
+- Default value: `sqlite:///db.sqlite3`
 
-آدرس دیتابیس در قابل آدرس های SQLAlchemy
+The database address in SQLAlchemy format.
 
-::: tip راهنما
-فرمت و درایور های موجود برای آدرس دیتابیس را در [مستندات SQLAlchemy](https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls) مشاهده کنید.
+::: tip Guide
+See the available formats and drivers for the database address in the [SQLAlchemy documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls).
 :::
 
 
 ## WEBHOOK_ADDRESS
-- مقدار پیش‌فرض: `DEFAULT`
+- Default value: `DEFAULT`
 
 
 
 ## WEBHOOK_SECRET
-- مقدار پیش‌فرض: `DEFAULT`
+- Default value: `DEFAULT`
 
 
 
 ## SUDO_USERNAME
-::: warning توجه
-به شدت توصیه میشه تا از مرزبان cli برای ساخت ادمین استفاده کنید و از این متغیر استفاده نکنید.
+::: warning Note
+It is strongly recommended to use the Marzban CLI to create an admin and not use this variable.
 :::
-شما می توانید نام کاربری ادمین کل را از متغیر محیطی تنظیم کنید.
+You can set the username of the super admin from an environment variable.
 
 
 ## SUDO_PASSWORD
-::: warning توجه
-به شدت توصیه میشه تا از مرزبان cli برای ساخت ادمین استفاده کنید و از این متغیر استفاده نکنید.
+::: warning Note
+It is strongly recommended to use the Marzban CLI to create an admin and not use this variable.
 :::
-شما می توانید گذرواژه ادمین کل را از متغیر محیطی تنظیم کنید.
+You can set the password of the super admin from an environment variable.
 
 
 ## DOCS
-- مقدار پیش‌فرض: `false`
+- Default value: `false`
 
-فعال‌سازی مستندات API در آدرس `/docs` و ‍`/redoc`
+Enable API documentation at `/docs` and `/redoc`.
 
 
 ## JWT_ACCESS_TOKEN_EXPIRE_MINUTES
-- مقدار پیش‌فرض: `1440`
+- Default value: `1440`
 
-مدت زمان انقضا توکن دسترسی بر مبنی دقیقه
+The expiration time of the access token in minutes.
 
-::: tip نکته
-`0` به معنای 'بدون انقضا' است.
+::: tip Note
+`0` means 'no expiration'.
 :::
 
 
 ## DEBUG
-- مقدار پیش‌فرض: `false`
+- Default value: `false`
 
-فعالسازی حالت توسعه (development)
+Enable development mode.
 
 
 ## VITE_BASE_API
-- مقدار پیش‌فرض: `/api/`
+- Default value: `/api/`
 
-پیشوند مسیر API برای استفاده در داشبورد (front-end)
+The API route prefix for use in the dashboard (front-end)

@@ -1,31 +1,29 @@
 ---
-title: معرفی مرزبان
+title: Introduction to Marzban
 ---
 
-# مرزبان
-مرزبان یک نرم افزار (وب اپلیکیشن) مدیریت پروکسی است که امکان مدیریت چند صد حساب پروکسی را با قدرت و دسترسی بالا فراهم میکند. مرزبان از Xray-core قدرت گرفته و با Python و React پیاده سازی شده است.
+# Marzban
+Marzban is a powerful proxy management software (web application) that allows you to manage hundreds of proxy accounts with high performance and accessibility. Marzban is built on top of Xray-core and implemented using Python and React.
 
-## چرا مرزبان؟
+## Why Marzban?
 
-مرزبان پلتفرمی است که با تمرکز بر سادگی و کارآمدی طراحی شده. مرزبان از نیاز های شخصی و کوچک تا مقیاس های بزرگ را پاسخگو است. با استفاده از مرزبان، شما به راحتی قادر خواهید بود کاربر های خود را با تنظیمات پیشرفته مدیریت کرده و به نیازهای مختلف پاسخ دهید. این پلتفرم به شما این امکان را می‌دهد تا کنترل کاملی بر ترافیک و منابع داشته باشید و با بهره‌گیری از ویژگی‌های پیشرفته آن، بهترین تجربه را بسازید. همچنین، مرزبان کاملا انعطاف پذیر و توزیع پذیر است و شما قادر خواهید بود که زیرساخت خود را بدون محدودیت گسترش دهید.
+Marzban is designed as a platform focused on simplicity and efficiency. It caters to both personal and large-scale needs. With Marzban, you can easily manage your users with advanced settings and meet various requirements. This platform gives you full control over traffic and resources, allowing you to create the best experience by leveraging its advanced features. Additionally, Marzban is highly flexible and scalable, enabling you to expand your infrastructure without limitations.
 
-
-## امکانات
-- رابط کاربری تحت وب آماده
-- به صورت REST API پیاده سازی شده
-- پشتیبانی از یکپارچه سازی چندین سرور مختلف برای توزیع زیرساخت و مقیاس پذیری <Badge type="tip">جدید</Badge>
-- پشتیبانی از پروتکل های Vmess, VLESS, Trojan و Shadowsocks
-- امکان فعالسازی چندین پروتکل برای هر یوزر
-- امکان ساخت چندین کاربر بر روی یک inbound
-- پشتیبانی از چندین inbound بر روی یک port (پشتیبانی از fallbacks)
-- محدودیت بر اساس مصرف ترافیک و تاریخ انقضا
-- محدودیت ترافیک دوره ای (به عنوان مثال روزانه، هفتگی و غیره)
-- پشتیبانی از Subscription link سازگار با کلاینت های مختلف ✨
-- ساخت لینک اشتراک گذاری و QRcode به صورت خودکار
-- مانیتورینگ منابع سرور و مصرف ترافیک
-- پشتیبانی از تنظیمات Xray
-- پشتیبانی از TLS و REALITY <Badge type="tip">جدید</Badge>
-- ربات تلگرام
-- رابط خط فرمان (CLI) داخلی <Badge type="tip">جدید</Badge>
-- قابلیت ایجاد چندین مدیر
-
+## Features
+- Ready-to-use web-based user interface
+- Implemented as a REST API
+- Supports integration with multiple servers for infrastructure distribution and scalability ([Marzban-node](/docs/marzban-node)) <Badge type="tip">New</Badge>
+- Supports Vmess, VLESS, Trojan, and Shadowsocks protocols
+- Ability to activate multiple protocols for each user
+- Ability to create multiple users on a single inbound
+- Supports multiple inbounds on a single port (fallbacks)
+- Traffic and expiration date-based limitations
+- Periodic traffic limitations (e.g., daily, weekly, etc.)
+- Supports Subscription link compatible with various clients ✨
+- Automatically generates sharing links and QR codes
+- Server resource monitoring and traffic consumption
+- Supports Xray configurations
+- Supports TLS and REALITY <Badge type="tip">New</Badge>
+- Telegram bot
+- Built-in command-line interface (CLI) <Badge type="tip">New</Badge>
+- Ability to create multiple administrators
