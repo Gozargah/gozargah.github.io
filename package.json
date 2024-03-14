@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "marzban documentation",
   "scripts": {
-    "marzban:dev": "NODE_ENV=development vitepress dev marzban --port 3000",
+    "marzban:dev": "NODE_ENV=development vitepress dev marzban --port 3000 --host",
     "marzban:build": "vitepress build marzban",
     "marzban:preview": "vitepress preview marzban --port 3000"
   },
