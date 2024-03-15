@@ -1,59 +1,70 @@
 ---
-title: سابسکریپشن
+title: Subscription
 ---
 
 
-# سابسکریپشن
+# Subscription 
 
-با استفاده از این آموزش می‌توانید لینک سابسکریپشن را در مرزبان فعال کنید. قابلیت سابسکریپشن در مرزبان به شما اجازه می‌دهد تا به همه کانفیگ‌های خود در کلاینت‌های مختلف دسترسی داشته باشید، همچنین در صورت اضافه یا حذف کردن اینباندها و یا ایجاد تغییر در `Host Settings`، می‌توانید با آپدیت کردن لینک سابسکریپشن به راحتی به کانفیگ‌های جدید خود دسترسی داشته باشید.
+Using this tutorial, you can enable subscription links in Marzban. The subscription feature in Marzban allows you to access all your configurations on different clients. Additionally, by adding or removing inbounds or making changes in the `Host Settings`, you can easily access your new configurations by updating the subscription link.
 
-## فعال کردن لینک سابسکریپشن
+## Enabling Subscription Link
 
-1. برای فعال کردن لینک سابسکریپشن ابتدا باید طبق آموزش [ساخت گواهی SSL]( https://gozargah.github.io/marzban/examples/issue-ssl-certificate) برای دامنه خود گواهی SSL بسازید سپس طبق آموزش [فعال‌سازی SSL در مرزبان]( https://gozargah.github.io/marzban/examples/marzban-ssl) آن را در مرزبان فعال کنید تا داشبورد مرزبان و لینک سابسکریپشن شما به صورت `https` در دسترس باشد.
+1. To enable the subscription link, first, you need to follow this tutorial [How to generate SSL](https://gozargah.github.io/marzban/examples/issue-ssl-certificate) to generate an SSL certificate for your domain. Then, follow the instructions on this tutorial [Activating SSL in Marzban](https://gozargah.github.io/marzban/examples/marzban-ssl) to activate SSL in Marzban so that your Marzban dashboard and subscription link will be accessible via `https` which provides encrypted data transfer for enhanced security.
 
-2. اگر قصد تفکیک کردن دامنه پنل و لینک سابسکریپشن را ندارید، پس از فعال‌سازی SSL لینک سابسکریپشن شما فعال خواهد بود، اما اگر می‌خواهید برای هر کدام دامنه مجزا داشته باشید لازم است که مولتی SSL بگیرید تا گواهی برای هر دو دامنه شما کار کند. همچنین در `.env` کد زیر را با برداشتن # اول آن از حالت کامنت در بیاورید، سپس ساب دامنه مورد نظر خود را برای لینک سابسکریپشن قرار دهید.
+2. If you do not intend to separate the domain for panel and the subscription link, activating SSL will automatically enable the subscription link. However, if you want to have separate domains for each, you need to obtain a Multi SSL certificate so that the certificate works for both your domains. Also, you need to uncomment the following code in the `.env` by removing the initial #, then specify your desired subdomain for the subscription link.
 
 ```env
 XRAY_SUBSCRIPTION_URL_PREFIX = https://YOUR_DOMAIN:PORT
 ```
 
-::: warning توجه 
-در صورتی که برای پنل پورتی غیر از 443 تعیین کرده‌اید لازم است که پورت پنل را هم در متغیر بالا قرار دهید. همچنین اگر از ربات تلگرام استفاده می‌کنید تعیین کردن متغیر بالا ضروری است در غیر این صورت اگر لینک ساب کاربر را از طریق ربات دریافت کنید فرمت آن درست نخواهد بود.
+::: warning Attention 
+If you have assigned a port other than 443 for your panel, it is necessary to include the panel port in the above variable. Additionally, If you are using the Telegram bot, it's essential to specify the above variable. Otherwise, If you copy the user's sub-link via the Telegram bot, the format will be incorrect.
 :::
 
-3. در نهایت با دستور زیر مرزبان را ریستارت کنید تا تغییرات اعمال شود.
+3. Finally, to apply changes, restart Marzban using the following command.
 
 ```bash
 marzban restart
 ```
 
-حالا لینک سابسکریپشن شما فعال شده است و پس از ساخت کاربر در پنل مرزبان می‌توانید از آن استفاده کنید.
+Now, your subscription link is activated, and after creating a user in Marzban panel or Telegram bot, you can use it.
 
-::: tip  نکته 
-برخی از متغیرهای لینک سابسکریپشن در آموزش [پیکربندی](https://gozargah.github.io/marzban/docs/configuration) توضیح داده شده‌اند. برای خواندن توضیحات آن‌ها به آموزش پیکربندی رجوع کنید.
+::: tip  Tip 
+Some of the subscription link variables are explained in the [Configuration](https://gozargah.github.io/marzban/en/docs/configuration) tutorial. Refer to the configuration tutorial to read their descriptions.
 :::
 
-## صفحه سابسکریپشن
+## Subscription Page
 
- صفحه سابسکریپشن به شما اجازه می‌دهد یک صفحه دلخواه برای قرار دادن کلاینت‌های مختلف در خصوص سیستم عامل‌های مختلف و آموزش‌های مربوط به آن‌ها داشته باشید. یک نمونه صفحه سابسکریپشن که توسط یکی از اعضای کامیونیتی مرزبان توسعه داده شده در ادامه معرفی شده است.
+The subscription page allows you to have a custom page for placing various clients regarding different operating systems and tutorials related to them. A sample subscription page developed by one of the Marzban community members is introduced below.
 
-1. با دستور زیر قالب صفحه سابسکریپشن را دانلود کنید.
+1. Download the subscription page template using the following command.
 
 ```bash
 sudo wget -N -P /var/lib/marzban/templates/subscription/  https://raw.githubusercontent.com/x0sina/marzban-sub/main/index.html
 ```
 
-2. بعد مقادیر زیر را در فایل `.env` در پوشه /opt/marzban/ با پاک کردن # اول آن‌ها از حالت کامنت در بیاورید.
+2. Then, uncomment the following values in the `.env` file located in the `/opt/marzban/` directory by removing the initial #.
 
 ```env
 CUSTOM_TEMPLATES_DIRECTORY="/var/lib/marzban/templates/"
 SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"
 ```
 
-3. در نهایت با دستور زیر مرزبان را ریستارت کنید تا تغییرات اعمال شود.
+3. Finally, to apply changes, restart Marzban using the following command.
 
 ```bash
 marzban restart
 ```
 
-حالا کافی‌ست لینک سابسکریپشن یکی از کاربر‌ها را در مرورگر وارد کنید تا صفحه سابسکریپشن برای شما نمایش داده شود.
+Now, simply enter one of the users' subscription link into your browser to display the subscription page.
+
+::: tip Tip
+To change the default language, refer to the end of the code in html file and place your desired language in the select tag at the top. In the example below, English is the default language.
+```html 
+<select id="countries" class="border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white :focus:ring-blue-500 :focus:border blue-500">
+  <option value="en">English</option>
+  <option value="fa">فارسی</option>
+  <option value="ru">Русский</option>
+</select>
+```
+:::
