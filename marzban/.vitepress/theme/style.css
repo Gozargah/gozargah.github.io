@@ -101,9 +101,9 @@ html[dir] {
 	line-height: 1.2;
 }
 
-a.VPLink.link[href^="/marzban/en/"] {
+/* a.VPLink.link[href^="/marzban/fa/"] {
 	display: none;
-}
+} */
 
 .VPImage.logo {
 	margin-right: 10px;

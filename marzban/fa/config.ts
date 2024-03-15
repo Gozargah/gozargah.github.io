@@ -73,7 +73,7 @@ export const config: DefaultTheme.Config = {
     title: 'صفحه مورد نظر پیدا نشد',
     quote: 'برای مشاهده مستندات، به صفحه اصلی مراجعه کنید. برای پیدا کردن مطلب مورد نظر میتوانید از قابلیت جستجو استفاده کنید.',
     linkText: 'مطالعه مستندات',
-    linkLabel: '/marzban/',
+    linkLabel: '/marzban/fa',
   },
   darkModeSwitchLabel: 'رنگبندی',
   darkModeSwitchTitle: 'تاریک',

@@ -14,10 +14,10 @@ hero:
   actions:
     - theme: brand
       text: Get started
-      link: './documentation/'
+      link: './docs/introduction'
     - theme: alt
       text: Examples
-      link: './examples/'
+      link: './examples/issue-ssl-certificate'
 
 features:
   - icon: 💎

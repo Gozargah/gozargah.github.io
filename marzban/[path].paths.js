@@ -19,19 +19,19 @@ const developmentContent = (location) => `
 <script setup>
 import {withBase, useRouter} from 'vitepress'
 
-const {go} = useRouter();
-console.log(go)
-go(withBase('/en/${location}'))
+const { go } = useRouter();
+
+go(withBase('/fa/${location}'))
 </script>
 `
 
 export default {
   async paths() {
-    return walk('./marzban/en').map((filePath) => {
-      const path = filePath.replace('./marzban/en/', '').replace('.md', '')
+    return walk('./marzban/fa').map((filePath) => {
+      const path = filePath.replace('./marzban/fa/', '').replace('.md', '')
       return {
         params: { path },
-        content: process.env.NODE_ENV === 'development' ? developmentContent(path) : fs.readFileSync(filePath, { encoding: 'utf8' }),
+        content: developmentContent(path),
       }
     })
   },

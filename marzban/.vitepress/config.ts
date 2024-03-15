@@ -33,7 +33,7 @@ export default defineConfig({
   cleanUrls: true,
   lang: 'fa',
   locales: {
-    root: englishLang,
+    // root: englishLang,
     fa: {
       ...persianLang,
       link: '/fa/',
