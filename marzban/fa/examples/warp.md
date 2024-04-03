@@ -127,8 +127,12 @@ Endpoint = engage.cloudflareclient.com:2408
 در صورت عدم اضافه کردن `Table = off` دسترسی شما به سرور قطع خواهد شد و دیگر نمیتوانید به سرور متصل شوید و باید از طریق وب سایت دیتاسنتر خود به سرور وارد شده و اتصال به `Warp` رو قطع کنید تا بتونید دوباره به صورت عادی ارتباط برقرار کنید.
 :::
 
-- سپس نام فایل رو از `wgcf-profile.conf` به `warp.conf` تغییر بدید.
-- فایل رو در پوشه `/etc/Wireguard` در سرور قرار بدید.
+- سپس با دستور زیر نام فایل رو از `wgcf-profile.conf` به `warp.conf` تغییر بدید و فایل رو در پوشه `/etc/wireguard` در سرور قرار بدید.
+
+```bash
+sudo mv wgcf-profile.conf /etc/wireguard/warp.conf
+```
+  
 - با دستور پایین Wireguard رو فعال کنید.
 
 ```bash
