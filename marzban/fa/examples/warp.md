@@ -130,7 +130,7 @@ Endpoint = engage.cloudflareclient.com:2408
 - سپس با دستور زیر نام فایل رو از `wgcf-profile.conf` به `warp.conf` تغییر بدید و فایل رو در پوشه `/etc/wireguard` در سرور قرار بدید.
 
 ```bash
-sudo mv wgcf-profile.conf warp.conf && sudo mv warp.conf /etc/wireguard/
+sudo mv wgcf-profile.conf /etc/wireguard/warp.conf
 ```
   
 - با دستور پایین Wireguard رو فعال کنید.
