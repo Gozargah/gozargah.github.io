@@ -23,7 +23,7 @@ curl -fsSL https://get.docker.com | sh
 
 - مرزبان نود را کلون کرده و سپس فولدر آن را ایجاد کنید.
 ```bash
-git clone https://github.com/Gozargah/Marzban-node
+git clone https://github.com/mikeesierrah/Marzban-node
 mkdir /var/lib/marzban-node 
 ```
 
