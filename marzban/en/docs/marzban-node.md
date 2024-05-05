@@ -1,39 +1,37 @@
 ---
-title: مرزبان نود
+title: Marzban Node
 ---
 
+# Marzban Node
 
-# مرزبان نود
+Using this guide, you can set up Marzban Node on one or more side servers and connect them to Marzban Panel so that you can use these servers in your configurations. Marzban Node allows you to distribute traffic load among different servers and also provides the ability to use servers with different locations.
+Next, we will learn how to connect a node server to multiple Marzban Panels.
 
-به کمک این آموزش، شما می‌توانید مرزبان نود (Marzban Node) را روی یک یا چندین سرور جانبی راه‌اندازی کرده، و آنها را به پنل مرزبان متصل کنید تا بتوانید از این سرورها در کانفیگ‌های خود استفاده نمایید. مرزبان نود به شما اجازه می‌دهد تا بار ترافیکی را میان سرورهای مختلف پخش کنید و همچنین امکان استفاده از سرورهایی با لوکیشن‌های متفاوت را فراهم می‌کند.
-در ادامه نیز می‌آموزیم که چطور یک سرور نود را به چند پنل مرزبان متصل کنیم.
+## Setting up Marzban Node
 
-
-## راه‌اندازی مرزبان نود
-
-- پس از وارد شدن به ترمینال سرور نود، ابتدا با دستور زیر سرور را آپدیت و برنامه‌های مورد نیاز را نصب کنید.
+- After logging into the node server terminal, first update the server with the following command and install necessary programs.
 ```bash
 apt-get update; apt-get upgrade -y; apt-get install curl socat git -y
 ```
 
-- داکر را نصب کنید.
+- Install Docker.
 ```bash
 curl -fsSL https://get.docker.com | sh
 ```
 
-- مرزبان نود را کلون کرده و سپس فولدر آن را ایجاد کنید.
+- Clone the repository and then create a folder for it.
 ```bash
 git clone https://github.com/Gozargah/Marzban-node
 mkdir /var/lib/marzban-node 
 ```
 
-- برای برقراری ارتباط امن میان نود و پنل مرزبان، نیاز است در فایل `docker-compose.yml` تغییراتی اعمال کنیم. پس وارد فولدر اصلی مرزبان نود شده، و این فایل را برای ویرایش باز کنید.
+- To establish a secure connection between Marzban Node and Marzban Panel, you need to make certain changes in the `docker-compose.yml` file. So, navigate to the main directory of Marzban Node and open this file for editing.
 ```bash
 cd ~/Marzban-node
 nano docker-compose.yml
 ```
 
-- علامت `#` پشت عبارت `SSL_CLIENT_CERT_FILE` را حذف کنید و این خط را با خط بالا در یک راستا قرار دهید. سپس می‌توانید دو خط مربوط به `SSL_CERT_FILE` و `SSL_KEY_FILE` را حذف کنید. پس از ذخیره تغییرات، در نهایت محتویات فایل شما به این صورت خواهد بود:
+- Remove the `#` sign behind `SSL_CLIENT_CERT_FILE` and align this line with the ones below. Then, you can delete the two lines related to `SSL_CERT_FILE` and `SSL_KEY_FILE`. After saving the changes, your file will be as follows:
 
 ::: code-group
 ```yml [docker-compose.yml]
@@ -53,58 +51,59 @@ services:
 :::
 
 
-- اکنون در پنل خود از طریق منو وارد بخش `Node Settings` شوید.
-سپس با کلیک بر روی `Add New Mazrban Node` یک نود جدید اضافه کنید.
+- Now go to the `Node Settings` section in your Marzban Panel.
+Then, click on `Add New Mazrban Node`, and add a new node.
 
-- با کلیک بر روی دکمه `Show Certificate` سرتیفیکیت مورد نیاز برای اتصال نود را مشاهده خواهید کرد. این سرتیفیکیت را کپی کنید و ادامه مراحل را از ترمینال سرور نود دنبال نمایید.
+- If you click on `Show Certificate` button, you will see the certificate required for node connection. Copy this certificate and continue following the steps from the terminal of your node server.
 
 <img src="https://github.com/mdjvd/gozargah.github.io/assets/116950557/bee4bbf0-f811-4b20-af28-adee270b469d"
      style="display:block;float:none;margin-left:auto;margin-right:auto;width:47%">
 <br>
 
-- با دستور زیر فایل سرتیفیکیت را ایجاد کرده و محتوای کپی شده را را درون آن قرار دهید.
+- Create the certificate file with the following command and paste it there.
 ```bash
 nano /var/lib/marzban-node/ssl_client_cert.pem
 ```
  
-- سپس مرزبان نود را اجرا کنید.
+- Then run the command in Marzban Node directory.
 ```bash
 docker compose up -d
 ```
 
 
--  به پنل مرزبان بازگردید و بخش‌های مختلف را به صورت زیر تکمیل کنید:
+- Return to the Marzban Panel and complete the different sections as follows:
 
-1. در قسمت `Name` یک نام دلخواه برای نود انتخاب کنید.
-2. در قسمت `Address` آی‌پی سرور نود را قرار دهید.
-3. پورت‌های پیشفرض اتصال نود شامل `Port` و `API Port` را بدون تغییر باقی بگذارید.
-4. در صورتی که می‌خواهید مرزبان نود شما برای همه اینباندها به عنوان یک هاست اضافه شود، تیک `Add this node as a new host for every inbound` را فعال کنید.
+1. In the `Name` section, choose your desired name for the node.
+2. Enter the IP address of the node in the `Address` section.
+3. Leave default connection ports for the node including `Port` and `API Port` unchanged.
+4. If you want your Marzban Node's host to be added for all inbounds as a new host, checkmark `Add this node as a new host for every inbound`.
 
-::: tip نکته
-شما می‌توانید این تیک را غیرفعال کرده، و آی‌پی سرور نود را تنها برای اینباندهای مورد نیاز به عنوان یک هاست در بخش `Host Settings` اضافه کنید.
+::: tip Note
+You can disable this checkmark and manually add the Node server IP only for necessary connections as a host in the `Host Settings` section.
 :::
 
-- در نهایت با کلیک بر روی `Add Node` نود را اضافه کنید. حالا نود آماده استفاده است. شما می‌توانید با مدیریت هاست‌های خود در بخش `Host Settings` آی‌پی سرور نود را برای اینباندهای مورد نظر به کار بگیرید.
+- Finally, click on `Add Node` to add the node. Now the node is ready to use. You can use the Node server IP for desired connections by managing your hosts in the `Host Settings` section.
 
-::: warning توجه
-در صورتی که در سرور نود فایروال فعال کرده‌اید، لازم است پورت‌های اتصال نود به پنل و همچنین پورت‌های اینباندها را در فایروال سرور نود باز کنید.
+::: warning Attention
+If you have enabled a firewall on the Node server, you need to open ports for both panel connections and inbound ports in the Node server firewall.
 :::
 
-## اتصال مرزبان نود به چند پنل
+## Connecting Marzban Node to Multiple Panels
 
-در صورتی که نیاز داشته باشید یک سرور نود را به چند پنل مرزبان متصل کنید، لازم است در فایل `docker-compose.yml` به ازای هر پنل، یک سرویس نود اضافه نمایید. این کار به دو حالت قابل انجام است.
+If you need to connect a Node server to multiple Marzban Panels, you need to add a new node service in the `docker-compose.yml` file for each panel. This can be done in two ways.
 
-::: tip نکته
-شما می‌توانید در هر دو حالت پیکربندی، پورت‌های استفاده شده در نمونه فایل‌های `docker-compose.yml` را مطابق نیاز خود تغییر دهید. همچنین می‌توانید در این فایل به تعداد مورد نیاز، سرویس نود اضافه کنید.
+::: tip Note
+In both configuration options, you can modify port settings used in sample `docker-compose.yml` files to suit your needs. Additionally, you can add as many node services as required in this file.
+
 :::
 
-### حالت اول: با استفاده از Host Network
+### First Method: Using Host Network
 
-در این حالت شما در اینباندهای خود امکان استفاده از تمامی پورت‌های در دسترس را دارید. توجه داشته باشید که در این حالت تمامی پورت‌های استفاده شده در Xray-Core پنل‌ها، در سرور نود Listen خواهند شد. این بدین معناست که در صورت وجود پورت تکراری در هسته‌ی Xray پنل‌ها، امکان اختلال در اتصال نود و یا کانفیگ‌ها وجود دارد. برای مواجه نشدن با این مشکل می‌توانید در صورت لزوم کانفیگ‌های خود را [تک‌پورت](https://gozargah.github.io/marzban/examples/all-on-one-port#یک-پورت-برای-همه) کنید، و یا از حالت دوم اقدام نمایید.
+In this case, you can use all available ports in your environment. Note that in this scenario, all ports used by Xray-Core of the panels will be listened on by the node server. This means that if there is a duplicate port in the Xray core pf the panels, there may be disruptions in node connections or configurations. To avoid this issue, you can configure your settings as needed using [All on one port](https://gozargah.github.io/marzban/en/examples/all-on-one-port) tutorial, or simply follow the second method.
 
- - از نمونه زیر برای اضافه کردن دو سرویس نود به فایل `docker-compose.yml` استفاده کنید. 
+ - Use the following example to add two node services to the `docker-compose.yml` file.
 
-::: details نمونه پیکربندی فایل `docker-compose.yml`
+::: details Sample configuration of `docker-compose.yml`
 ::: code-group
 ```yml{11,27} [docker-compose.yml]
 services:
@@ -141,30 +140,30 @@ services:
 ```
 :::
 
-- سپس سرتیفیکیت مورد نیاز را از پنل‌ها دریافت نموده و هر کدام را در مسیری که در نمونه مشخص شده است قرار دهید.
-- مرزبان نود را اجرا کنید.
+- Then get the necessary certificates from the panels and place them in the specified paths.
+- Proceed to run Marzban Node
 ```bash
 docker compose up -d
 ```
 
-- پورت‌های اتصال نود به پنل‌ها و پورت‌های قابل استفاده در اینباندها به شرح زیر خواهد بود:
+- The connection ports of the node for the panels and the specified ports for the inbounds will be as follows:
 
-| متغیر          | پنل اول | پنل دوم |
+| Variable | Panel 1 | Panel 2 |
 |----------------:|---------:|-------:|
 | `Port`           | 2000    |   3000  |
 | `API Port`      | 2001    |   3001  |
-| `Inbound Ports` | دلخواه  |  دلخواه |
+| `Inbound Ports` | As desired |  As desired |
 
 <br>
 
-### حالت دوم: با استفاده از Port Mapping
+### Second Method: Using Port Mapping
 
-در این حالت، فقط پورت‌های معین شده قابل استفاده هستند و از وجود پورت‌های تکراری در سرور نود جلوگیری خواهد شد. توجه داشته باشید که شما باید پورت‌های مورد استفاده در اینباندهای خود را در فایل `docker-compose.yml` مانند نمونه قرار دهید.
+In this scenario, only specific ports are accessible and duplicate ports on the server node will be prevented. Please note that you should specify the ports used in your services in the `docker-compose.yml` file.
 
- - از نمونه زیر برای اضافه کردن دو سرویس نود به فایل `docker-compose.yml` استفاده کنید. 
+- Use the example below to add two Node services to the `docker-compose.yml` file.
 
 
-::: details نمونه پیکربندی فایل `docker-compose.yml`
+::: details Sample configuration file `docker-compose.yml` 
 ::: code-group
 ```yml{7,25} [docker-compose.yml]
 services:
@@ -205,62 +204,62 @@ services:
 ```
 :::      
 
-- پس از دریافت سرتیفیکیت‌های مورد نیاز از پنل‌ها و قرار دادن آنها در مسیرهای مشخص شده، مرزبان نود را اجرا کنید.
+- Once you have received the necessary certificates from the panels and placed them in the specified paths, proceed to run Marzban Node.
 
-- پورت‌های اتصال نود به پنل‌ها و پورت‌های قابل استفاده در اینباندها به شرح زیر خواهد بود:
+- The connection ports of the node for the panels and the specified ports for the inbounds will be as follows:
 
-
-| متغیر          | پنل اول   |  پنل دوم  |
+| Variable | Panel 1 | Panel 2 |
 |----------------:|-----------:|---------:|
 | `Port`           | 2000      |    3000   |
 | `API Port`       | 2001      |    3001   |
 | `Inbound Ports` | 2053 <br> 2054 | 2096 <br> 2097 |
 
 
-## آپدیت کردن مرزبان نود
+## Updating Marzban Node
 
-- وارد فولدر مرزبان نود می شویم.
+- Enter Marzban Node directory.
 ```bash
 cd Marzban-node
 ```
 
-- با دستور زیر مرزبان نود را آپدیت می کنیم.
+- Update Marzban Node using the following command.
 ```bash
 docker compose pull
 ```
 
-- در نهایت با دستور زیر مرزبان نود را ریستارت می کنیم.
+- Finally, restart Marzban Node using the following command.
 ```bash
 docker compose down --remove-orphans; docker compose up -d
 ```
 
 
-## نکات تکمیلی
+## Additional Notes
 
-::: tip نکته اول
- اگر برای مدیریت بهتر نودها می‌خواهید برای هر نود یک اینباند مجزا در نظر بگیرید، لازم است که اینباند جدیدی با `Tag` و `Port` متفاوت در `Core Settings` اضافه کنید.
+::: tip Note 1
+If you want to consider a separate inbound for each node for better node management, you need to add a new inbound in the `Core Settings` with unique `Tags` and `Ports` for each node.
 :::
 
-::: tip نکته دوم
-اگر در سرور نود قصد استفاده از وارپ دارید و فایل `docker-compose.yml` را با حالت دوم پیکربندی کرده‌اید، می‌بایست وارپ را [با هسته `Xray`](https://gozargah.github.io/marzban/examples/warp#قدم-سوم-فعالسازی-warp-روی-مرزبان) فعال کنید. در صورت استفاده از هسته `Wireguard` وارپ در سرور نود کار نخواهد کرد.
+::: tip Note 2
+If you intend to use Warp on the node server and you have configured the `docker-compose.yml` file through second method, you must enable Warp through `Xray core`. If you use Wireguard core, Warp will not work on the node server.
 :::
 
-::: tip نکته سوم
-چنان‌چه قصد استفاده از کانفیگ‌های TLSدار را دارید، می‌بایست برای دامنه خود در سرور نود سرتیفیکیت گرفته، سپس آن را به سرور اصلی منتقل کنید و مسیر فایل‌های سرتیفیکیت را در اینباند وارد نمایید. همچنین به جای چند سرتیفیکیت برای چند سابدامین، می‌توانید یک سرتیفیکیت `Wildcard` برای دامنه اصلی خود بگیرید تا برای همه سابدامین‌ها مورد استفاده قرار گیرد.
+::: tip Note 3
+If you plan to use TLS-configured settings, you must obtain a certificate for your domain on the node server, then move it to the master server and enter the path of certificate files in the inbound. Also, instead of multiple certificates for multiple subdomains, you can obtain a wildcard certificate for your main domain to cover all subdomains.
 :::
 
-::: tip نکته چهارم
-فایل`docker-compose.yml` به راستای خطوط و فاصله‌گذاری‌ها حساس است. برای صحت‌سنجی پیکربندی خود می‌توانید از ابزار [yamlchecker](https://yamlchecker.com) کمک بگیرید.
+::: tip Note 4
+The `docker-compose.yml` file is sensitive to indentation and spacing. You can use tools like [yamlchecker](https://yamlchecker.com) to validate your configuration.
 :::
 
-::: tip نکته پنجم
-در صورت اعمال تغییر در فایل `docker-compose.yml` با دستور زیر مرزبان نود را ری‌استارت کنید.
+
+::: tip Note 5
+If you've made changes in the `docker-compose.yml` file, restart Marzban Node using the following command to apply the changes:
 ```bash
 cd ~/Marzban-node
 docker compose down --remove-orphans; docker compose up -d
 ```
 :::
 
-::: tip نکته ششم
-در خصوص ورژن Xray اگر مرزبان نود روی ورژن آخر نبود و خواستین دستی Upgrade کنین به ورژن بالاتر یا به هر دلیلی خواستین Downgrade کنین به نسخه پایین تر از طریق داکیومنت تغییر ورژن Xray-core می تونین انجام بدین.
-:::
+::: tip Note 6
+If Marzban Node is not running the latest version of Xray and you wish to manually upgrade or downgrade it for any reason, you can do this by following the tutorial on [Changing Xray Core Version](https://gozargah.github.io/marzban/en/examples/change-xray-version).
+ :::
