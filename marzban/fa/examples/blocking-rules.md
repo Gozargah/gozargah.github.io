@@ -190,5 +190,5 @@ services:
 در نهایت برای اعمال تغییرات با دستور زیر مرزبان را ریستارت کنید.
 
 ``` bash
-marzban restart
+docker compose down && docker compose up -d
 ```
