@@ -55,7 +55,7 @@ mkdir -p /var/lib/marzban/certs
   - بعد از نصب acme مراحل زیر را اجرا کنید
  
 ```
-curl https://get.acme.sh
+curl https://get.acme.sh | sh -s email=YOUR_EMAIL
 ```
 
 1. قدم اول:
