@@ -31,15 +31,15 @@ SELECT * FROM users WHERE (data_limit - used_traffic) < (2*1024*1024*1024) and s
 ```sql
 SELECT admins.username, users.data_limit/1073741824, Count(*)
 FROM admins 
-  LEFT JOIN users ON users.admin_id = admins.id
+LEFT JOIN users ON users.admin_id = admins.id
 GROUP BY admins.username, users.data_limit
 ```
 - مشاهده حجم مصرفی ادمین‌ها
 ```sql
 SELECT admins.username, (SUM(users.used_traffic) + IFNULL(SUM(user_usage_logs.used_traffic_at_reset), 0)) / 1073741824
 FROM admins 
-  LEFT JOIN users ON users.admin_id = admins.id 
-  LEFT JOIN user_usage_logs ON user_usage_logs.user_id = users.id
+LEFT JOIN users ON users.admin_id = admins.id 
+LEFT JOIN user_usage_logs ON user_usage_logs.user_id = users.id
 Group By admins.username
 ```
 - میزان مصرف ادمین‌ها از هر نود
