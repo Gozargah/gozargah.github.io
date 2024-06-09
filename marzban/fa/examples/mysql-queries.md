@@ -18,7 +18,7 @@ title: کوئری‌ های کاربردی SQL
 ## لیست کوئری‌ های کاربردی SQL
 - دیدن لیست کاربرانی که تا تاریخ مشخصی زمانشان به اتمام میرسد
 ```sql
-SELECT * FROM users WHERE expire < UNIX_TIMESTAMP('2024-03-10') and  status = 'active';
+SELECT * FROM users WHERE expire < UNIX_TIMESTAMP('2024-03-10') and status = 'active';
 ```
 ::: tip نکته
 فرضا ۷ مارس هست توی کوئری بالا ۱۰ مارس تعیین شده پس تمام کاربرانی که ۳ روز از زمان آنها باقی مانده را خروجی میدهد. 
@@ -73,15 +73,14 @@ WHERE datediff(now(), sub_updated_at) > 10 AND status = 'active' ORDER BY LastUp
 :::
 - دیدن لیست کاربرانی که اینباند غیرفعال دارن
 ```sql
-SELECT users.username, proxies.id, exclude_inbounds_association.inbound_tag FROM users 
-INNER JOIN proxies ON proxies.user_id = users.id  INNER JOIN exclude_inbounds_association ON exclude_inbounds_association.proxy_id = proxies.id 
-ORDER BY users.username;
+SELECT users.username, proxies.id, exclude_inbounds_association.inbound_tag FROM users INNER JOIN proxies 
+ON proxies.user_id = users.id INNER JOIN exclude_inbounds_association 
+ON exclude_inbounds_association.proxy_id = proxies.id ORDER BY users.username;
 ```
 - دیدن لیست کاربرانی که پروتکل `Vmess` براشون غیر فعاله
 ```sql
-SELECT users.username FROM users
-WHERE users.username not in (SELECT users.username
-FROM users  LEFT JOIN proxies ON proxies.user_id = users.id
+SELECT users.username FROM users 
+WHERE users.username not in (SELECT users.username FROM users LEFT JOIN proxies ON proxies.user_id = users.id 
 WHERE proxies.type = 'VMESS');
 ```
 ::: tip نکته
@@ -99,7 +98,7 @@ WHERE users.admin_id = 6;
 - غیر فعال کردن تمام کاربران یک ادمین خاص
 ```sql
 UPDATE users SET users.status= 'disabled' 
-WHERE users.admin_id = '1' and and users.status= 'active'
+WHERE users.admin_id = '1' and users.status= 'active'
 ```
 - فعال کردن تمام کاربران غیر فعال یک ادمین خاص
 ```sql
@@ -214,8 +213,7 @@ DO TRUNCATE node_user_usages
 ```
 - ایونت روزانه برای ست کردن `Flow` چنانچه فراموش کنید برای کاربر بزارید
 ```sql
-CREATE DEFINER=`root`@`%` EVENT `SetFlow` ON SCHEDULE EVERY 1 DAY STARTS '2024-06-01 01:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE proxiesSET settings = JSON_SET(settings, '$.flow', 'xtls-rprx-vision')
-WHERE type = 'VLESS' AND JSON_UNQUOTE(JSON_EXTRACT(settings, '$.flow')) = ''
+CREATE DEFINER=`root`@`%` EVENT `SetFlow` ON SCHEDULE EVERY 1 DAY STARTS '2024-06-01 01:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE proxies SET settings = JSON_SET(settings, '$.flow', 'xtls-rprx-vision') WHERE type = 'VLESS' AND JSON_UNQUOTE(JSON_EXTRACT(settings, '$.flow')) = '';
 ```
 ::: tip نکته
 چطور یک ایونت را خاموش کنیم؟ بعد از فعال کردن اون بالا دکمه `Drop` را بزنین غیرفعال می‌شود ، اما توجه داشته باشید اگر دکمه `On` و `Off` کنید کلیه `Event` ها غیرفعال می‌شوند. 
