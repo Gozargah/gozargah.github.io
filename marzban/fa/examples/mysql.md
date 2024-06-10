@@ -167,3 +167,124 @@ marzban restart
 ```
 
 حالا اطلاعات دیتابیس قبلی شما به MySQL انتقال داده شده است.
+
+## سرویس PhpMyAdmin برای سرورهای ARM
+
+- اگر معماری `CPU` سرور شما `ARM` باشد که شامل `arm64` یا `aarch64` است، و سرویس `PhpMyAdmin` را با نمونه بالا فعال سازی کردین، در لاگ های مرزبان که با دستور `marzban logs` قابل مشاهده است ارورهایی را خواهید دید که مربوط به ساپورت نشدن `PhpMyAdmin` برای `CPU` سرور شماست. همچنین اگر دستور `marzban status` را بزنید، سرویس `PhpMyAdmin` در حالت `restarting` قرار دارد. 
+
+- برای اطمینان کامل از نوع معماری `CPU` سرور می توانید با اسکریپت زیر یک نمای کلی از مشخصات سرور خودتان را مشاهده کنید که جلوی بخش `Arch` نوع `CPU` قابل مشاهده است.
+
+```bash
+wget -qO- bench.sh | bash
+```
+
+- از این رو، باید سرویس `PhpMyAdmin` را در فایل `docker-compose.yml` مانند زیر قرار دهید که در آن از ایمیج متفاوت استفاده شده است.
+
+```yml{24} [docker-compose.yml]
+services:
+  marzban:
+    image: gozargah/marzban:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    volumes:
+      - /var/lib/marzban:/var/lib/marzban
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    command: --bind-address=127.0.0.1 --mysqlx-bind-address=127.0.0.1 --disable-log-bin
+    environment:
+      MYSQL_DATABASE: marzban
+    volumes:
+      - /var/lib/marzban/mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: arm64v8/phpmyadmin:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    environment:
+      PMA_HOST: 127.0.0.1
+      APACHE_PORT: 8010
+      UPLOAD_LIMIT: 1024M
+    depends_on:
+      - mysql
+```
+
+- در نهایت مرزبان را با دستور زیر ریستارت کنید تا ایمیج ذکر شده `Pull` شود.
+```bash
+marzban restart
+```
+حالا اگر دستور زیر را وارد کنید سرویس `PhpMyAdmin` باید در حالت `running` قرار داشته باشد.
+```bash
+marzban status
+```
+
+## رفع ارور موقع خروجی گرفتن از دیتابیس SQLite
+
+اگر موقع مهاجرت به MySQL برای خروجی گرفتن از دیتابیس قبلی با ارور زیر مواجه شدید:
+
+`Unknown option "--data-only" on ".dump"`
+
+به این معناست که نسخه قدیمی از `sqlite` روی سرور شما نصب است. برای حل این مشکل باید از راه دیگری ورژن بالاتری از `sqlite` را نصب کنیم.
+
+- دستور اول
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+- دستور دوم
+```bash
+sudo apt-get install build-essential
+```
+- دستور سوم
+```bash
+wget https://www.sqlite.org/2023/sqlite-autoconf-3430200.tar.gz
+```
+- دستور چهارم
+```bash
+tar -xvf sqlite-autoconf-3430200.tar.gz && cd sqlite-autoconf-3430200
+```
+- پیکربندی و کامپایل سورس کد (این مرحله ممکن است 3 الی 4 دقیقه طول بکشد)
+```bash
+./configure
+```
+```bash
+make
+```
+- حذف نسخه قدیمی `SQLite`
+```bash
+sudo apt-get purge sqlite3
+```
+- نصب نسخه جدید
+```bash
+sudo make install
+```
+- به‌روزرسانی متغیر `PATH`
+```bash
+export PATH="/usr/local/bin:$PATH"
+```
+- بررسی نسخه نصب شده
+```bash
+sqlite3 --version
+```
+اگر همه چیز را درست انجام داده باشید، نسخه جدید باید `3.43.2` باشد.
+- اضافه کردن متغیر `PATH` به فایل `bashrc` برای ماندگاری
+
+فایل `~/.bashrc` را با `nano` باز کنید.
+```bash
+nano ~/.bashrc
+```
+- سپس خط زیر را به انتهای فایل اضافه کنید.
+```bash
+export PATH="/usr/local/bin:$PATH"
+```
+- اعمال تغییرات فایل `bashrc`
+```bash
+source ~/.bashrc
+```
+- حالا مجدد خروجی بگیرید و ادامه مراحل آموزش مهاجرت به MySQL را انجام دهید.
