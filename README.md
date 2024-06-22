@@ -18,6 +18,8 @@
     </a>
 </p>
 
+[Live Version](https://gozargah.github.io/marzban)
+
 Welcome to the Marzban documentation repository. This repository contains all the necessary documentation for the [Marzban](https://github.com/gozargah/marzban) project, which provides a unified GUI
 censorship-resistant solution powered by Xray.
 
