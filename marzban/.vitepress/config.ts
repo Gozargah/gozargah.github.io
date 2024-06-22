@@ -1,6 +1,7 @@
 import { DefaultTheme, LocaleSpecificConfig, defineConfig } from 'vitepress'
 import englishThemeConfig from '../en/config'
 import persianThemeConfig from '../fa/config'
+import russianThemeConfig from '../ru/config'
 
 type ThemeConfig = LocaleSpecificConfig<DefaultTheme.Config> & { label: string; link?: string }
 
@@ -25,6 +26,15 @@ const englishLang: ThemeConfig = {
   themeConfig: englishThemeConfig,
 }
 
+const russianLang: ThemeConfig = {
+  title: 'Marzban',
+  description: '',
+  label: 'Русский',
+  lang: 'ru',
+  link: '/',
+  themeConfig: russianThemeConfig,
+}
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Marzban',
@@ -39,6 +49,7 @@ export default defineConfig({
       link: '/fa/',
     },
     en: { ...englishLang, link: '/en/' },
+    ru: { ...russianLang, link: '/ru/' },
   },
   themeConfig: {
     i18nRouting: true,
