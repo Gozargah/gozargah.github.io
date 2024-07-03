@@ -172,11 +172,8 @@ https://{XRAY_SUBSCRIPTION_URL_PREFIX}/{XRAY_SUBSCRIPTION_PATH}/{JWT_TOKEN}/{CLI
 Получая в `accept_header` значение `"text/html"`, мы понимаем, что запрос к ссылке исходит от веб браузера,
 предоставляя ему на выходе рендер шаблона по умолчанию (или заданного Вами, кастомного шаблона) в виде html файла.
 
-<LinkCard
-  title="Шаблон по умолчанию"
-
 href="https://github.com/Gozargah/Marzban/blob/master/app/templates/subscription/index.html"
-/>
+
 
 Для применения собственного шаблона, Вам необходимо использовать 2 перменные в файле `.env`:
 
@@ -291,17 +288,15 @@ subscription-userinfo: upload=0; download=4460105213; total=2147483648; expire=1
 
 Содержащий в каждом элементе массива полностью валидный json хоста, на основе базового или заданного Вами шаблона
 
-<LinkCard
-  title="Шаблон по умолчанию"
-  href="https://github.com/Gozargah/Marzban/blob/dev/app/templates/v2ray/default.json"
-/>
+
+  href="https://github.com/Gozargah/Marzban/blob/dev/app/templates/v2ray/default.json
+
 
 Согласно утвержденного стандарта конфигурации json
 
-<LinkCard
-  title="Стандарт"
-  href="https://xtls.github.io/Xray-docs-next/en/config/"
-/>
+
+  href="https://xtls.github.io/Xray-docs-next/en/config/
+
 
 Для применения собственного шаблона, Вам необходимо использовать 2 перменные в файле `.env`:
 
