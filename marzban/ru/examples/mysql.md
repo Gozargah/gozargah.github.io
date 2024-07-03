@@ -1,11 +1,7 @@
 ---
 title: Переход на БД MySQL
-description: В данном руководстве мы осуществим переход с SQLite на БД MySQL
-sidebar:
- order: 1
----
-import { Tabs, TabItem, FileTree } from '@astrojs/starlight/components';
 
+---
 
 Этот документ представляет собой руководство по настройке и запуску MySQL для использования с Marzban. Рассмотрены различные варианты настройки, включая MariaDB и Percona Server.
 
