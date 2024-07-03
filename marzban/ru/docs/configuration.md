@@ -141,6 +141,7 @@ URL прокси для запуска Telegram-бота (если сервер�
 
 Шаблон страницы подписки
 Значение по умолчанию: `subscription/index.html`
+
 (Пример: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/subscription/index.html))
 
 ### HOME_PAGE_TEMPLATE
@@ -148,12 +149,14 @@ URL прокси для запуска Telegram-бота (если сервер�
 Шаблон главной страницы.
 
 Значение по умолчанию: `home/index.html`
+
 (Пример: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/home/index.html))
 
 ### SINGBOX_SUBSCRIPTION_TEMPLATE
 
 Шаблон конфига Sing-Box
 Значение по умолчанию: `singbox/default.json`
+
 [https://github.com/Gozargah/Marzban/tree/master/app/templates/singbox](https://github.com/Gozargah/Marzban/blob/master/app/templates/singbox/default.json)
 
 ### SINGBOX_MUX_CONFIGURATION
@@ -161,7 +164,9 @@ URL прокси для запуска Telegram-бота (если сервер�
 Настройки MUX для Sing-box
 
 Значение по умолчанию: `singbox/mux_config.json`
+
 [https://github.com/Gozargah/Marzban/tree/master/app/templates/singbox](https://github.com/Gozargah/Marzban/blob/master/app/templates/singbox/mux_config.json)
+
 ## Настройки Подписки
 
 ### SUB_PROFILE_TITLE
