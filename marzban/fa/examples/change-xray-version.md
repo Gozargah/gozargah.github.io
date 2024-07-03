@@ -39,7 +39,7 @@ mkdir -p /var/lib/marzban/xray-core && cd /var/lib/marzban/xray-core
 ```
 - فایل `Xray` را به کمک `wget` دانلود کنید.
 ```bash
-wget https://github.com/XTLS/Xray-core/releases/download/v1.8.3/Xray-linux-64.zip
+wget https://github.com/XTLS/Xray-core/releases/download/v1.8.16/Xray-linux-64.zip
 ```
 - فایل را از حالت فشرده خارج کنید و فایل فشرده رو پاک کنید.
 ```bash
