@@ -118,22 +118,22 @@ docker compose up -d
 Если вы включили брандмауэр на сервере Node, вам необходимо открыть порты как для подключений к панели, так и для входящих портов в брандмауэре сервера Node.
 :::
 
-## Connecting Marzban Node to Multiple Panels
 
-If you need to connect a Node server to multiple Marzban Panels, you need to add a new node service in the `docker-compose.yml` file for each panel. This can be done in two ways.
+## Подключение узла Marzban к нескольким панелям
 
-::: tip Note
-In both configuration options, you can modify port settings used in sample `docker-compose.yml` files to suit your needs. Additionally, you can add as many node services as required in this file.
+Если вам нужно подключить сервер узла к нескольким панелям Marzban, вам нужно добавить новую службу узла в файл `docker-compose.yml` для каждой панели. Это можно сделать двумя способами.
 
+::: tip Примечание
+В обоих вариантах конфигурации вы можете изменить настройки портов, используемые в образцах файлов `docker-compose.yml`, в соответствии с вашими потребностями. Кроме того, вы можете добавить столько служб узлов, сколько потребуется, в этот файл.
 :::
 
-### First Method: Using Host Network
+### Первый способ: использование хост-сети
 
-In this case, you can use all available ports in your environment. Note that in this scenario, all ports used by Xray-Core of the panels will be listened on by the node server. This means that if there is a duplicate port in the Xray core pf the panels, there may be disruptions in node connections or configurations. To avoid this issue, you can configure your settings as needed using [All on one port](https://gozargah.github.io/marzban/en/examples/all-on-one-port) tutorial, or simply follow the second method.
+В этом случае вы можете использовать все доступные порты в вашей среде. Обратите внимание, что в этом сценарии все порты, используемые Xray-Core панелей, будут прослушиваться сервером узла. Это означает, что если в ядре Xray панелей есть дублирующийся порт, могут возникнуть сбои в соединениях или конфигурациях узла. Чтобы избежать этой проблемы, вы можете настроить свои настройки, используя учебник [Все на одном порту](https://gozargah.github.io/marzban/en/examples/all-on-one-port), или просто следовать второму методу.
 
- - Use the following example to add two node services to the `docker-compose.yml` file.
+- Используйте следующий пример для добавления двух служб узлов в файл `docker-compose.yml`.
 
-::: details Sample configuration of `docker-compose.yml`
+::: details Пример конфигурации `docker-compose.yml`
 ::: code-group
 ```yml{11,27} [docker-compose.yml]
 services:
@@ -170,30 +170,30 @@ services:
 ```
 :::
 
-- Then get the necessary certificates from the panels and place them in the specified paths.
-- Proceed to run Marzban Node
+- Затем получите необходимые сертификаты с панелей и поместите их в указанные пути.
+- Запустите узел Marzban
 ```bash
 docker compose up -d
 ```
 
-- The connection ports of the node for the panels and the specified ports for the inbounds will be as follows:
+- Порты подключения узла для панелей и указанные порты для входящих подключений будут следующими:
 
-| Variable | Panel 1 | Panel 2 |
+| Переменная | Панель 1 | Панель 2 |
 |----------------:|---------:|-------:|
 | `Port`           | 2000    |   3000  |
 | `API Port`      | 2001    |   3001  |
-| `Inbound Ports` | As desired |  As desired |
+| `Inbound Ports` | По желанию |  По желанию |
 
 <br>
 
-### Second Method: Using Port Mapping
+### Второй способ: использование сопоставления портов
 
-In this scenario, only specific ports are accessible and duplicate ports on the server node will be prevented. Please note that you should specify the ports used in your services in the `docker-compose.yml` file.
+В этом сценарии доступны только определенные порты, и дублирующиеся порты на сервере узла будут предотвращены. Обратите внимание, что вам нужно указать используемые порты в файле `docker-compose.yml`.
 
-- Use the example below to add two Node services to the `docker-compose.yml` file.
+- Используйте пример ниже для добавления двух служб узлов в файл `docker-compose.yml`.
 
 
-::: details Sample configuration file `docker-compose.yml` 
+::: details Пример конфигурации `docker-compose.yml`
 ::: code-group
 ```yml{7,25} [docker-compose.yml]
 services:
@@ -232,64 +232,63 @@ services:
       - 2096:2096
       - 2097:2097
 ```
-:::      
+:::
 
-- Once you have received the necessary certificates from the panels and placed them in the specified paths, proceed to run Marzban Node.
+- После того как вы получите необходимые сертификаты с панелей и поместите их в указанные пути, запустите узел Marzban.
 
-- The connection ports of the node for the panels and the specified ports for the inbounds will be as follows:
+- Порты подключения узла для панелей и указанные порты для входящих подключений будут следующими:
 
-| Variable | Panel 1 | Panel 2 |
+| Переменная | Панель 1 | Панель 2 |
 |----------------:|-----------:|---------:|
 | `Port`           | 2000      |    3000   |
 | `API Port`       | 2001      |    3001   |
 | `Inbound Ports` | 2053 <br> 2054 | 2096 <br> 2097 |
 
 
-## Updating Marzban Node
+## Обновление узла Marzban
 
-- Enter Marzban Node directory.
+- Перейдите в каталог узла Marzban.
 ```bash
 cd Marzban-node
 ```
 
-- Update Marzban Node using the following command.
+- Обновите узел Marzban с помощью следующей команды.
 ```bash
 docker compose pull
 ```
 
-- Finally, restart Marzban Node using the following command.
+- Наконец, перезапустите узел Marzban с помощью следующей команды.
 ```bash
 docker compose down --remove-orphans; docker compose up -d
 ```
 
 
-## Additional Notes
+## Дополнительные заметки
 
-::: tip Note 1
-If you want to consider a separate inbound for each node for better node management, you need to add a new inbound in the `Core Settings` with unique `Tags` and `Ports` for each node.
+::: tip Примечание 1
+Если вы хотите рассмотреть отдельный входящий для каждого узла для лучшего управления узлом, вам нужно добавить новый входящий в `Core Settings` с уникальными `Tags` и `Ports` для каждого узла.
 :::
 
-::: tip Note 2
-If you intend to use Warp on the node server and you have configured the `docker-compose.yml` file through second method, you must enable Warp through `Xray core`. If you use Wireguard core, Warp will not work on the node server.
+::: tip Примечание 2
+Если вы намерены использовать Warp на сервере узла и настроили файл `docker-compose.yml` через второй метод, вам необходимо включить Warp через `Xray core`. Если вы используете Wireguard core, Warp не будет работать на сервере узла.
 :::
 
-::: tip Note 3
-If you plan to use TLS-configured settings, you must obtain a certificate for your domain on the node server, then move it to the master server and enter the path of certificate files in the inbound. Also, instead of multiple certificates for multiple subdomains, you can obtain a wildcard certificate for your main domain to cover all subdomains.
+::: tip Примечание 3
+Если вы планируете использовать настройки с конфигурацией TLS, вы должны получить сертификат для вашего домена на сервере узла, затем переместить его на мастер-сервер и ввести путь к файлам сертификатов в входящем. Также вместо множества сертификатов для нескольких поддоменов вы можете получить сертификат с подстановочным знаком для вашего основного домена, чтобы охватить все поддомены.
 :::
 
-::: tip Note 4
-The `docker-compose.yml` file is sensitive to indentation and spacing. You can use tools like [yamlchecker](https://yamlchecker.com) to validate your configuration.
+::: tip Примечание 4
+Файл `docker-compose.yml` чувствителен к отступам и пробелам. Вы можете использовать инструменты, такие как [yamlchecker](https://yamlchecker.com), чтобы проверить вашу конфигурацию.
 :::
 
-
-::: tip Note 5
-If you've made changes in the `docker-compose.yml` file, restart Marzban Node using the following command to apply the changes:
+::: tip Примечание 5
+Если вы внесли изменения в файл `docker-compose.yml`, перезапустите узел Marzban с помощью следующей команды, чтобы применить изменения:
 ```bash
 cd ~/Marzban-node
 docker compose down --remove-orphans; docker compose up -d
 ```
 :::
 
-::: tip Note 6
-If Marzban Node is not running the latest version of Xray and you wish to manually upgrade or downgrade it for any reason, you can do this by following the tutorial on [Changing Xray Core Version](https://gozargah.github.io/marzban/en/examples/change-xray-version).
- :::
+::: tip Примечание 6
+Если узел Marzban не использует последнюю версию Xray и вы хотите вручную обновить или понизить её по какой-либо причине, вы можете сделать это, следуя учебнику [Изменение версии Xray Core](https://gozargah.github.io/marzban/en/examples/change-xray-version).
+:::
