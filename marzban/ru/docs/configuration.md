@@ -132,32 +132,36 @@ URL прокси для запуска Telegram-бота (если сервер�
 
 Значение по умолчанию: `clash/default.yml`
 
+
 :::hint
-Пример: `default.yml`
+Пример: [default.yml](https://github.com/Gozargah/Marzban/blob/master/app/templates/clash/default.yml))
 :::
 
 ### SUBSCRIPTION_PAGE_TEMPLATE
 
 Шаблон страницы подписки
 Значение по умолчанию: `subscription/index.html`
+(Пример: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/subscription/index.html))
 
 ### HOME_PAGE_TEMPLATE
 
 Шаблон главной страницы.
 
 Значение по умолчанию: `home/index.html`
+(Пример: [index.html](https://github.com/Gozargah/Marzban/blob/master/app/templates/home/index.html))
 
 ### SINGBOX_SUBSCRIPTION_TEMPLATE
 
 Шаблон конфига Sing-Box
 Значение по умолчанию: `singbox/default.json`
+[https://github.com/Gozargah/Marzban/tree/master/app/templates/singbox](https://github.com/Gozargah/Marzban/blob/master/app/templates/singbox/default.json)
 
 ### SINGBOX_MUX_CONFIGURATION
 
 Настройки MUX для Sing-box
 
 Значение по умолчанию: `singbox/mux_config.json`
-
+[https://github.com/Gozargah/Marzban/tree/master/app/templates/singbox](https://github.com/Gozargah/Marzban/blob/master/app/templates/singbox/mux_config.json)
 ## Настройки Подписки
 
 ### SUB_PROFILE_TITLE
@@ -193,6 +197,9 @@ URL прокси для запуска Telegram-бота (если сервер�
 URL базы данных для SQLAlchemy.
 
 Значение по умолчанию: `sqlite:///db.sqlite3`
+::: tip Совет
+См. доступные форматы и драйверы для адреса базы данных в [SQLAlchemy documentation](https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls).
+:::
 
 ## Настройки Разработчика
 
