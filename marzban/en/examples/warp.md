@@ -30,22 +30,22 @@ title: فعال سازی CloudFlare Warp
 - ابتدا باید `Asset` مورد نیاز رو از بخش [releases](https://github.com/ViRb3/wgcf/releases) دانلود کنید ، این فایل بسته به پردازنده متفاوت می باشد.
 - با دستور `wget` میتوانید این کار را انجام دهید.
 
-  برای سی‌پی‌یو‌های معماری AMD64 :
+برای پردازنده های معماری AMD64 :
 ```bash
 wget https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.22_linux_amd64
 ```
-  برای سی‌پی‌یو‌های معماری ARM64 :
+برای پردازنده های معماری ARM64 :
 ```bash
 wget https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.22_linux_amd64
 ```
 مسیر فایل رو به `/usr/bin/` تغییر داده و اسم اون رو به `wgcf` تغییر بدید.
 
-  برای سی‌پی‌یو‌های معماری AMD64 :
+برای پردازنده های معماری AMD64 :
 ```bash
 mv wgcf_2.2.22_linux_amd64 /usr/bin/wgcf
 chmod +x /usr/bin/wgcf
 ```
-  برای سی‌پی‌یو‌های معماری ARM64 :
+برای پردازنده های معماری ARM64 :
 ```bash
 mv wgcf_2.2.22_linux_arm64 /usr/bin/wgcf
 chmod +x /usr/bin/wgcf
