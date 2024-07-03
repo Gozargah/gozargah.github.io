@@ -1,91 +1,81 @@
 ---
-title: Смена версии xray-core
-description: В данном руководстве мы сменим версию xray-core
-
+title: تغییر ورژن Xray
 ---
 
-## Вы можете использовать скрипт:
+
+#  تغییر ورژن Xray
+با استفاده از آموزش های زیر می‌توانید نسخه هسته `Xray-core` خود را در مرزبان یا مرزبان نود تغییر دهید.
+
+::: tip نکته
+در تمام مثال های پایین، فایل‌ های `docker-compose.yml` و `.env` در مسیر `/opt/marzban‍‍‍` و `xray_config.json` در مسیر `/var/lib/marzban` ‌می‌توانید پیدا کنید.
+
+در صورتی که مرزبان را به صورت دستی نصب کرده‌اید، باید تغییرات مورد نیاز را شخصاً انجام دهید.
+:::
+
+
+## دانلود Xray-core
+::: warning پیش‌ نیاز ها
+در ادامه شما به پکیج های `unzip` و `wget` نیاز خواهید‌ داشت.
+برای نصب آن ها از دستور زیر استفاده کنید.
+
+در `Ubuntu` و `Debian`:
 ```bash
-bash <(wget -qO- https://raw.githubusercontent.com/DigneZzZ/marzban_core_change/main/change.sh)
+apt install wget unzip
 ```
 
-## С помощью руководства ниже, Вы сможете изменить ядро вашего Xray-core в Marzban или Marzban Node.
+در `CentOS` 
+```bash
+sudo yum install wget unzip
+```
+:::
 
-## Смена ядра на сервере панели
+ابتدا در صفحه [دانلود های Xray-core](https://github.com/XTLS/Xray-core/releases) لینک دانلود نسخه مورد نظر خود را کپی کرده و آن را در سرور در مسیر `/var/lib/marzban/xray-core` دانلود کنید.
 
-1. Устанаваливаем нужный софт
+به عنوان مثال، برای دانلود نسخه `1.8.3` مراحل زیر را انجام دهید.
+
+- یک پوشه برای `Xray` ایجاد کنید و وارد آن شوید. 
+```bash
+mkdir -p /var/lib/marzban/xray-core && cd /var/lib/marzban/xray-core
+```
+- فایل `Xray` را به کمک `wget` دانلود کنید.
+```bash
+wget https://github.com/XTLS/Xray-core/releases/download/v1.8.3/Xray-linux-64.zip
+```
+- فایل را از حالت فشرده خارج کنید و فایل فشرده رو پاک کنید.
+```bash
+unzip Xray-linux-64.zip
+rm Xray-linux-64.zip
+```
+
+## تغییر هسته مرزبان
+
+متغیر `XRAY_EXECUTABLE_PATH` رو در فایل `.env` مقدار دهی کنید.
+```bash
+XRAY_EXECUTABLE_PATH = "/var/lib/marzban/xray-core/xray"
+```
+
+مرزبان را ری‌استارت کنید.
+```bash
+marzban restart
+```
+
+::: details تغییر هسته در مرزبان نود
+در مرزبان نود هم به همین ترتیب، باید ‍‍`XRAY_EXECUTABLE_PATH` را مانند زیر مقدار‌دهی کنید و پوشه `/var/lib/marzban/` را به سرویس اضافه کنید.
 
 
-    ```bash
-    sudo apt install wget unzip
-    ```
-
-
-2. Создаем папку для Xray и переходим в нее.
-
-    ```bash
-    sudo mkdir -p /var/lib/marzban/xray-core && cd /var/lib/marzban/xray-core
-    ```
-
-3. Скачиваем нужную версию Xray с помощью wget.
-
-    ```bash
-    wget https://github.com/XTLS/Xray-core/releases/download/v1.8.13/Xray-linux-64.zip
-    ```
-
-4. Извлекаем содержимое и удаляем  архив.
-
-    ```bash
-    unzip Xray-linux-64.zip && rm Xray-linux-64.zip
-    ```
-
-
-5. Указываем панели путь к исполняемым файлам
-    ```bash
-    sudo nano /opt/marzban/.env
-    ```
-    ```diff
-    // /opt/marzban/.env
-    +XRAY_EXECUTABLE_PATH = /var/lib/marzban/xray-core/xray
-    ```
-
-6. Перезапускаем Marzban.
-
-    ```bash
-    sudo marzban restart
-    ```
-
-## Смена ядра на сервере узла
-Используемые файлы:
-
-Выполняем шаги с 1-4.
-
-5. Устанавливаем значение переменной `XRAY_EXECUTABLE_PATH` 
-
-    ```bash
-    sudo nano ~/Marzban-node/docker-compose.yml
-    ```
-
-    ```yaml
-    // ~/Marzban-node/docker-compose.yml
-    services:
-      marzban-node:
-        image: gozargah/marzban-node:latest
-        restart: always
-        network_mode: host
-
-        volumes:
-          - /var/lib/marzban-node:/var/lib/marzban-node
-          - /var/lib/marzban:/var/lib/marzban
-
-        environment:
-          SSL_CLIENT_CERT_FILE: "/var/lib/marzban-node/ssl_client_cert.pem"
-          SERVICE_PROTOCOL: rest
-          XRAY_EXECUTABLE_PATH: "/var/lib/marzban/xray-core/xray"
-
-    ```
-6. Перезапускаем узел
-    ```bash
-    cd ~/Marzban-node
-    docker compose down --remove-orphans; docker compose up -d
-    ```
+::: code-group
+```yml{8,11} [docker-compose.yml]
+services:
+  marzban-node:
+    # build: .
+    image: gozargah/marzban-node:latest
+    restart: always
+    network_mode: host
+    environment:
+      XRAY_EXECUTABLE_PATH: "/var/lib/marzban/xray-core/xray"
+    volumes:
+      - /var/lib/marzban-node:/var/lib/marzban-node
+      - /var/lib/marzban:/var/lib/marzban
+```
+و سپس سرویس را ری‌استارت کنید.
+:::
