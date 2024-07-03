@@ -1,20 +1,21 @@
+
 ---
 title: CLI
 description: CLI
 ---
 
-# Команды Marzban
+# Marzban Commands
 
-Marzban предоставляет ряд команд для управления экземпляром приложения.
-Ниже приведен подробный обзор доступных команд.
+Marzban provides a set of commands for managing the application instance.
+Below is a detailed overview of the available commands.
 
-## Команды
+## Commands
 
 ### `up`
 
-Запускает все необходимые сервисы приложения.
+Starts all necessary application services.
 
-Используйте эту команду для инициализации всех компонентов Marzban.
+Use this command to initialize all Marzban components.
 
 ```bash
 sudo marzban up
@@ -22,9 +23,9 @@ sudo marzban up
 
 ### `down`
 
-Останавливает все запущенные сервисы.
+Stops all running services.
 
-Это безопасный способ остановить все процессы, связанные с Marzban.
+This is a safe way to stop all processes related to Marzban.
 
 ```bash
 sudo marzban down
@@ -32,9 +33,9 @@ sudo marzban down
 
 ### `restart`
 
-Перезапускает все сервисы.
+Restarts all services.
 
-Эта команда полезна для применения изменений в конфигурации.
+This command is useful for applying configuration changes.
 
 ```bash
 sudo marzban restart
@@ -42,9 +43,9 @@ sudo marzban restart
 
 ### `status`
 
-Отображает текущий статус всех сервисов приложения.
+Displays the current status of all application services.
 
-Используйте эту команду, чтобы проверить, активны ли нужные сервисы.
+Use this command to check if the necessary services are active.
 
 ```bash
 sudo marzban status
@@ -52,9 +53,9 @@ sudo marzban status
 
 ### `logs`
 
-Показывает логи для всех сервисов.
+Shows logs for all services.
 
-Это может быть полезно для отладки и поиска причин возможных проблем.
+This can be useful for debugging and identifying potential issues.
 
 ```bash
 sudo marzban logs
@@ -62,7 +63,7 @@ sudo marzban logs
 
 ### `cli`
 
-Предоставляет доступ к интерфейсу командной строки Marzban для выполнения специфических задач.
+Provides access to the Marzban command line interface for performing specific tasks.
 
 ```bash
 sudo marzban cli
@@ -70,9 +71,9 @@ sudo marzban cli
 
 ### `install`
 
-Выполняет установку Marzban на вашей системе.
+Installs Marzban on your system.
 
-Эта команда готовит все необходимое для запуска приложения.
+This command prepares everything needed to run the application.
 
 ```bash
 sudo marzban install
@@ -80,9 +81,9 @@ sudo marzban install
 
 ### `update`
 
-Обновляет приложение до последней версии.
+Updates the application to the latest version.
 
-Рекомендуется выполнять обновление регулярно, чтобы использовать последние функции и исправления.
+It is recommended to update regularly to use the latest features and fixes.
 
 ```bash
 sudo marzban update
@@ -90,7 +91,7 @@ sudo marzban update
 
 ### `uninstall`
 
-Удаляет Marzban из вашей системы.
+Uninstalls Marzban from your system.
 
 ```bash
 sudo marzban uninstall
@@ -98,17 +99,17 @@ sudo marzban uninstall
 
 ## CLI
 
-**Использование**:
+**Usage**:
 
 ```console
-$ [ОПЦИИ] КОМАНДА [АРГУМЕНТЫ]...
+$ [OPTIONS] COMMAND [ARGS]...
 ```
 
-**Опции**:
+**Options**:
 
-- `--help`: Показать это сообщение и выйти.
+- `--help`: Show this message and exit.
 
-**Команды**:
+**Commands**:
 
 - `admin`
 - `subscription`
@@ -116,226 +117,225 @@ $ [ОПЦИИ] КОМАНДА [АРГУМЕНТЫ]...
 
 ### `admin`
 
-**Использование**:
+**Usage**:
 
 ```console
-$ admin [ОПЦИИ] КОМАНДА [АРГУМЕНТЫ]...
+$ admin [OPTIONS] COMMAND [ARGS]...
 ```
 
-**Опции**:
+**Options**:
 
-- `--help`: Показать это сообщение и выйти.
+- `--help`: Show this message and exit.
 
-**Команды**:
+**Commands**:
 
-- `create`: Создает админа
-- `delete`: Удаляет указанного админа
-- `import-from-env`: Импортирует суперадмина из переменных окружения
-- `list`: Отображает таблицу админов
-- `update`: Обновляет указанного админа
+- `create`: Creates an admin
+- `delete`: Deletes the specified admin
+- `import-from-env`: Imports a superadmin from environment variables
+- `list`: Displays a table of admins
+- `update`: Updates the specified admin
 
 #### `admin create`
 
-Создает админа
+Creates an admin
 
-Пароль также может быть установлен через переменную окружения `MARZBAN_ADMIN_PASSWORD` для использования без взаимодействия с пользователем.
+The password can also be set via the `MARZBAN_ADMIN_PASSWORD` environment variable for non-interactive use.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ admin create [ОПЦИИ]
+$ admin create [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
-- `-u, --username TEXT`: [обязательно]
+- `-u, --username TEXT`: [required]
 - `--sudo / --no-sudo`
-- `--help`: Показать это сообщение и выйти.
+- `--help`: Show this message and exit.
 
 #### `admin delete`
 
-Удаляет указанного админа
+Deletes the specified admin
 
-Подтверждение можно пропустить с помощью опции `--yes/-y`.
+Confirmation can be skipped using the `--yes/-y` option.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ admin delete [ОПЦИИ]
+$ admin delete [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
-- `-u, --username TEXT`: [обязательно]
-- `-y, --yes`: Пропускает подтверждения
-- `--help`: Показать это сообщение и выйти.
+- `-u, --username TEXT`: [required]
+- `-y, --yes`: Skips confirmation
+- `--help`: Show this message and exit.
 
 #### `admin import-from-env`
 
-Импортирует суперадмина из переменных окружения
+Imports a superadmin from environment variables
 
-Подтверждение можно пропустить с помощью опции `--yes/-y`.
+Confirmation can be skipped using the `--yes/-y` option.
 
-Что делает эта команда?
+What does this command do?
 
-- Создает суперадмина согласно `SUDO_USERNAME` и `SUDO_PASSWORD`.
-- Связывает любого пользователя, у которого нет `admin_id`, с импортированным суперадмином.
+- Creates a superadmin according to `SUDO_USERNAME` and `SUDO_PASSWORD`.
+- Links any user who does not have an `admin_id` to the imported superadmin.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ admin import-from-env [ОПЦИИ]
+$ admin import-from-env [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
-- `-y, --yes`: Пропускает подтверждения
-- `--help`: Показать это сообщение и выйти.
+- `-y, --yes`: Skips confirmation
+- `--help`: Show this message and exit.
 
 #### `admin list`
 
-Отображает таблицу админов
+Displays a table of admins
 
-**Использование**:
+**Usage**:
 
 ```console
-$ admin list [ОПЦИИ]
+$ admin list [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
 - `-o, --offset INTEGER`
 - `-l, --limit INTEGER`
-- `-u, --username TEXT`: Поиск по имени пользователя
-- `--help`: Показать это сообщение и выйти.
+- `-u, --username TEXT`: Search by username
+- `--help`: Show this message and exit.
 
 #### `admin update`
 
-Обновляет указанного админа
+Updates the specified admin
 
-ПРИМЕЧАНИЕ: Эту команду НЕЛЬЗЯ использовать в режиме без взаимодействия с пользователем.
+NOTE: This command CANNOT be used in non-interactive mode.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ admin update [ОПЦИИ]
+$ admin update [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
-- `-u, --username TEXT`: [обязательно]
-- `--help`: Показать это сообщение и выйти.
+- `-u, --username TEXT`: [required]
+- `--help`: Show this message and exit.
 
 ### `subscription`
 
-**Использование**:
+**Usage**:
 
 ```console
-$ subscription [ОПЦИИ] КОМАНДА [АРГУМЕНТЫ]...
+$ subscription [OPTIONS] COMMAND [ARGS]...
 ```
 
-**Опции**:
+**Options**:
 
-- `--help`: Показать это сообщение и выйти.
+- `--help`: Show this message and exit.
 
-**Команды**:
+**Commands**:
 
-- `get-config`: Генерирует конфигурацию подписки.
-- `get-link`: Выводит ссылку на подписку указанного пользователя.
+- `get-config`: Generates a subscription configuration.
+- `get-link`: Outputs the subscription link for the specified user.
 
 #### `subscription get-config`
 
-Генерирует конфигурацию подписки.
+Generates a subscription configuration.
 
-Генерирует конфигурацию подписки для указанного пользователя в указанном формате.
+Generates a subscription configuration for the specified user in the specified format.
 
-Выходные данные будут записаны в выходной файл, если указан `output-file`,
-в противном случае будут показаны в терминале.
+The output will be written to the output file if `output-file` is specified, otherwise it will be shown in the terminal.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ subscription get-config [ОПЦИИ]
+$ subscription get-config [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
-- `-u, --username TEXT`: [обязательно]
-- `-f, --format [v2ray|clash]`: [обязательно]
-- `-o, --output TEXT`: Записывает сгенерированную конфигурацию в файл, если указано
-- `--base64`: Кодирует выходные данные в формате base64, если указано
-- `--help`: Показать это сообщение и выйти.
+- `-u, --username TEXT`: [required]
+- `-f, --format [v2ray|clash]`: [required]
+- `-o, --output TEXT`: Writes the generated configuration to a file, if specified
+- `--base64`: Encodes the output in base64 format, if specified
+- `--help`: Show this message and exit.
 
 #### `subscription get-link`
 
-Выводит ссылку на подписку указанного пользователя.
+Outputs the subscription link for the specified user.
 
-ПРИМЕЧАНИЕ: Для корректной работы этой команды необходимо установить переменную окружения `XRAY_SUBSCRIPTION_URL_PREFIX`.
+NOTE: The `XRAY_SUBSCRIPTION_URL_PREFIX` environment variable must be set for this command to work properly.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ subscription get-link [ОПЦИИ]
+$ subscription get-link [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
-- `-u, --username TEXT`: [обязательно]
-- `--help`: Показать это сообщение и выйти.
+- `-u, --username TEXT`: [required]
+- `--help`: Show this message and exit.
 
 ### `user`
 
-**Использование**:
+**Usage**:
 
 ```console
-$ user [ОПЦИИ] КОМАНДА [АРГУМЕНТЫ]...
+$ user [OPTIONS] COMMAND [ARGS]...
 ```
 
-**Опции**:
+**Options**:
 
-- `--help`: Показать это сообщение и выйти.
+- `--help`: Show this message and exit.
 
-**Команды**:
+**Commands**:
 
-- `list`: Отображает таблицу пользователей
-- `set-owner`: Передает право владения пользователя
+- `list`: Displays a table of users
+- `set-owner`: Transfers user ownership
 
 #### `user list`
 
-Отображает таблицу пользователей
+Displays a table of users
 
-ПРИМЕЧАНИЕ: В настоящее время сортировка недоступна.
+NOTE: Sorting is currently unavailable.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ user list [ОПЦИИ]
+$ user list [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
 - `-o, --offset INTEGER`
 - `-l, --limit INTEGER`
-- `-u, --username TEXT`: Поиск по имени пользователя
+- `-u, --username TEXT`: Search by username
 - `--status [active|disabled|limited|expired]`
-- `--admin, --owner TEXT`: Поиск по имени админа-владельца
-- `--help`: Показать это сообщение и выйти.
+- `--admin, --owner TEXT`: Search by admin-owner username
+- `--help`: Show this message and exit.
 
 #### `user set-owner`
 
-Передает право владения пользователя
+Transfers user ownership
 
-ПРИМЕЧАНИЕ: Эта команда требует дополнительного подтверждения для пользователей, у которых уже есть владелец.
+NOTE: This command requires additional confirmation for users who already have an owner.
 
-**Использование**:
+**Usage**:
 
 ```console
-$ user set-owner [ОПЦИИ]
+$ user set-owner [OPTIONS]
 ```
 
-**Опции**:
+**Options**:
 
 - `-u, --username TEXT`
-- `--admin, --owner TEXT`: Имя пользователя админа
-- `-y, --yes`: Пропускает подтверждения
-- `--help`: Показать это сообщение и выйти.
+- `--admin, --owner TEXT`: Admin username
+- `-y, --yes`: Skips confirmation
+- `--help`: Show this message and exit.
