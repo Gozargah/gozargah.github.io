@@ -29,12 +29,25 @@ title: فعال سازی CloudFlare Warp
 
 - ابتدا باید `Asset` مورد نیاز رو از بخش [releases](https://github.com/ViRb3/wgcf/releases) دانلود کنید ، این فایل بسته به پردازنده متفاوت می باشد.
 - با دستور `wget` میتوانید این کار را انجام دهید.
+
+برای پردازنده های معماری AMD64 :
 ```bash
-wget https://github.com/ViRb3/wgcf/releases/download/v2.2.19/wgcf_2.2.19_linux_amd64
+wget https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.22_linux_amd64
+```
+برای پردازنده های معماری ARM64 :
+```bash
+wget https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.22_linux_amd64
 ```
 مسیر فایل رو به `/usr/bin/` تغییر داده و اسم اون رو به `wgcf` تغییر بدید.
+
+برای پردازنده های معماری AMD64 :
 ```bash
-mv wgcf_2.2.19_linux_amd64 /usr/bin/wgcf
+mv wgcf_2.2.22_linux_amd64 /usr/bin/wgcf
+chmod +x /usr/bin/wgcf
+```
+برای پردازنده های معماری ARM64 :
+```bash
+mv wgcf_2.2.22_linux_arm64 /usr/bin/wgcf
 chmod +x /usr/bin/wgcf
 ```
 سپس با استفاده از این 2 دستور کانفیگ رو ایجاد کنید.
@@ -105,7 +118,10 @@ wgcf generate
 ```bash
 sudo apt install wireguard-dkms wireguard-tools resolvconf
 ```
-
+اگر از اوبونتو 24 استفاده میکنید برای نصب وایرگارد از دستور زیر استفاده کنید.
+```bash
+sudo apt install wireguard
+```
 سپس باید عبارت `Table = off` رو مثل نمونه به فایل Wireguard اضافه کنید.
 
 ```conf
