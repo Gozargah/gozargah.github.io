@@ -46,17 +46,17 @@ docker volume create mysql
 Ниже приведены примеры запуска контейнера для каждого из вариантов MySQL, MariaDB и Percona Server.
 
 ### MySQL
-        ```sh
-        docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mysql:8.3 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-redo-log-capacity=134217728 --disable-log-bin --mysqlx=OFF
-        ```
+```shell
+docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mysql:8.3 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-redo-log-capacity=134217728 --disable-log-bin --mysqlx=OFF
+```
 ### MariaDB
-        ```sh
-        docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mariadb:lts --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-log-file-size=67108864
-        ```
+```shell
+docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mariadb:lts --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-log-file-size=67108864
+```
 ### Percona
-        ```sh
-        docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban percona/percona-server:8.2 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --disable-log-bin --innodb-redo-log-capacity=134217728 --mysqlx=OFF
-        ```
+```shell
+docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban percona/percona-server:8.2 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --disable-log-bin --innodb-redo-log-capacity=134217728 --mysqlx=OFF
+```
  
 
 
