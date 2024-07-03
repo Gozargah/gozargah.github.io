@@ -1,74 +1,82 @@
-# Host Settings 
+---
+title: Настройки хоста
+description: В данном руководстве мы рассмотрим настройки хоста пользовательского интерфейса панели Marzban
+---
 
-The purpose of host settings is to customize configurations.
-With host settings, you can create specific configurations for each inbound. Each configuration can have its own settings. The following fields can be modified in host settings.
+## Описание
 
-- Remark
-- Address
-- Port
-- SNI
-- Host
-- Path 
-- Security Layer (TLS, None)
+С помощью настроек хоста вы можете создавать специальные конфигурации для каждого входящего соединения. Каждая конфигурация может иметь свои специфические параметры. В настройках хоста доступны следующие поля для редактирования:
+
+- Примечание
+- Адрес
+- Порт
+- SNI (Имя сервера)
+- Хост
+- Secutity Layer (TLS, None)
 - ALPN (h2, http/1.1)
 - Fingerprint
 
-The settings provided in this section lets you assign multiple addresses or domains with different names for each inbound. One use of this section is that if your server is maintained with specific settings, it may be necessary for the user's connection port to be different from the inbound port. Using these settings, you can customize the connection port, SNI, Host, Path, etc. 
+С помощью настроек в этом разделе вы можете настроить порт соединения, SNI, хост и т.д. по своему усмотрению.
 
-By default, the server's IP is set as the address, and default inbound settings (such as port, etc.) are applied to each configuration. To customize configurations, you need to edit this section.
+По умолчанию, IP-адрес сервера используется в качестве значения для поля Address, а настройки по умолчанию для входящего соединения (порт и т.д.) устанавливаются для каждой конфигурации.
 
-::: info Tip
-The host settings have higher priority compared to other settings. The fields configured in this section are prioritized over other settings in generating configurations.
+:::tip
+Настройки хоста имеют более высокий приоритет по сравнению с другими настройками.
+
+Значения, заданные в этом разделе, имеют наивысший приоритет при создании конфигураций.
 :::
 
-## Variables
-To customize configurations, variables have been designed for each field. It is necessary to use variables specific to each field. You can use the following varibles either in Remark section or Address.
+## Переменные
 
-::: warning Attention
-Please note that variables must be used with `{}` in the fields.
+Для максимальной настраиваемости конфигураций предусмотрены переменные для каждого поля. В каждом поле необходимо использовать переменные этого же поля.
+
+:::tip
+Переменные размещаются в `{ ... }`
+
+Если у вас есть переменная "SERVER_IP", и вы хотите использовать ее в поле "Адрес", вам нужно написать `{SERVER_IP}` в поле "Адрес".
 :::
 
-| Variables               | Description                                                         |
-| ----------------------- | ------------------------------------------------------------------- |
-| `{SERVER_IP}`           | Master Server's IPv4                                                       |
-| `{USERNAME}`            | User's Username                                                     |
-| `{DATA_USAGE}`          | User's Data Usage                                                   |
-| `{DATA_LEFT}`           | User's Remaining Data                                               |
-| `{DATA_LIMIT}`          | User's Total Data Limit                                             |
-| `{DAYS_LEFT}`           | Remaining Days of the User's Subscription                           |
-| `{TIME_LEFT}`           | Remaining Days, Hours, Minutes, Seconds of the User's Subscription  |
-| `{EXPIRE_DATE}`         | User's Expiration Date in English Calendar                          |
-| `{JALALI_EXPIRE_DATE}`  | User's Expiration Date in Persian Calendar                          |
-| `{STATUS_EMOJI}`        | User Status as an Emoji (✅,⌛️,🪫,❌,🔌)                          |
-| `{PROTOCOL}`            | Configuration Protocols: Vless, Vmess ,Trojan, Shadowsocks, ...     |
-| `{TRANSPORT}`           | Transport Method for the Configuration: TCP, WS, gRPC, ...          |
+### Описание переменных
 
-Example:
+| Переменная             | Описание                                              |
+| ---------------------- | ----------------------------------------------------- |
+| `{SERVER_IP}`          | Текущий IP адрес сервера                              |
+| `{USERNAME}`           | Имя пользователя                                      |
+| `{DATA_USAGE}`         | Использованный трафик                                 |
+| `{DATA_LEFT}`          | Оставшийся трафик                                     |
+| `{DATA_LIMIT}`         | Лимит трафика                                         |
+| `{DAYS_LEFT}`          | Оставшееся кол-во дней                                |
+| `{EXPIRE_DATE}`        | Дата истечения срока                                  |
+| `{JALALI_EXPIRE_DATE}` | Дата истечения срока по солнечному календарю          |
+| `{TIME_LEFT}`          | Оставшееся время использования                        |
+| `{STATUS_EMOJI}`       | Статус пользователя в виде смайлика (✅,⌛️,🪫,❌,🔌)  |
+| `{STATUS_TEXTS}`       | Статус пользователя в виде текста (задается в `.env`) |
+| `{TRANSPORT}`          | Транспорт (e.g WS)                                    |
 
-| Remark field                                                | Output                               |
-| ----------------------------------------------------------- | ------------------------------------ |
-| 🚀 Server 1 (\{USERNAME\}) [\{PROTOCOL\} - \{TRANSPORT\}]  | 🚀 Server 1 (user102) [VMess - ws]   |
-| Days Left: \{DAYS_LEFT\}                                    |      Dayy Left: 24                   |
-| Data Used: \{DATA_LEFT\}/\{DATA_LIMIT\}                     | Data Used: 16.5GB/30GB               |
+Используя эти переменные, вы можете делать, например, следующее:
 
-## Generating Random Phrases
+📆 DAYS LEFT: `{DAYS_LEFT}`
 
-Sometimes, there's a need to generate a random part of the SNI and Host fields. This technique is used in some cases to prevent excessive connections to a specific subdomain. In this scenario, each user connects to a random subdomain.
+📊 DATA USE: `{DATA_USAGE}`
 
-To utilize this feature, use the `*` character in the SNI and Host fields.
+### Случайные значения
 
-::: warning Attention
-Please note that, it is necessary to generate wildcard SSL certificate for your domain in order for this to work.
+В некоторых случаях требуется, чтобы часть полей (например SNI и Host) генерировалась случайным образом. Эта техника используется для предотвращения большого количества соединений к конкретному поддомену. В этом случае каждый пользователь будет подключаться к случайному поддомену.
+
+Чтобы использовать эту функцию, используйте символ `*`, в полях SNI и Host.
+
+:::caution
+Обратите внимание, что в этом случае также необходимо настроить соответствующие настройки для wildcard-домена.
 :::
 
+Например:
 
-Example:
+| `*.example.com`        | 32ks0ef23402.example.com        |
+| ---------------------- | ------------------------------- |
+| `access-*.example.com` | access-laks038fn201.example.com |
 
-| SNI or Host field      |      Configuration's output in the fields           |
-| ---------------------- | --------------------------------------------------- |
-| `*.example.com`        | 32ks0ef23402.example.com                            |
-| `access-*.example.com` | access-laks038fn201.example.com                     |
+### Несколько хостов и SNI
 
-### Multiple Host or SNI
+Если необходимо установить несколько разных адресов для Host и SNI, вы можете разделить эти адреса с помощью `,`
 
-In case you want to set multiple addresses for Host and SNI, you can separate those addresses with commas. Then, for each user, one of these addresses will be randomly selected.
+Один из этих адресов будет выбран случайным образом.
