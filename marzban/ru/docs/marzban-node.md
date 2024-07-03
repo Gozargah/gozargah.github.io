@@ -2,36 +2,48 @@
 title: Marzban Node
 ---
 
-# Marzban Node
+## Введение
 
-Using this guide, you can set up Marzban Node on one or more side servers and connect them to Marzban Panel so that you can use these servers in your configurations. Marzban Node allows you to distribute traffic load among different servers and also provides the ability to use servers with different locations.
-Next, we will learn how to connect a node server to multiple Marzban Panels.
+**Marzban Node** - это приложение на Python, предоставляющее сервис для управления экземпляром ядра Xray.
+Приложение разработано с учетом требований безопасности и использует взаимную аутентификацию самоподписанными SSL-сертификатами, для связи между панелью и ее клиентами(узлами).
 
-## Setting up Marzban Node
+В зависимости от Вашего выбора, приложение может использовать или RPyC для удаленных вызовов процедур, или REST, используя стандартные HTTP-методы (GET, POST, PUT, DELETE и т.д.) для выполнения различных операций.
 
-- After logging into the node server terminal, first update the server with the following command and install necessary programs.
+С помощью этого руководства вы можете создать узел Marzban Node на дополнительном сервере и подключить его к панели.
+
+## Настройка Marzban Node
+
+:::note
+Обратите внимание, что и Ваша панель и узел должны быть обновлены до последних `latest` версий
+:::
+
+- Обновляем сервер и устанавливаем необходимый софт
 ```bash
 apt-get update; apt-get upgrade -y; apt-get install curl socat git -y
 ```
 
-- Install Docker.
+- Устанавливаем на сервер Docker.
 ```bash
 curl -fsSL https://get.docker.com | sh
 ```
 
-- Clone the repository and then create a folder for it.
+- Клонируем репозиторий и создаем папку для ключа.
 ```bash
 git clone https://github.com/Gozargah/Marzban-node
-mkdir /var/lib/marzban-node 
+mkdir /var/lib/marzban-node
+mkdir /var/lib/marzban
 ```
 
-- To establish a secure connection between Marzban Node and Marzban Panel, you need to make certain changes in the `docker-compose.yml` file. So, navigate to the main directory of Marzban Node and open this file for editing.
+- Чтобы установить безопасное соединение между Marzban Node и Marzban Panel, вам необходимо внести определенные изменения в файл docker-compose.yml. Итак, перейдите в основной каталог Marzban Node и откройте этот файл для редактирования.
 ```bash
 cd ~/Marzban-node
 nano docker-compose.yml
 ```
 
-- Remove the `#` sign behind `SSL_CLIENT_CERT_FILE` and align this line with the ones below. Then, you can delete the two lines related to `SSL_CERT_FILE` and `SSL_KEY_FILE`. After saving the changes, your file will be as follows:
+– Удалите знак `#` после `SSL_CLIENT_CERT_FILE` и совместите эту строку со строками ниже. Затем вы можете удалить две строки, относящиеся к SSL_CERT_FILE и SSL_KEY_FILE. 
+- Также мы сразу подключим еще одну папку, где могут храниться логи, если настроено логирование на основном сервере.
+- А еще мы сразу перейдем на использование REST метода подключения. 
+После сохранения изменений ваш файл будет иметь следующий вид:
 
 ::: code-group
 ```yml [docker-compose.yml]
@@ -44,48 +56,66 @@ services:
 
     environment:
       SSL_CLIENT_CERT_FILE: "/var/lib/marzban-node/ssl_client_cert.pem"
+      SERVICE_PROTOCOL: rest
 
     volumes:
       - /var/lib/marzban-node:/var/lib/marzban-node
+      - /var/lib/marzban:/var/lib/marzban
 ```
 :::
 
+::: tip Дополнительная информация по переменным
+Доступные переменные окружения
+| Переменная     | Описание  | Значение по умолчанию |
+| -------------- | -------------------- | -----------|
+| `SERVICE_PORT`  | Сервисный порт |62050|
+| `XRAY_API_PORT`   | Порт API xray-core         |62051|
+| `XRAY_EXECUTABLE_PATH` | Путь к исполняемым файлам xray    |/usr/local/bin/xray|
+| `XRAY_ASSETS_PATH`  | Путь к ассетам xray        |/usr/local/share/xray|
+| `SSL_CERT_FILE` | Сертификат узла для связи с панелью            |/var/lib/marzban-node/ssl_cert.pem|
+| `SSL_KEY_FILE`  | Ключ сертификата для связи с панелью   |/var/lib/marzban-node/ssl_key.pem|
+| `SSL_CLIENT_CERT_FILE`  | Сертификат панели для связи с узлом   |/var/lib/marzban-node/ssl_client_cert.pem|
+| `SERVICE_PROTOCOL`  | Сервисный протокол   |rpyc|
+| `DEBUG`  | Вывод отладочной информации   |false|
+:::
 
-- Now go to the `Node Settings` section in your Marzban Panel.
-Then, click on `Add New Mazrban Node`, and add a new node.
+- Теперь перейдите в раздел «Настройки узла» на панели Marzban.
+Затем нажмите «Добавить новый узел Mazrban» и добавьте новый узел.
 
-- If you click on `Show Certificate` button, you will see the certificate required for node connection. Copy this certificate and continue following the steps from the terminal of your node server.
+- Если вы нажмете кнопку «Показать сертификат», вы увидите сертификат, необходимый для подключения узла. Скопируйте этот сертификат и продолжайте следовать инструкциям с терминала вашего узла-сервера.
 
 <img src="https://github.com/mdjvd/gozargah.github.io/assets/116950557/bee4bbf0-f811-4b20-af28-adee270b469d"
      style="display:block;float:none;margin-left:auto;margin-right:auto;width:47%">
 <br>
 
-- Create the certificate file with the following command and paste it there.
+- Создадим файл для хранения сертификата и вставим туда сертификат, который был скопирован из панели.
 ```bash
 nano /var/lib/marzban-node/ssl_client_cert.pem
 ```
  
-- Then run the command in Marzban Node directory.
+- Запустим контейнер с нодой.
 ```bash
 docker compose up -d
 ```
+Теперь вернемся в основную панель
 
+- Вернувшись в панель заполняем недостающие поля:
 
-- Return to the Marzban Panel and complete the different sections as follows:
+Заполняем данные узла:
 
-1. In the `Name` section, choose your desired name for the node.
-2. Enter the IP address of the node in the `Address` section.
-3. Leave default connection ports for the node including `Port` and `API Port` unchanged.
-4. If you want your Marzban Node's host to be added for all inbounds as a new host, checkmark `Add this node as a new host for every inbound`.
+   - Name - Имя узла;
+   - Adress - IP адрес узла. (для подключения к узлам, не рекомендуется использовать Доменные имена, подключайтесь всегда по IP)
+   - Port - Оставляем по умолчанию, если не изменяли их.
+   - Оставляем галку, если хотим добавить узел в качестве нового хоста во все входящие
 
-::: tip Note
-You can disable this checkmark and manually add the Node server IP only for necessary connections as a host in the `Host Settings` section.
+::: tip Рекомендация
+Вы можете отключить эту галочку и вручную добавлять IP-адрес Node-сервера только для необходимых подключений в качестве хоста в разделе «Настройки хоста».
 :::
 
-- Finally, click on `Add Node` to add the node. Now the node is ready to use. You can use the Node server IP for desired connections by managing your hosts in the `Host Settings` section.
+- Наконец, нажмите `Добавить узел`, чтобы добавить узел. Теперь узел готов к использованию. Вы можете использовать IP-адрес Node-сервера для желаемых подключений, управляя своими хостами в разделе `Настройки хоста`.
 
-::: warning Attention
-If you have enabled a firewall on the Node server, you need to open ports for both panel connections and inbound ports in the Node server firewall.
+::: warning Внимание
+Если вы включили брандмауэр на сервере Node, вам необходимо открыть порты как для подключений к панели, так и для входящих портов в брандмауэре сервера Node.
 :::
 
 ## Connecting Marzban Node to Multiple Panels
