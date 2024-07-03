@@ -1,88 +1,117 @@
 ---
-title: ساخت گواهی SSL
+title: Получение SSL
+description: Получение SSL
 ---
 
-# ساخت گواهی SSL
-آموزش های پایین مربوط به دریافت گواهی SSL برای استفاده در مرزبان است.
 
-::: warning توجه
-فایل های گواهی باید در آدرس `/var/lib/marzban/certs` در دسترس باشند تا مرزبان بتواند به آنها دسترسی داشته باشد.
 
-در تمام مثال های پایین، فایل ها در این آدرس نصب خواهند شد.
+Рекомендуется получить и настроить сертификат для обеспечения безопасности передачи данных панели и защиты от атак "человек-по-середине", работы TLS подключений, функционирования подписок и многого другого.
+
+:::caution
+Перед получением SSL-сертификата настройте DNS-записи вашего домена (A и/или AAAA записи).
+
+Если вы только что зарегистрировали домен и добавили DNS-записи, возможно, потребуется время для их обновления. Статус можно проверить на https://www.whatsmydns.net.
 :::
 
-::: warning توجه
-شما باید قبل از اقدام به دریافت گواهی SSL، رکورد های DNS دامنه را ثبت کرده باشید.
+:::note
+Для новых и существующих доменов рекомендуется использовать NS сервера Cloudflare и управлять DNS-записями через их сервисы.
 :::
 
-## دریافت گواهی با acme.sh
 
-- با دستور زیر، [acme.sh](https://github.com/acmesh-official/acme.sh) را نصب کنید.
+## Получение сертификата с acme.sh
 
-`YOUR_EMAIL` را به ایمیل خود تغییر دهید.
 
-::: tip نکته
-در صورتی که acme.sh را قبلا نصب کرده‌اید، دیگر نیازی به انجام این مرحله نیست.
-:::
+1. Установка необходимого ПО
+	```bash
+	sudo apt install cron socat
+	```
+2. Установка acme.sh
+	:::note
+	`EMAIL` — ваш email (можно указать любой).
+	:::
+	```bash
+	curl https://get.acme.sh | sh -s email=EMAIL
+	```
+3. Создание директории для сертификатов
+
+    ```bash
+    sudo mkdir -p /var/lib/marzban/certs/
+    ```
+
+4. Получение сертификатов
+   :::note
+   Замените `DOMAIN` на ваш домен или субдомен.
+   :::
+   ```bash
+	~/.acme.sh/acme.sh --set-default-ca --server letsencrypt --issue --standalone -d DOMAIN \
+	--key-file /var/lib/marzban/certs/key.pem \
+	--fullchain-file /var/lib/marzban/certs/fullchain.pem
+	```
+
+
+## Получение WILDCARD сертификата с acme.sh
+
+
+1. Установка необходимого ПО
+	```bash
+	sudo apt install cron socat
+	```
+2. Установка acme.sh
+	:::note
+	`EMAIL` — ваш email (можно указать любой).
+	:::
+	```bash
+	curl https://get.acme.sh | sh -s email=EMAIL
+	```
+
+3. Создание директории для сертификатов
+
+   ```bash
+   sudo mkdir -p /var/lib/marzban/certs/
+   ```
+
+4. Получение ключа API Cloudflare
+
+   Получите Global API Key в аккаунте Cloudflare для автоматической настройки DNS-записей.
+
+5. Настройка переменных окружения
+
+   ```bash
+   export CF_Key="ваш_cloudflare_api_key"
+   export CF_Email="ваш_cloudflare_email"
+   ```
+
+6. Выпуск wildcard сертификата
+   :::note
+   Замените `DOMAIN` на ваш домен.
+   :::
+   ```bash
+   ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt --issue --dns dns_cf \
+   -d DOMAIN \
+   -d *.DOMAIN \
+   --key-file /var/lib/marzban/certs/key.pem \
+   --fullchain-file /var/lib/marzban/certs/fullchain.pem
+   ```
+
+
+## Дополнительные советы
+
+:::tip
+Для просмотра списка выпущенных сертификатов:
 
 ```bash
-curl https://get.acme.sh | sh -s email=YOUR_EMAIL
+~/.acme.sh/acme.sh --list
 ```
 
-- برای دریافت گواهی، دستورات زیر را به ترتیب اجرا کنید.
+:::
 
-`YOUR_DOMAIN` را به دامنه یا ساب‌دامنه‌ی مورد نظر خود تغییر دهید.
+:::tip
+Для ручного продления сертификатов:
+
+Вы должны перечислить все домены, которые хотите продлить
 
 ```bash
-
-export DOMAIN=YOUR_DOMAIN
-
-mkdir -p /var/lib/marzban/certs
-
-~/.acme.sh/acme.sh \
-  --issue --force --standalone -d "$DOMAIN" \
-  --fullchain-file "/var/lib/marzban/certs/$DOMAIN.cer" \
-  --key-file "/var/lib/marzban/certs/$DOMAIN.cer.key"
-
+~/.acme.sh/acme.sh --renew -d DOMAIN --force
 ```
 
-## دریافت گواهی دامنه ثبت شده بر کلودفلر
-
-- اگر دامنه بر روی کلودفلر ثبت شده و روش های بالا پاسخگو نبود، از حالت دستی استفاده کنید
-
-  `example.com` را به دامنه خود تغییر دهید
-
-  - بعد از نصب acme مراحل زیر را اجرا کنید
- 
-```
-curl https://get.acme.sh
-```
-
-1. قدم اول:
-```
-~/.acme.sh/acme.sh --issue -d example.com --dns \
- --yes-I-know-dns-manual-mode-enough-go-ahead-please
-```
-- بعد از اجرا دو مقدار مانند عکس زیر به شما داده میشود
-
-  ![image](https://github.com/Gozargah/gozargah.github.io/assets/67644313/538c8341-fa77-4b06-96a4-73c29f3e0ded)
-
-2. قدم دوم:
-به کلودفلر رفته و یک رکورد از تایپ txt ایجاد کنید و مقادیر را مانند عکس زیر وارد کنید
-
-![image](https://github.com/Gozargah/gozargah.github.io/assets/67644313/dad9c59a-da1f-440b-aa6e-ad524aff212a)
-
-3. قدم سوم:
-  با دستور زیر سرتیفیکیت را دریافت کنید
-```
-~/.acme.sh/acme.sh --renew -d example.com \
-  --yes-I-know-dns-manual-mode-enough-go-ahead-please
-```
-
-- در آخر فایل سرتیفیکیت دامین شما در آدرس زیر
-
-`/root/.acme.sh/example.com_ecc/fullchain.cer`
-
-- و فایل پرایوت کی در آدرس زیر ذخیره میشود
-
-`/root/.acme.sh/example.com_ecc/example.com.key`
+:::
