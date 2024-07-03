@@ -9,7 +9,7 @@ description: В данном руководстве мы сменим верси
 bash <(wget -qO- https://raw.githubusercontent.com/DigneZzZ/marzban_core_change/main/change.sh)
 ```
 
-С помощью руководства ниже, Вы сможете изменить ядро вашего Xray-core в Marzban или Marzban Node.
+## С помощью руководства ниже, Вы сможете изменить ядро вашего Xray-core в Marzban или Marzban Node.
 
 ## Смена ядра на сервере панели
 
