@@ -1,8 +1,5 @@
 ---
 title: Подключение SSL
-description: Подключение SSL
-sidebar:
-  order: 4
 ---
 
 
