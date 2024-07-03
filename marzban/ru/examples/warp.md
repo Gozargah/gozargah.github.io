@@ -1,79 +1,91 @@
 ---
-title: Настройка WARP
-description: В данном руководстве мы осуществим настройку подключений через cloudflare warp
-
+title: فعال سازی CloudFlare Warp
 ---
 
-Используя это руководство, вы можете снять некоторые ограничения, налагаемые крупными компаниями, такими как Google, Spotify и т.п., на IP-адрес Вашего сервера и без проблем получать доступ к ним, используя мощности Cloudflare WARP
+# فعال سازی CloudFlare Warp
 
-:::note
-Для WARP+ есть ограничение на 5 устройств, но в нашем контексте, устройством будет являться сервер.
-Соответсвенно, он разрешит подключение с пяти серверов.
+با استفاده از این آموزش میتوانید برخی محدودیت هایی که از سمت شرکت های بزرگ مثل google و spotify روی IP شما اعمال شده رو برطرف کنید و بدون مشکل از سرویس ها شون استفاده کنید.
 
-Например: центральный сервер и четыре узла.
-
-Клиентов, которые подключены к этим серверам может быть сколько угодно.
+::: warning
+توجه داشته باشید برای کانفیگ های Warp محدودیت اتصال حداکثر 5 دستگاه همزمان وجود دارد ، برای حل مشکل میتوانید از چند کانفیگ استفاده کنید.
 :::
 
-## Вариант 1
+## قدم اول : ساخت کانفیگ Wireguard
 
-### Создание конфигурации Wireguard
+### روش اول :با استفاده از ویندوز
 
-Для начала вам необходимо скачать нужный [`Asset`](https://github.com/ViRb3/wgcf/releases) из раздела релизов , этот файл разный в зависимости от процессора.
+- ابتدا باید `Asset` مورد نیاز رو از بخش [releases](https://github.com/ViRb3/wgcf/releases) دانلود کنید ، این فایل بسته به پردازنده متفاوت می باشد.
+- نام فایل `Asset` رو به `wgcf` تغییر بدید.
+- حالا در قسمت ادرس دهی File Explorer عبارت `cmd.exe` رو وارد کنید.
 
+![image](https://github.com/Gozargah/gozargah.github.io/assets/50927468/fb9f3eae-8390-45a5-a7b3-c50db4aa82a1)
+
+- در ترمینال باز شده عبارت `wgcf.exe` رو وارد کنید.
+- یک بار دستور `wgcf.exe register` و سپس `wgcf.exe generate` رو وارد کنید.
+- فایل جدیدی به اسم `wgcf-profile.conf` ایجاد شده و این فایل `Wireguard` مورد نیاز ما می باشد.
+- کانفیگ شما امادست و میتونید از اون استفاده کنید.
+
+### روش دوم : با استفاده از لینوکس
+
+- ابتدا باید `Asset` مورد نیاز رو از بخش [releases](https://github.com/ViRb3/wgcf/releases) دانلود کنید ، این فایل بسته به پردازنده متفاوت می باشد.
+- با دستور `wget` میتوانید این کار را انجام دهید.
 ```bash
-wget https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.22_linux_amd64
+wget https://github.com/ViRb3/wgcf/releases/download/v2.2.19/wgcf_2.2.19_linux_amd64
 ```
-
-Перемещаем скачанный файл в `/usr/bin/` и меняем его имя на `wgcf`
-
+مسیر فایل رو به `/usr/bin/` تغییر داده و اسم اون رو به `wgcf` تغییر بدید.
 ```bash
-mv wgcf_2.2.22_linux_amd64 /usr/bin/wgcf && chmod +x /usr/bin/wgcf
+mv wgcf_2.2.19_linux_amd64 /usr/bin/wgcf
+chmod +x /usr/bin/wgcf
 ```
-
-Затем создайте конфигурацию, используя эти две команды
-
+سپس با استفاده از این 2 دستور کانفیگ رو ایجاد کنید.
 ```bash
 wgcf register
 wgcf generate
 ```
+فایلی با نام `wgcf-profile.conf` ساخته شده و این کانفیگ مورد نیاز ما می باشد.
 
-Вы создали файл конфигурации `wgcf-profile.conf`
+## قدم دوم : استفاده از Warp+ (اختیاری)
 
-### Использование Warp+ (необязательно)
-
-Чтобы получить лицензию и использовать Warp+, вы можете получить `license key` через [этого](https://t.me/generatewarpplusbot) Telegram-бота
-
-После его получения необходимо заменить `license_key` в файле `wgcf-account.toml`
-
-Затем вам необходимо обновить информацию о конфигурации.
-
+- برای دریافت لایسنس و استفاده از Warp+ میتونید از طریق [این](https://t.me/generatewarpplusbot) بات تلگرام اقدام به دریافت `license_key` کنید.
+- بعد از دریافت `license_key` باید اون رو در فایل `wgcf-account.toml` جایگزین کنید.
+::: tip نکته
+ این تغییر رو میتونید در لینوکس با `nano` و در ویندوز با `Notepad` و یا هر نرم افزار دیگه ای انجام بدید.
+:::
+::: details Windows
+برای استفاده از کامند ها روی ویندوز نیاز دارید به جای استفاده از کامند `wgcf` از `wgcf.exe` استفاده کنید.
+:::
+سپس باید اطلاعات کانفیگ ها رو بروزرسانی کنید.
 ```bash
 wgcf update
 ```
-
-Затем вам нужно создать новый файл конфигурации.
-
+سپس باید فایل کانفیگ جدیدی ایجاد کنید.
 ```bash
 wgcf generate
 ```
 
-### Активация WARP в Marzban
+## قدم سوم : فعالسازی Warp روی مرزبان
 
-Вам необходимо отредактировать ваш `xray_config.json` добавив в него новый `OUTBOUND` как в примере ниже, заполнив его данными из`wgcf-profile.conf`
+### روش اول : با استفاده از هسته Xray
+
+::: warning توجه
+- این روش فقط برای نسخه Xray 1.8.3 و یا بالاتر پیشنهاد میشود ، در نسخه های قدیمی تر احتمالا با مشکل Memory Leak مواجه خواهید شد.
+- در صورتی که ورژن `Xray` شما پایین تر از این نسخه می باشد می توانید به کمک [ اموزش تغییر ورژن Xray-core](/examples/change-xray-version) ورژن `Xray` خودتون رو ارتقا بدید.
+:::
+
+- وارد بخش Core Setting در پنل مرزبان شوید.
+- ابتدا یک outbound همانند نمونه اضافه می کنیم و اطلاعات فایل `wgcf-profile.conf` را در آن جایگذاری می کنیم.
 
 ```json
-// /var/lib/marzban/xray_config.json
 {
-  "tag": "WARP",
+  "tag": "warp",
   "protocol": "wireguard",
   "settings": {
-    "secretKey": "",
+    "secretKey": "Your_Secret_Key",
     "DNS": "1.1.1.1",
-    "address": ["172.16.0.2/32", "2606:4700:110:8381:7328:468f:78ff:a1f5/128"],
+    "address": ["172.16.0.2/32", "2606:4700:110:8756:9135:af04:3778:40d9/128"],
     "peers": [
       {
-        "publicKey": "",
+        "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
         "endpoint": "engage.cloudflareclient.com:2408"
       }
     ],
@@ -82,58 +94,106 @@ wgcf generate
 }
 ```
 
-### Настройки раздела маршрутизации
+::: tip نکته
+در صورتی که میخواهید تمام ترافیک به صورت پیش فرض از Warp عبور کنید این Outbound رو اول قرار بدید و دیگه نیازی به انجام مرحله بعد نیست.
+:::
 
-Вам необходимо отредактировать ваш `xray_config.json` добавив в него новый `RULES` как в примере ниже, указав, какие сайты будут отправлять через `WARP`
+### روش دوم : با استفاده از هسته Wireguard
 
-```json
-// /var/lib/marzban/xray_config.json
-{
-  "outboundTag": "WARP",
-  "domain": ["geosite:google", "geosite:openai"],
-  "type": "field"
-}
-```
-
-## Вариант 2
-
-### Создание тунеля
-
-Устанавливаем WARP-cli
+ابتدا باید پیش نیاز های استفاده از Wireguard رو روی سرور نصب کنید.
 
 ```bash
-cd && bash <(curl -fsSL git.io/warp.sh) proxy
+sudo apt install wireguard-dkms wireguard-tools resolvconf
 ```
 
-### Активация WARP в Marzban
+سپس باید عبارت `Table = off` رو مثل نمونه به فایل Wireguard اضافه کنید.
 
-Вам необходимо отредактировать ваш `xray_config.json` добавив в него новый `OUTBOUND` как в примере ниже
+```conf
+[Interface]
+PrivateKey = Your_Private_Key
+Address = 172.16.0.2/32
+Address = 2606:4700:110:8a1a:85ef:da37:b891:8d01/128
+DNS = 1.1.1.1
+MTU = 1280
+Table = off
+[Peer]
+PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+AllowedIPs = 0.0.0.0/0
+AllowedIPs = ::/0
+Endpoint = engage.cloudflareclient.com:2408
+```
+
+::: warning توجه
+در صورت عدم اضافه کردن `Table = off` دسترسی شما به سرور قطع خواهد شد و دیگر نمیتوانید به سرور متصل شوید و باید از طریق وب سایت دیتاسنتر خود به سرور وارد شده و اتصال به `Warp` رو قطع کنید تا بتونید دوباره به صورت عادی ارتباط برقرار کنید.
+:::
+
+- سپس نام فایل رو از `wgcf-profile.conf` به `warp.conf` تغییر بدید.
+- فایل رو در پوشه `/etc/Wireguard` در سرور قرار بدید.
+- با دستور پایین Wireguard رو فعال کنید.
+
+```bash
+sudo systemctl enable --now wg-quick@warp
+```
+
+با این دستور نیز می‌توانید `Warp` را غیر فعال کنید
+
+```bash
+sudo systemctl disable --now wg-quick@warp
+```
+
+- وارد بخش Core Setting در پنل مرزبان شوید.
+- ابتدا یک outbound همانند نمونه اضافه کنید.
 
 ```json
-// /var/lib/marzban/xray_config.json
 {
   "tag": "warp",
-  "protocol": "socks",
-  "settings": {
-    "servers": [
-      {
-        "address": "127.0.0.1",
-        "port": 40000
-      }
-    ]
+  "protocol": "freedom",
+  "streamSettings": {
+    "sockopt": {
+      "tcpFastOpen": true,
+      "interface": "warp"
+    }
   }
 }
 ```
 
-### Настройки раздела маршрутизации
+::: tip نکته
+در صورتی که میخواهید تمام ترافیک به صورت پیش فرض از Warp عبور کنید این Outbound رو اول قرار بدید و دیگه نیازی به انجام مرحله بعد نیست.
+:::
 
-Вам необходимо отредактировать ваш `xray_config.json` добавив в него новый `RULES` как в примере ниже, указав, какие сайты будут отправлять через `WARP`
+## قدم چهارم : تنظیمات بخش routing
+
+ابتدا یک `rule` در بخش `routing` همانند نمونه اضافه می کنیم.
 
 ```json
-// /var/lib/marzban/xray_config.json
 {
   "outboundTag": "warp",
-  "domain": ["geosite:google", "geosite:openai"],
+  "domain": [],
   "type": "field"
 }
 ```
+
+حال باید وب سایت های دلخواه خودتون رو مثل نمونه اضافه کنید.
+
+```json
+{
+    "outboundTag": "warp",
+    "domain": [
+        "geosite:google",
+        "openai.com",
+        "ai.com",
+        "ipinfo.io",
+        "iplocation.net",
+        "spotify.com"
+    ],
+    "type": "field"
+}
+```
+
+تغییرات رو ذخیره می کنیم ، هم اکنون میتوانید از `Warp` استفاده کنید.
+::: details Marzban-Node
+
+- در صورتی که با کمک هسته xray از `Warp` استفاده می کنید نیاز به انجام تغییر در نود ندارید و به صورت اتوماتیک در نود نیز اعمال می شود.
+
+- در صورتی که از هسته `Wireguard` استفاده می کنید باید مرحله سوم ، روش دوم رو روی نود هم انجام دهید.
+  :::

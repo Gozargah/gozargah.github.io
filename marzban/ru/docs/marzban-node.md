@@ -2,48 +2,36 @@
 title: Marzban Node
 ---
 
-## Введение
+# Marzban Node
 
-**Marzban Node** - это приложение на Python, предоставляющее сервис для управления экземпляром ядра Xray.
-Приложение разработано с учетом требований безопасности и использует взаимную аутентификацию самоподписанными SSL-сертификатами, для связи между панелью и ее клиентами(узлами).
+Using this guide, you can set up Marzban Node on one or more side servers and connect them to Marzban Panel so that you can use these servers in your configurations. Marzban Node allows you to distribute traffic load among different servers and also provides the ability to use servers with different locations.
+Next, we will learn how to connect a node server to multiple Marzban Panels.
 
-В зависимости от Вашего выбора, приложение может использовать или RPyC для удаленных вызовов процедур, или REST, используя стандартные HTTP-методы (GET, POST, PUT, DELETE и т.д.) для выполнения различных операций.
+## Setting up Marzban Node
 
-С помощью этого руководства вы можете создать узел Marzban Node на дополнительном сервере и подключить его к панели.
-
-## Настройка Marzban Node
-
-:::note
-Обратите внимание, что и Ваша панель и узел должны быть обновлены до последних `latest` версий
-:::
-
-- Обновляем сервер и устанавливаем необходимый софт
+- After logging into the node server terminal, first update the server with the following command and install necessary programs.
 ```bash
 apt-get update; apt-get upgrade -y; apt-get install curl socat git -y
 ```
 
-- Устанавливаем на сервер Docker.
+- Install Docker.
 ```bash
 curl -fsSL https://get.docker.com | sh
 ```
 
-- Клонируем репозиторий и создаем папку для ключа.
+- Clone the repository and then create a folder for it.
 ```bash
 git clone https://github.com/Gozargah/Marzban-node
-mkdir /var/lib/marzban-node
-mkdir /var/lib/marzban
+mkdir /var/lib/marzban-node 
 ```
 
-- Чтобы установить безопасное соединение между Marzban Node и Marzban Panel, вам необходимо внести определенные изменения в файл docker-compose.yml. Итак, перейдите в основной каталог Marzban Node и откройте этот файл для редактирования.
+- To establish a secure connection between Marzban Node and Marzban Panel, you need to make certain changes in the `docker-compose.yml` file. So, navigate to the main directory of Marzban Node and open this file for editing.
 ```bash
 cd ~/Marzban-node
 nano docker-compose.yml
 ```
 
-– Удалите знак `#` после `SSL_CLIENT_CERT_FILE` и совместите эту строку со строками ниже. Затем вы можете удалить две строки, относящиеся к SSL_CERT_FILE и SSL_KEY_FILE. 
-- Также мы сразу подключим еще одну папку, где могут храниться логи, если настроено логирование на основном сервере.
-- А еще мы сразу перейдем на использование REST метода подключения. 
-После сохранения изменений ваш файл будет иметь следующий вид:
+- Remove the `#` sign behind `SSL_CLIENT_CERT_FILE` and align this line with the ones below. Then, you can delete the two lines related to `SSL_CERT_FILE` and `SSL_KEY_FILE`. After saving the changes, your file will be as follows:
 
 ::: code-group
 ```yml [docker-compose.yml]
@@ -56,84 +44,66 @@ services:
 
     environment:
       SSL_CLIENT_CERT_FILE: "/var/lib/marzban-node/ssl_client_cert.pem"
-      SERVICE_PROTOCOL: rest
 
     volumes:
       - /var/lib/marzban-node:/var/lib/marzban-node
-      - /var/lib/marzban:/var/lib/marzban
 ```
 :::
 
-::: tip Дополнительная информация по переменным
-Доступные переменные окружения
-| Переменная     | Описание  | Значение по умолчанию |
-| -------------- | -------------------- | -----------|
-| `SERVICE_PORT`  | Сервисный порт |62050|
-| `XRAY_API_PORT`   | Порт API xray-core         |62051|
-| `XRAY_EXECUTABLE_PATH` | Путь к исполняемым файлам xray    |/usr/local/bin/xray|
-| `XRAY_ASSETS_PATH`  | Путь к ассетам xray        |/usr/local/share/xray|
-| `SSL_CERT_FILE` | Сертификат узла для связи с панелью            |/var/lib/marzban-node/ssl_cert.pem|
-| `SSL_KEY_FILE`  | Ключ сертификата для связи с панелью   |/var/lib/marzban-node/ssl_key.pem|
-| `SSL_CLIENT_CERT_FILE`  | Сертификат панели для связи с узлом   |/var/lib/marzban-node/ssl_client_cert.pem|
-| `SERVICE_PROTOCOL`  | Сервисный протокол   |rpyc|
-| `DEBUG`  | Вывод отладочной информации   |false|
-:::
 
-- Теперь перейдите в раздел «Настройки узла» на панели Marzban.
-Затем нажмите «Добавить новый узел Mazrban» и добавьте новый узел.
+- Now go to the `Node Settings` section in your Marzban Panel.
+Then, click on `Add New Mazrban Node`, and add a new node.
 
-- Если вы нажмете кнопку «Показать сертификат», вы увидите сертификат, необходимый для подключения узла. Скопируйте этот сертификат и продолжайте следовать инструкциям с терминала вашего узла-сервера.
+- If you click on `Show Certificate` button, you will see the certificate required for node connection. Copy this certificate and continue following the steps from the terminal of your node server.
 
 <img src="https://github.com/mdjvd/gozargah.github.io/assets/116950557/bee4bbf0-f811-4b20-af28-adee270b469d"
      style="display:block;float:none;margin-left:auto;margin-right:auto;width:47%">
 <br>
 
-- Создадим файл для хранения сертификата и вставим туда сертификат, который был скопирован из панели.
+- Create the certificate file with the following command and paste it there.
 ```bash
 nano /var/lib/marzban-node/ssl_client_cert.pem
 ```
  
-- Запустим контейнер с нодой.
+- Then run the command in Marzban Node directory.
 ```bash
 docker compose up -d
 ```
-Теперь вернемся в основную панель
 
-- Вернувшись в панель заполняем недостающие поля:
 
-Заполняем данные узла:
+- Return to the Marzban Panel and complete the different sections as follows:
 
-   - Name - Имя узла;
-   - Adress - IP адрес узла. (для подключения к узлам, не рекомендуется использовать Доменные имена, подключайтесь всегда по IP)
-   - Port - Оставляем по умолчанию, если не изменяли их.
-   - Оставляем галку, если хотим добавить узел в качестве нового хоста во все входящие
+1. In the `Name` section, choose your desired name for the node.
+2. Enter the IP address of the node in the `Address` section.
+3. Leave default connection ports for the node including `Port` and `API Port` unchanged.
+4. If you want your Marzban Node's host to be added for all inbounds as a new host, checkmark `Add this node as a new host for every inbound`.
 
-::: tip Рекомендация
-Вы можете отключить эту галочку и вручную добавлять IP-адрес Node-сервера только для необходимых подключений в качестве хоста в разделе «Настройки хоста».
+::: tip Note
+You can disable this checkmark and manually add the Node server IP only for necessary connections as a host in the `Host Settings` section.
 :::
 
-- Наконец, нажмите `Добавить узел`, чтобы добавить узел. Теперь узел готов к использованию. Вы можете использовать IP-адрес Node-сервера для желаемых подключений, управляя своими хостами в разделе `Настройки хоста`.
+- Finally, click on `Add Node` to add the node. Now the node is ready to use. You can use the Node server IP for desired connections by managing your hosts in the `Host Settings` section.
 
-::: warning Внимание
-Если вы включили брандмауэр на сервере Node, вам необходимо открыть порты как для подключений к панели, так и для входящих портов в брандмауэре сервера Node.
+::: warning Attention
+If you have enabled a firewall on the Node server, you need to open ports for both panel connections and inbound ports in the Node server firewall.
 :::
 
+## Connecting Marzban Node to Multiple Panels
 
-## Подключение узла Marzban к нескольким панелям
+If you need to connect a Node server to multiple Marzban Panels, you need to add a new node service in the `docker-compose.yml` file for each panel. This can be done in two ways.
 
-Если вам нужно подключить сервер узла к нескольким панелям Marzban, вам нужно добавить новую службу узла в файл `docker-compose.yml` для каждой панели. Это можно сделать двумя способами.
+::: tip Note
+In both configuration options, you can modify port settings used in sample `docker-compose.yml` files to suit your needs. Additionally, you can add as many node services as required in this file.
 
-::: tip Примечание
-В обоих вариантах конфигурации вы можете изменить настройки портов, используемые в образцах файлов `docker-compose.yml`, в соответствии с вашими потребностями. Кроме того, вы можете добавить столько служб узлов, сколько потребуется, в этот файл.
 :::
 
-### Первый способ: использование хост-сети
+### First Method: Using Host Network
 
-В этом случае вы можете использовать все доступные порты в вашей среде. Обратите внимание, что в этом сценарии все порты, используемые Xray-Core панелей, будут прослушиваться сервером узла. Это означает, что если в ядре Xray панелей есть дублирующийся порт, могут возникнуть сбои в соединениях или конфигурациях узла. Чтобы избежать этой проблемы, вы можете настроить свои настройки, используя учебник [Все на одном порту](https://gozargah.github.io/marzban/en/examples/all-on-one-port), или просто следовать второму методу.
+In this case, you can use all available ports in your environment. Note that in this scenario, all ports used by Xray-Core of the panels will be listened on by the node server. This means that if there is a duplicate port in the Xray core pf the panels, there may be disruptions in node connections or configurations. To avoid this issue, you can configure your settings as needed using [All on one port](https://gozargah.github.io/marzban/en/examples/all-on-one-port) tutorial, or simply follow the second method.
 
-- Используйте следующий пример для добавления двух служб узлов в файл `docker-compose.yml`.
+ - Use the following example to add two node services to the `docker-compose.yml` file.
 
-::: details Пример конфигурации `docker-compose.yml`
+::: details Sample configuration of `docker-compose.yml`
 ::: code-group
 ```yml{11,27} [docker-compose.yml]
 services:
@@ -170,30 +140,30 @@ services:
 ```
 :::
 
-- Затем получите необходимые сертификаты с панелей и поместите их в указанные пути.
-- Запустите узел Marzban
+- Then get the necessary certificates from the panels and place them in the specified paths.
+- Proceed to run Marzban Node
 ```bash
 docker compose up -d
 ```
 
-- Порты подключения узла для панелей и указанные порты для входящих подключений будут следующими:
+- The connection ports of the node for the panels and the specified ports for the inbounds will be as follows:
 
-| Переменная | Панель 1 | Панель 2 |
+| Variable | Panel 1 | Panel 2 |
 |----------------:|---------:|-------:|
 | `Port`           | 2000    |   3000  |
 | `API Port`      | 2001    |   3001  |
-| `Inbound Ports` | По желанию |  По желанию |
+| `Inbound Ports` | As desired |  As desired |
 
 <br>
 
-### Второй способ: использование сопоставления портов
+### Second Method: Using Port Mapping
 
-В этом сценарии доступны только определенные порты, и дублирующиеся порты на сервере узла будут предотвращены. Обратите внимание, что вам нужно указать используемые порты в файле `docker-compose.yml`.
+In this scenario, only specific ports are accessible and duplicate ports on the server node will be prevented. Please note that you should specify the ports used in your services in the `docker-compose.yml` file.
 
-- Используйте пример ниже для добавления двух служб узлов в файл `docker-compose.yml`.
+- Use the example below to add two Node services to the `docker-compose.yml` file.
 
 
-::: details Пример конфигурации `docker-compose.yml`
+::: details Sample configuration file `docker-compose.yml` 
 ::: code-group
 ```yml{7,25} [docker-compose.yml]
 services:
@@ -232,63 +202,64 @@ services:
       - 2096:2096
       - 2097:2097
 ```
-:::
+:::      
 
-- После того как вы получите необходимые сертификаты с панелей и поместите их в указанные пути, запустите узел Marzban.
+- Once you have received the necessary certificates from the panels and placed them in the specified paths, proceed to run Marzban Node.
 
-- Порты подключения узла для панелей и указанные порты для входящих подключений будут следующими:
+- The connection ports of the node for the panels and the specified ports for the inbounds will be as follows:
 
-| Переменная | Панель 1 | Панель 2 |
+| Variable | Panel 1 | Panel 2 |
 |----------------:|-----------:|---------:|
 | `Port`           | 2000      |    3000   |
 | `API Port`       | 2001      |    3001   |
 | `Inbound Ports` | 2053 <br> 2054 | 2096 <br> 2097 |
 
 
-## Обновление узла Marzban
+## Updating Marzban Node
 
-- Перейдите в каталог узла Marzban.
+- Enter Marzban Node directory.
 ```bash
 cd Marzban-node
 ```
 
-- Обновите узел Marzban с помощью следующей команды.
+- Update Marzban Node using the following command.
 ```bash
 docker compose pull
 ```
 
-- Наконец, перезапустите узел Marzban с помощью следующей команды.
+- Finally, restart Marzban Node using the following command.
 ```bash
 docker compose down --remove-orphans; docker compose up -d
 ```
 
 
-## Дополнительные заметки
+## Additional Notes
 
-::: tip Примечание 1
-Если вы хотите рассмотреть отдельный входящий для каждого узла для лучшего управления узлом, вам нужно добавить новый входящий в `Core Settings` с уникальными `Tags` и `Ports` для каждого узла.
+::: tip Note 1
+If you want to consider a separate inbound for each node for better node management, you need to add a new inbound in the `Core Settings` with unique `Tags` and `Ports` for each node.
 :::
 
-::: tip Примечание 2
-Если вы намерены использовать Warp на сервере узла и настроили файл `docker-compose.yml` через второй метод, вам необходимо включить Warp через `Xray core`. Если вы используете Wireguard core, Warp не будет работать на сервере узла.
+::: tip Note 2
+If you intend to use Warp on the node server and you have configured the `docker-compose.yml` file through second method, you must enable Warp through `Xray core`. If you use Wireguard core, Warp will not work on the node server.
 :::
 
-::: tip Примечание 3
-Если вы планируете использовать настройки с конфигурацией TLS, вы должны получить сертификат для вашего домена на сервере узла, затем переместить его на мастер-сервер и ввести путь к файлам сертификатов в входящем. Также вместо множества сертификатов для нескольких поддоменов вы можете получить сертификат с подстановочным знаком для вашего основного домена, чтобы охватить все поддомены.
+::: tip Note 3
+If you plan to use TLS-configured settings, you must obtain a certificate for your domain on the node server, then move it to the master server and enter the path of certificate files in the inbound. Also, instead of multiple certificates for multiple subdomains, you can obtain a wildcard certificate for your main domain to cover all subdomains.
 :::
 
-::: tip Примечание 4
-Файл `docker-compose.yml` чувствителен к отступам и пробелам. Вы можете использовать инструменты, такие как [yamlchecker](https://yamlchecker.com), чтобы проверить вашу конфигурацию.
+::: tip Note 4
+The `docker-compose.yml` file is sensitive to indentation and spacing. You can use tools like [yamlchecker](https://yamlchecker.com) to validate your configuration.
 :::
 
-::: tip Примечание 5
-Если вы внесли изменения в файл `docker-compose.yml`, перезапустите узел Marzban с помощью следующей команды, чтобы применить изменения:
+
+::: tip Note 5
+If you've made changes in the `docker-compose.yml` file, restart Marzban Node using the following command to apply the changes:
 ```bash
 cd ~/Marzban-node
 docker compose down --remove-orphans; docker compose up -d
 ```
 :::
 
-::: tip Примечание 6
-Если узел Marzban не использует последнюю версию Xray и вы хотите вручную обновить или понизить её по какой-либо причине, вы можете сделать это, следуя учебнику [Изменение версии Xray Core](https://gozargah.github.io/marzban/en/examples/change-xray-version).
-:::
+::: tip Note 6
+If Marzban Node is not running the latest version of Xray and you wish to manually upgrade or downgrade it for any reason, you can do this by following the tutorial on [Changing Xray Core Version](https://gozargah.github.io/marzban/en/examples/change-xray-version).
+ :::
