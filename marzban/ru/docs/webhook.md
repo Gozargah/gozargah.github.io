@@ -1,6 +1,5 @@
 ---
 title: Webhook
-description: Webhook
 ---
 
 Вы можете установить webhook адрес и Marzban будет отправлять уведомления на него.
