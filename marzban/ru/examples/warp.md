@@ -40,12 +40,12 @@ wget https://github.com/ViRb3/wgcf/releases/download/v2.2.22/wgcf_2.2.19_linux_a
 ```
 مسیر فایل رو به `/usr/bin/` تغییر داده و اسم اون رو به `wgcf` تغییر بدید.
 
-برای سیپیو های AMD64 :
+برای معماری AMD64 :
 ```bash
 mv wgcf_2.2.22_linux_amd64 /usr/bin/wgcf
 chmod +x /usr/bin/wgcf
 ```
-برای سیپیو های ARM64 :
+برای معماری ARM64 :
 ```bash
 mv wgcf_2.2.22_linux_arm64 /usr/bin/wgcf
 chmod +x /usr/bin/wgcf
