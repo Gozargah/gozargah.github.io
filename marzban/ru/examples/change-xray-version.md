@@ -28,7 +28,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/DigneZzZ/marzban_core_change/
 3. Скачиваем нужную версию Xray с помощью wget.
 
     ```bash
-    wget https://github.com/XTLS/Xray-core/releases/download/v1.8.13/Xray-linux-64.zip
+    wget https://github.com/XTLS/Xray-core/releases/download/v1.8.16/Xray-linux-64.zip
     ```
 
 4. Извлекаем содержимое и удаляем  архив.
