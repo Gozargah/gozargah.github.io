@@ -1,6 +1,5 @@
 ---
 title: API
-description: API
 ---
 
 
