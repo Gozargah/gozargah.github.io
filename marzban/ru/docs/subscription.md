@@ -1,8 +1,5 @@
 ---
 title: Подписки
-description: В данном руководстве, мы рассмотрим систему подписки marzban
-sidebar:
-  order: 2
 ---
 
 
@@ -373,10 +370,9 @@ subscription-userinfo: upload=0; download=4460105213; total=2147483648; expire=1
 
 При запросе к ссылке через клиент на базе Sing-box, или с испольованием ключа `/sing-box`, пользователь получит валидный json, построенный на шаблоне
 
-<LinkCard
-  title="Шаблон по умолчанию"
-  href="https://github.com/Gozargah/Marzban/blob/master/app/templates/singbox/default.json"
-/>
+
+`https://github.com/Gozargah/Marzban/blob/master/app/templates/singbox/default.json`
+
 
 Для применения собственного шаблона, Вам необходимо использовать 2 перменные в файле `.env`:
 
