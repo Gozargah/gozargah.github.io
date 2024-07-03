@@ -211,7 +211,7 @@ href="https://github.com/Gozargah/Marzban/blob/master/app/templates/subscription
 protocol://$(uuid)@remote-host:remote-port?<protocol-specific fields><transport-specific fields><tls-specific fields>#$(descriptive-text)
 ```
 
-<LinkCard title="Стандарт" href="https://github.com/XTLS/Xray-core/issues/91" />
+https://github.com/XTLS/Xray-core/issues/91
 
 Дополнительно, будут переданны заголовки, которые, в свою очередь, в том или инном обьеме, будут интерпретированы клиентом.
 
