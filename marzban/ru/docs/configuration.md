@@ -132,10 +132,8 @@ URL прокси для запуска Telegram-бота (если сервер�
 
 Значение по умолчанию: `clash/default.yml`
 
-
-:::hint
 Пример: [default.yml](https://github.com/Gozargah/Marzban/blob/master/app/templates/clash/default.yml))
-:::
+
 
 ### SUBSCRIPTION_PAGE_TEMPLATE
 
