@@ -1,6 +1,5 @@
 ---
 title: Получение SSL
-description: Получение SSL
 ---
 
 
