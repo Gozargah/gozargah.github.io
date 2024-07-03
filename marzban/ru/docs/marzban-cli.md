@@ -1,6 +1,5 @@
 ---
 title: CLI
-description: CLI
 ---
 
 # Команды Marzban
