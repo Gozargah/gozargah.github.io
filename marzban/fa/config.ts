@@ -37,6 +37,7 @@ export const config: DefaultTheme.Config = {
       items: [
         { text: 'ساخت گواهی SSL', link: '/fa/examples/issue-ssl-certificate' },
         { text: 'فعال‌سازی SSL در مرزبان', link: '/fa/examples/marzban-ssl' },
+        { text: 'دریافت wildcard ssl', link: '/fa/examples/wild-card-ssl' },
         { text: 'فعال‌سازی TLS', link: '/fa/examples/xray-tls-inbound' },
         { text: 'راه‌اندازی REALITY', link: '/fa/examples/all-on-one-port' },
         { text: 'فعال‌سازی Cloudflare Warp', link: '/fa/examples/warp' },
