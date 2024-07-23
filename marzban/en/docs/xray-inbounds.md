@@ -154,9 +154,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "tls",
     "tlsSettings": {
@@ -373,9 +371,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "tls",
     "tlsSettings": {
@@ -978,9 +974,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "none"
   },
@@ -1137,9 +1131,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "none"
   },
