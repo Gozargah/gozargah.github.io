@@ -154,9 +154,7 @@ title: اینباندهای Xray
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "tls",
     "tlsSettings": {
@@ -373,9 +371,7 @@ title: اینباندهای Xray
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "tls",
     "tlsSettings": {
@@ -978,9 +974,7 @@ title: اینباندهای Xray
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "none"
   },
@@ -1137,9 +1131,7 @@ title: اینباندهای Xray
     "network": "httpupgrade",
     "httpupgradeSettings": {
       "path": "/",
-      "headers": {
-        "Host": ""
-      }
+      "host": ""
     },
     "security": "none"
   },
