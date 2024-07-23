@@ -141,34 +141,37 @@ title: اینباندهای Xray
 ::: details VLESS HTTPUpgrade TLS
 ::: code-group
 ```json
-   {
-      "tag": "VLESS HTTPUPGRADE TLS",
-      "listen": "0.0.0.0",
-      "port": 443,
-      "protocol": "vless",
-      "settings": {
-        "clients": [],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "httpupgrade",
-        "httpupgradeSettings": {
-          "path": "/"
-        },
-        "security": "tls",
-        "tlsSettings": {
-          "serverName": "SERVER_NAME",
-          "certificates": [
-            {
-              "ocspStapling": 3600,
-              "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
-              "keyFile": "/var/lib/marzban/certs/key.pem"
-            }
-          ],
-          "minVersion": "1.2",
-          "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+{
+  "tag": "VLESS HTTPUPGRADE TLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "httpupgrade",
+    "httpupgradeSettings": {
+      "path": "/",
+      "headers": {
+        "Host": ""
+      }
+    },
+    "security": "tls",
+    "tlsSettings": {
+      "serverName": "SERVER_NAME",
+      "certificates": [
+        {
+          "ocspStapling": 3600,
+          "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
+          "keyFile": "/var/lib/marzban/certs/key.pem"
         }
-      },
+      ],
+      "minVersion": "1.2",
+      "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    }
+  },
   "sniffing": {
     "enabled": true,
     "destOverride": [
@@ -185,45 +188,45 @@ title: اینباندهای Xray
 ::: code-group
 ```json
 {
-    "tag": "VLESS Splithttp TLS",
-    "listen": "0.0.0.0",
-    "port": 443,
-    "protocol": "vless",
-    "settings": {
-        "clients": [],
-        "decryption": "none"
+  "tag": "VLESS Splithttp TLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "splithttpSettings": {
+      "host": "",
+      "path": "/",
+      "maxUploadSize": 1000000,
+      "maxConcurrentUploads": 10
     },
-    "streamSettings": {
-        "splithttpSettings": {
-            "host": "",
-            "path": "/",
-            "maxUploadSize": 1000000,
-            "maxConcurrentUploads": 10
-        },
-        "network": "splithttp",
-        "security": "tls",
-        "tlsSettings": {
-            "serverName": "SERVER_NAME",
-            "certificates": [
-                {
-                    "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
-                    "keyFile": "/var/lib/marzban/certs/key.pem"
-                }
-            ],
-            "minVersion": "1.2",
-              "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
-        },
-        "sniffing": {
-            "enabled": true,
-            "destOverride": [
-                "http",
-                "tls",
-                "quic"
-            ]
+    "network": "splithttp",
+    "security": "tls",
+    "tlsSettings": {
+      "serverName": "SERVER_NAME",
+      "certificates": [
+        {
+          "ocspStapling": 3600,
+          "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
+          "keyFile": "/var/lib/marzban/certs/key.pem"
         }
+      ],
+      "minVersion": "1.2",
+      "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    },
+    "sniffing": {
+      "enabled": true,
+      "destOverride": [
+        "http",
+        "tls",
+        "quic"
+      ]
     }
-},
-
+  }
+}
 ```
 :::
 
@@ -355,6 +358,96 @@ title: اینباندهای Xray
 
 ## VMess TLS
 
+::: details VMess HTTPUpgrade TLS
+::: code-group
+```json
+{
+  "tag": "VMESS HTTPUPGRADE TLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vmess",
+  "settings": {
+    "clients": []
+  },
+  "streamSettings": {
+    "network": "httpupgrade",
+    "httpupgradeSettings": {
+      "path": "/",
+      "headers": {
+        "Host": ""
+      }
+    },
+    "security": "tls",
+    "tlsSettings": {
+      "serverName": "SERVER_NAME",
+      "certificates": [
+        {
+          "ocspStapling": 3600,
+          "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
+          "keyFile": "/var/lib/marzban/certs/key.pem"
+        }
+      ],
+      "minVersion": "1.2",
+      "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
+::: details VMess SplitHTTP TLS
+::: code-group
+```json
+{
+  "tag": "VMESS Splithttp TLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vmess",
+  "settings": {
+    "clients": []
+  },
+  "streamSettings": {
+    "splithttpSettings": {
+      "host": "",
+      "path": "/",
+      "maxUploadSize": 1000000,
+      "maxConcurrentUploads": 10
+    },
+    "network": "splithttp",
+    "security": "tls",
+    "tlsSettings": {
+      "serverName": "SERVER_NAME",
+      "certificates": [
+        {
+          "ocspStapling": 3600,
+          "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
+          "keyFile": "/var/lib/marzban/certs/key.pem"
+        }
+      ],
+      "minVersion": "1.2",
+      "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    },
+    "sniffing": {
+      "enabled": true,
+      "destOverride": [
+        "http",
+        "tls",
+        "quic"
+      ]
+    }
+  }
+}
+```
+:::
+
 ::: details VMess WS TLS
 ::: code-group
 ```json
@@ -485,54 +578,54 @@ title: اینباندهای Xray
 ::: code-group
 ```json
 {
-    "tag": "Trojan WS TLS Fake Certificate",
-    "listen": "0.0.0.0",
-    "port": 2083,
-    "protocol": "trojan",
-    "settings": {
-        "clients": []
-    },
-    "streamSettings": {
-        "network": "ws",
-        "security": "tls",
-        "tlsSettings": {
-            "certificates": [
-                {
-                    "certificate": [
-                        "-----BEGIN CERTIFICATE-----",
-                        "MIIBvTCCAWOgAwIBAgIRAIY9Lzn0T3VFedUnT9idYkEwCgYIKoZIzj0EAwIwJjER",
-                        "MA8GA1UEChMIWHJheSBJbmMxETAPBgNVBAMTCFhyYXkgSW5jMB4XDTIzMDUyMTA4",
-                        "NDUxMVoXDTMzMDMyOTA5NDUxMVowJjERMA8GA1UEChMIWHJheSBJbmMxETAPBgNV",
-                        "BAMTCFhyYXkgSW5jMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEGAmB8CILK7Q1",
-                        "FG47g5VXg/oX3EFQqlW8B0aZAftYpHGLm4hEYVA4MasoGSxRuborhGu3lDvlt0cZ",
-                        "aQTLvO/IK6NyMHAwDgYDVR0PAQH/BAQDAgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMB",
-                        "MAwGA1UdEwEB/wQCMAAwOwYDVR0RBDQwMoILZ3N0YXRpYy5jb22CDSouZ3N0YXRp",
-                        "Yy5jb22CFCoubWV0cmljLmdzdGF0aWMuY29tMAoGCCqGSM49BAMCA0gAMEUCIQC1",
-                        "XMIz1XwJrcu3BSZQFlNteutyepHrIttrtsfdd05YsQIgAtCg53wGUSSOYGL8921d",
-                        "KuUcpBWSPkvH6y3Ak+YsTMg=",
-                        "-----END CERTIFICATE-----"
-                    ],
-                    "key": [
-                        "-----BEGIN RSA PRIVATE KEY-----",
-                        "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg7ptMDsNFiL7iB5N5",
-                        "gemkQUHIWvgIet+GiY7x7qB13V6hRANCAAQYCYHwIgsrtDUUbjuDlVeD+hfcQVCq",
-                        "VbwHRpkB+1ikcYubiERhUDgxqygZLFG5uiuEa7eUO+W3RxlpBMu878gr",
-                        "-----END RSA PRIVATE KEY-----"
-                    ]
-                }
-            ],
-            "minVersion": "1.2",
-            "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+  "tag": "Trojan WS TLS Fake Certificate",
+  "listen": "0.0.0.0",
+  "port": 2083,
+  "protocol": "trojan",
+  "settings": {
+    "clients": []
+  },
+  "streamSettings": {
+    "network": "ws",
+    "security": "tls",
+    "tlsSettings": {
+      "certificates": [
+        {
+          "certificate": [
+            "-----BEGIN CERTIFICATE-----",
+            "MIIBvTCCAWOgAwIBAgIRAIY9Lzn0T3VFedUnT9idYkEwCgYIKoZIzj0EAwIwJjER",
+            "MA8GA1UEChMIWHJheSBJbmMxETAPBgNVBAMTCFhyYXkgSW5jMB4XDTIzMDUyMTA4",
+            "NDUxMVoXDTMzMDMyOTA5NDUxMVowJjERMA8GA1UEChMIWHJheSBJbmMxETAPBgNV",
+            "BAMTCFhyYXkgSW5jMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEGAmB8CILK7Q1",
+            "FG47g5VXg/oX3EFQqlW8B0aZAftYpHGLm4hEYVA4MasoGSxRuborhGu3lDvlt0cZ",
+            "aQTLvO/IK6NyMHAwDgYDVR0PAQH/BAQDAgWgMBMGA1UdJQQMMAoGCCsGAQUFBwMB",
+            "MAwGA1UdEwEB/wQCMAAwOwYDVR0RBDQwMoILZ3N0YXRpYy5jb22CDSouZ3N0YXRp",
+            "Yy5jb22CFCoubWV0cmljLmdzdGF0aWMuY29tMAoGCCqGSM49BAMCA0gAMEUCIQC1",
+            "XMIz1XwJrcu3BSZQFlNteutyepHrIttrtsfdd05YsQIgAtCg53wGUSSOYGL8921d",
+            "KuUcpBWSPkvH6y3Ak+YsTMg=",
+            "-----END CERTIFICATE-----"
+          ],
+          "key": [
+            "-----BEGIN RSA PRIVATE KEY-----",
+            "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQg7ptMDsNFiL7iB5N5",
+            "gemkQUHIWvgIet+GiY7x7qB13V6hRANCAAQYCYHwIgsrtDUUbjuDlVeD+hfcQVCq",
+            "VbwHRpkB+1ikcYubiERhUDgxqygZLFG5uiuEa7eUO+W3RxlpBMu878gr",
+            "-----END RSA PRIVATE KEY-----"
+          ]
         }
-    },
-    "sniffing": {
-        "enabled": true,
-        "destOverride": [
-            "http",
-            "tls"
-        ]
+      ],
+      "minVersion": "1.2",
+      "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
     }
-},
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls"
+    ]
+  }
+}
 ```
 :::
 
@@ -666,205 +759,205 @@ title: اینباندهای Xray
 ::: code-group
 ```json
 {
-    "tag": "TROJAN FALLBACK TLS",
-    "port": 443,
-    "protocol": "trojan",
-    "settings": {
-        "clients": [],
-        "decryption": "none",
-        "fallbacks": [
-            {
-                "path": "/lw",
-                "dest": "@vless-ws",
-                "xver": 2
-            },
-            {
-                "path": "/mw",
-                "dest": "@vmess-ws",
-                "xver": 2
-            },
-            {
-                "path": "/tw",
-                "dest": "@trojan-ws",
-                "xver": 2
-            },
-            {
-                "path": "/lt",
-                "dest": "@vless-tcp",
-                "xver": 2
-            },
-            {
-                "path": "/mt",
-                "dest": "@vmess-tcp",
-                "xver": 2
-            },
-        ]
-    },
-    "streamSettings": {
-         "network": "tcp",
-         "security": "tls",
-         "tlsSettings": {
-             "serverName": "SERVER_NAME",
-             "certificates": [
-                 {
-                     "ocspStapling": 3600,
-                     "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
-                     "keyFile": "/var/lib/marzban/certs/key.pem"
-                 }
-             ],
-             "minVersion": "1.2",
-             "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-             "alpn": [
-                 "h2",
-                 "http/1.1"
-             ]
-         }
-    },
-    "sniffing": {
-        "enabled": true,
-        "destOverride": [
-            "http",
-            "tls",
-            "quic"
-        ]
+  "tag": "TROJAN FALLBACK TLS",
+  "port": 443,
+  "protocol": "trojan",
+  "settings": {
+    "clients": [],
+    "decryption": "none",
+    "fallbacks": [
+      {
+        "path": "/lw",
+        "dest": "@vless-ws",
+        "xver": 2
+      },
+      {
+        "path": "/mw",
+        "dest": "@vmess-ws",
+        "xver": 2
+      },
+      {
+        "path": "/tw",
+        "dest": "@trojan-ws",
+        "xver": 2
+      },
+      {
+        "path": "/lt",
+        "dest": "@vless-tcp",
+        "xver": 2
+      },
+      {
+        "path": "/mt",
+        "dest": "@vmess-tcp",
+        "xver": 2
+      }
+    ]
+  },
+  "streamSettings": {
+    "network": "tcp",
+    "security": "tls",
+    "tlsSettings": {
+      "serverName": "SERVER_NAME",
+      "certificates": [
+        {
+          "ocspStapling": 3600,
+          "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
+          "keyFile": "/var/lib/marzban/certs/key.pem"
+        }
+      ],
+      "minVersion": "1.2",
+      "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+      "alpn": [
+        "h2",
+        "http/1.1"
+      ]
     }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
 },
 {
-    "tag": "VLESS TCP TLS Header",
-    "listen": "@vless-tcp",
-    "protocol": "vless",
-    "settings": {
-        "clients": [],
-        "decryption": "none"
-    },
-    "streamSettings": {
-        "network": "tcp",
-        "security": "none",
-        "tcpSettings": {
-            "acceptProxyProtocol": true,
-            "header": {
-                "type": "http",
-                "request": {
-                    "path": [
-                        "/lt"
-                    ]
-                }
-            }
+  "tag": "VLESS TCP TLS Header",
+  "listen": "@vless-tcp",
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "tcp",
+    "security": "none",
+    "tcpSettings": {
+      "acceptProxyProtocol": true,
+      "header": {
+        "type": "http",
+        "request": {
+          "path": [
+            "/lt"
+          ]
         }
-    },
-    "sniffing": {
-        "enabled": true,
-        "destOverride": [
-            "http",
-            "tls",
-            "quic"
-        ]
+      }
     }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
 },
 {
-    "tag": "VMESS TCP TLS Header",
-    "listen": "@vmess-tcp",
-    "protocol": "vmess",
-    "settings": {
-        "clients": []
-    },
-    "streamSettings": {
-        "network": "tcp",
-        "security": "none",
-        "tcpSettings": {
-            "acceptProxyProtocol": true,
-            "header": {
-                "type": "http",
-                "request": {
-                    "path": [
-                        "/mt"
-                    ]
-                }
-            }
+  "tag": "VMESS TCP TLS Header",
+  "listen": "@vmess-tcp",
+  "protocol": "vmess",
+  "settings": {
+    "clients": []
+  },
+  "streamSettings": {
+    "network": "tcp",
+    "security": "none",
+    "tcpSettings": {
+      "acceptProxyProtocol": true,
+      "header": {
+        "type": "http",
+        "request": {
+          "path": [
+            "/mt"
+          ]
         }
-    },
-    "sniffing": {
-        "enabled": true,
-        "destOverride": [
-            "http",
-            "tls",
-            "quic"
-        ]
+      }
     }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
 },
 {
-    "tag": "VLESS WS TLS",
-    "listen": "@vless-ws",
-    "protocol": "vless",
-    "settings": {
-        "clients": [],
-        "decryption": "none"
-    },
-    "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-            "acceptProxyProtocol": true,
-            "path": "/lw"
-        }
-    },
-    "sniffing": {
-        "enabled": true,
-        "destOverride": [
-            "http",
-            "tls",
-            "quic"
-        ]
+  "tag": "VLESS WS TLS",
+  "listen": "@vless-ws",
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "ws",
+    "security": "none",
+    "wsSettings": {
+      "acceptProxyProtocol": true,
+      "path": "/lw"
     }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
 },
 {
-    "tag": "VMESS WS TLS",
-    "listen": "@vmess-ws",
-    "protocol": "vmess",
-    "settings": {
-        "clients": []
-    },
-    "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-            "acceptProxyProtocol": true,
-            "path": "/mw"
-        }
-    },
-    "sniffing": {
-        "enabled": true,
-        "destOverride": [
-            "http",
-            "tls",
-            "quic"
-        ]
+  "tag": "VMESS WS TLS",
+  "listen": "@vmess-ws",
+  "protocol": "vmess",
+  "settings": {
+    "clients": []
+  },
+  "streamSettings": {
+    "network": "ws",
+    "security": "none",
+    "wsSettings": {
+      "acceptProxyProtocol": true,
+      "path": "/mw"
     }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
 },
 {
-    "tag": "TROJAN WS TLS",
-    "listen": "@trojan-ws",
-    "protocol": "trojan",
-    "settings": {
-        "clients": []
-    },
-    "streamSettings": {
-        "network": "ws",
-        "security": "none",
-        "wsSettings": {
-            "acceptProxyProtocol": true,
-            "path": "/tw"
-        }
-    },
-    "sniffing": {
-        "enabled": true,
-        "destOverride": [
-            "http",
-            "tls",
-            "quic"
-        ]
+  "tag": "TROJAN WS TLS",
+  "listen": "@trojan-ws",
+  "protocol": "trojan",
+  "settings": {
+    "clients": []
+  },
+  "streamSettings": {
+    "network": "ws",
+    "security": "none",
+    "wsSettings": {
+      "acceptProxyProtocol": true,
+      "path": "/tw"
     }
-},
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
 ```
 :::
 
@@ -873,20 +966,23 @@ title: اینباندهای Xray
 ::: details VLESS HTTPUpgrade NoTLS
 ::: code-group
 ```json
-   {
-      "tag": "VLESS HTTPUPGRADE NoTLS",
-      "listen": "0.0.0.0",
-      "port": 2095,
-      "protocol": "vless",
-      "settings": {
-        "clients": [],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "httpupgrade",
-        "httpupgradeSettings": {
-          "path": "/"
-        },
+{
+  "tag": "VLESS HTTPUPGRADE NoTLS",
+  "listen": "0.0.0.0",
+  "port": 2095,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "httpupgrade",
+    "httpupgradeSettings": {
+      "path": "/",
+      "headers": {
+        "Host": ""
+      }
+    },
     "security": "none"
   },
   "sniffing": {
@@ -905,24 +1001,23 @@ title: اینباندهای Xray
 ::: code-group
 ```json
 {
-      "tag": "VLESS SplitHTTP NoTLS",
-      "listen": "0.0.0.0",
-      "port": 8080,
-      "protocol": "vless",
-      "settings": {
-        "clients": [],
-        "decryption": "none"
-      },
-      "streamSettings": {
-        "network": "splithttp",
-        "splithttpSettings":
-          {
-  "host": "",
-  "path": "/",
-  "maxUploadSize": 1000000,
-  "maxConcurrentUploads": 10 
-}
-      },
+  "tag": "VLESS SplitHTTP NoTLS",
+  "listen": "0.0.0.0",
+  "port": 8080,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "splithttp",
+    "splithttpSettings": {
+      "host": "",
+      "path": "/",
+      "maxUploadSize": 1000000,
+      "maxConcurrentUploads": 10
+    }
+  },
   "sniffing": {
     "enabled": true,
     "destOverride": [
@@ -1027,6 +1122,73 @@ title: اینباندهای Xray
 :::
 
 ## VMess NoTLS 
+
+::: details VMess HTTPUpgrade NoTLS
+::: code-group
+```json
+{
+  "tag": "VMESS HTTPUPGRADE NoTLS",
+  "listen": "0.0.0.0",
+  "port": 2095,
+  "protocol": "vmess",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "httpupgrade",
+    "httpupgradeSettings": {
+      "path": "/",
+      "headers": {
+        "Host": ""
+      }
+    },
+    "security": "none"
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
+::: details VMess SplitHTTP NoTLS
+::: code-group
+```json
+{
+  "tag": "VMESS SplitHTTP NoTLS",
+  "listen": "0.0.0.0",
+  "port": 8080,
+  "protocol": "vmess",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "splithttp",
+    "splithttpSettings": {
+      "host": "",
+      "path": "/",
+      "maxUploadSize": 1000000,
+      "maxConcurrentUploads": 10
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
 
 ::: details VMess WS NoTLS
 ::: code-group
@@ -1214,88 +1376,88 @@ title: اینباندهای Xray
 ::: details Fallback NoTLS 
 ::: code-group
 ```json
+{
+  "tag": "TROJAN FALLBACK NoTLS",
+  "port": 8080,
+  "protocol": "trojan",
+  "settings": {
+    "clients": [],
+    "decryption": "none",
+    "fallbacks": [
       {
-        "tag": "TROJAN FALLBACK NoTLS",
-        "port": 8080,
-        "protocol": "trojan",
-        "settings": {
-          "clients": [],
-          "decryption": "none",
-          "fallbacks": [
-            {
-              "path": "/vl",
-              "dest": "@vless-ws",
-              "xver": 2
-            },
-            {
-              "path": "/vm",
-              "dest": "@vmess-ws",
-              "xver": 2
-            },
-          ]
-        },
-        "streamSettings": {
-          "network": "tcp",
-          "security": "none"
-        },
-        "sniffing": {
-          "enabled": true,
-          "destOverride": [
-            "http",
-            "tls"
-          ]
-        }
+        "path": "/vl",
+        "dest": "@vless-ws",
+        "xver": 2
       },
       {
-        "tag": "VLESS WS NoTLS",
-        "listen": "@vless-ws",
-        "protocol": "vless",
-        "settings": {
-          "clients": [],
-          "decryption": "none"
-        },
-        "streamSettings": {
-          "network": "ws",
-          "security": "none",
-          "wsSettings": {
-            "acceptProxyProtocol": true,
-            "path": "/vless"
-          }
-        },
-        "sniffing": {
-          "enabled": true,
-          "destOverride": [
-            "http",
-            "tls",
-            "quic"
-          ]
-        }
-      },
-      {
-        "tag": "VMESS WS NoTLS",
-        "listen": "@vmess-ws",
-        "protocol": "vmess",
-        "settings": {
-          "clients": [],
-          "decryption": "none"
-        },
-        "streamSettings": {
-          "network": "ws",
-          "security": "none",
-          "wsSettings": {
-            "acceptProxyProtocol": true,
-            "path": "/vmess"
-          }
-        },
-        "sniffing": {
-          "enabled": true,
-          "destOverride": [
-            "http",
-            "tls",
-            "quic"
-          ]
-        }
-      },
+        "path": "/vm",
+        "dest": "@vmess-ws",
+        "xver": 2
+      }
+    ]
+  },
+  "streamSettings": {
+    "network": "tcp",
+    "security": "none"
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls"
+    ]
+  }
+},
+{
+  "tag": "VLESS WS NoTLS",
+  "listen": "@vless-ws",
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "ws",
+    "security": "none",
+    "wsSettings": {
+      "acceptProxyProtocol": true,
+      "path": "/vless"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+},
+{
+  "tag": "VMESS WS NoTLS",
+  "listen": "@vmess-ws",
+  "protocol": "vmess",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "ws",
+    "security": "none",
+    "wsSettings": {
+      "acceptProxyProtocol": true,
+      "path": "/vmess"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
 ```
 :::
 
