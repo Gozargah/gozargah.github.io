@@ -541,8 +541,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": [],
-    "decryption": "none"
+    "clients": []
   },
   "streamSettings": {
     "network": "tcp",
@@ -1132,8 +1131,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "port": 2095,
   "protocol": "vmess",
   "settings": {
-    "clients": [],
-    "decryption": "none"
+    "clients": []
   },
   "streamSettings": {
     "network": "httpupgrade",
@@ -1166,8 +1164,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": [],
-    "decryption": "none"
+    "clients": []
   },
   "streamSettings": {
     "network": "splithttp",
@@ -1199,8 +1196,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": [],
-    "decryption": "none"
+    "clients": []
   },
   "streamSettings": {
     "network": "ws",
@@ -1438,8 +1434,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "listen": "@vmess-ws",
   "protocol": "vmess",
   "settings": {
-    "clients": [],
-    "decryption": "none"
+    "clients": []
   },
   "streamSettings": {
     "network": "ws",
@@ -1553,8 +1548,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": [],
-    "decryption": "none"
+    "clients": []
   },
   "streamSettings": {
     "network": "tcp",
@@ -1598,8 +1592,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": [],
-    "decryption": "none"
+    "clients": []
   },
   "streamSettings": {
     "network": "ws",
