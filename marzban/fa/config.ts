@@ -23,6 +23,7 @@ export const config: DefaultTheme.Config = {
       text: 'مستندات',
       items: [
         { text: 'اینباندهای Xray', link: '/fa/docs/xray-inbounds' },
+        { text: 'تنظیمات Core', link: '/fa/docs/core-settings' },
         { text: 'تنظیمات هاست', link: '/fa/docs/host-settings' },
         { text: 'سابسکریپشن', link: '/fa/docs/subscription' },
         { text: 'مرزبان نود ✨', link: '/fa/docs/marzban-node' },
