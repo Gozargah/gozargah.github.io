@@ -30,6 +30,8 @@ In the example above, we used Cloudflare’s `DNS`. Different types of `DNS` and
 | ---------------- | ---------------- | ------------------------------------------------               |
 | `1.1.1.1`        |    `Cloudflare`  |      Speed, privacy, and security                              |
 | `1.1.1.3`        |    `Cloudflare`  | Blocking adult content, suitable for family use                |
+| `1.1.1.2`        |    `Cloudflare`  | Blocking Malware                |
+| `1.0.0.2`        |    `Cloudflare`  | Blocking adult content and Malware                |
 | `8.8.8.8`        |    `Google`      | Reliable due to Google’s extensive global services             |
 | `8.8.4.4`        |    `Google`      |  Backup `DNS` for Google’s primary DNS service                   |
 | `9.9.9.9`        |    `Quad9`       |  Focuses on security and blocking access to malicious domains  |
