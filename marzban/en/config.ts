@@ -21,6 +21,7 @@ export const config = {
       text: 'Documentation',
       items: [
         { text: 'Xray Inbounds', link: '/en/docs/xray-inbounds' },
+        { text: 'Core Settings', link: '/en/docs/core-settings' },
         { text: 'Host settings', link: '/en/docs/host-settings' },
         { text: 'Subscriptions', link: '/en/docs/subscription' },
         { text: 'Marzban node ✨', link: '/en/docs/marzban-node' },
