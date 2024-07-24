@@ -1710,3 +1710,14 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
 ::: tip First Tip
 If you have received your SSL certificate from Cloudflare, remove the `ocspStapling` section from your inbound configuration.
 :::
+
+::: tip Second Tip
+If you are using `Fallback`, you need to first set the fallback inbound tag in your `.env` file.
+```env
+# XRAY_FALLBACKS_INBOUND_TAG = "INBOUND_X"
+```
+Find the above section in the `.env` file, uncomment it by removing the `#` at the beginning, then set the value of `INBOUND_X` to match your fallback inbound tag. Finally, to apply the changes, restart Marzban using the following command.
+```bash
+marzban restart
+```
+:::
