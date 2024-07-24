@@ -1704,3 +1704,9 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
 }
 ```
 :::
+
+## Notes
+
+::: tip First Tip
+If you have received your SSL certificate from Cloudflare, remove the ocspStapling section from your inbound configuration.
+:::
