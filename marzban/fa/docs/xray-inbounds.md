@@ -1221,6 +1221,48 @@ title: اینباندهای Xray
 ```
 :::
 
+::: details VMess KCP NoTLS
+::: code-group
+```json
+{
+  "tag": "VMESS KCP NoTLS",
+  "listen": "0.0.0.0",
+  "port": 8080,
+  "protocol": "vmess",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "kcp",
+    "kcpSettings": {
+      "mtu": 1350,
+      "tti": 20,
+      "uplinkCapacity": 5,
+      "downlinkCapacity": 20,
+      "congestion": false,
+      "readBufferSize": 2,
+      "writeBufferSize": 2,
+      "headers": {
+        "Host": [
+          ""
+        ]
+      },
+      "seed": "TED"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
 ::: details VMess WS NoTLS
 ::: code-group
 ```json
