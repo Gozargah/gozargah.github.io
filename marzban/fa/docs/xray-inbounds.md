@@ -1805,3 +1805,21 @@ title: اینباندهای Xray
 marzban restart
 ```
 :::
+
+::: tip نکته سوم
+اگر قصد استفاده از 2 یا چند دامین و یا ساب دامین را دارید می‌توانید مثل نمونه زیر چندین سرتیفیکت را داخل اینباند قرار بدید.
+```
+            "certificates": [
+              {
+                "ocspStapling": 3600,
+                "certificateFile": "/var/lib/marzban/certs/domain1.com/fullchain.pem",
+                "keyFile": "/var/lib/marzban/certs/domain1.com/key.pem"
+              },
+              {
+                "ocspStapling": 3600,
+                "certificateFile": "/var/lib/marzban/certs/domain2.com/fullchain.pem",
+                "keyFile": "/var/lib/marzban/certs/domain2.com/key.pem"
+              }
+            ],
+```
+:::

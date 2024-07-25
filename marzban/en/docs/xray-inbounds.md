@@ -1805,3 +1805,21 @@ Find the above section in the `.env` file, uncomment it by removing the `#` at t
 marzban restart
 ```
 :::
+
+::: tip Third Tip
+If you want to use multiple domains or subdomains, you can set multiple certificates in the inbound, as shown in the example below.
+```
+            "certificates": [
+              {
+                "ocspStapling": 3600,
+                "certificateFile": "/var/lib/marzban/certs/domain1.com/fullchain.pem",
+                "keyFile": "/var/lib/marzban/certs/domain1.com/key.pem"
+              },
+              {
+                "ocspStapling": 3600,
+                "certificateFile": "/var/lib/marzban/certs/domain2.com/fullchain.pem",
+                "keyFile": "/var/lib/marzban/certs/domain2.com/key.pem"
+              }
+            ],
+```
+:::
