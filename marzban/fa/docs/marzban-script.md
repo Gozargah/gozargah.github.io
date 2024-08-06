@@ -26,6 +26,13 @@ sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/
 marzban help
 ```
 :::
+- با دستور زیر ورژن دولوپر مرزبان را روی سرور خود نصب کنید.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install dev
+```
+::: warning توجه
+- ورژن دولوپر مرزبان مداوم در حال تغییر و آزمایش است، از این رو فقط برای کسانی پیشنهاد می‌شود که دانش برنامه‌نویسی دارند، پس اگر کاربر ساده هستید این ورژن را نصب نکنید چراکه ممکنه تغییرات باعث ایجاد باگ در عملکرد پنل و همینطور دیتابیس شما بشود.
+:::
 
 ## راه‌اندازی مرزبان نود
 
