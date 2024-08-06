@@ -33,6 +33,7 @@ title: Xray входящих
         ""
       ],
       "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "SpiderX": "/example",
       "shortIds": [
         "ea1058117be12087"
       ]
@@ -75,6 +76,7 @@ title: Xray входящих
         ""
       ],
       "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "SpiderX": "/example",
       "shortIds": [
         "ea1058117be12087"
       ]
@@ -119,6 +121,7 @@ title: Xray входящих
         ""
       ],
       "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "SpiderX": "/example",
       "shortIds": [
         "ea1058117be12087"
       ]
