@@ -17,6 +17,16 @@ title: ساخت گواهی SSL
 
 ## دریافت گواهی با acme.sh
 
+- به دلیل استفاده از روش standalone با دستور زیر socat را نصب کتید.
+
+```bash
+apt install curl socat -y
+```
+
+::: tip نکته
+در صورتی که socat را قبلا نصب کرده‌اید، دیگر نیازی به انجام این مرحله نیست.
+:::
+
 - با دستور زیر، [acme.sh](https://github.com/acmesh-official/acme.sh) را نصب کنید.
 
 `YOUR_EMAIL` را به ایمیل خود تغییر دهید.
