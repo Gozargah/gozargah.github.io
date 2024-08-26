@@ -20,6 +20,7 @@ export const config = {
     {
       text: 'Документация',
       items: [
+        { text: 'Xray входящих', link: '/ru/docs/xray-inbounds' },
         { text: 'Настройки хоста', link: '/ru/docs/host-settings' },
         { text: 'Подписки', link: '/ru/docs/subscription' },
         { text: 'Узел Marzban ✨', link: '/ru/docs/marzban-node' },
