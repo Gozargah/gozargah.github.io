@@ -32,10 +32,10 @@ title: اینباندهای Xray
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -75,10 +75,10 @@ title: اینباندهای Xray
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -120,10 +120,10 @@ title: اینباندهای Xray
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -136,6 +136,26 @@ title: اینباندهای Xray
     ]
   }
 }
+```
+:::
+
+::: tip نکته
+با وارد کردن دستور زیر `privateKey` دریافت کنید و آن را در اینباند ریلیتی خود قرار بدید. 
+
+نیازی به قرار دادن `publicKey` نیست چون بصورت خودکار جنریت خواهد شد.
+
+```bash 
+docker exec marzban-marzban-1 xray x25519
+```
+:::
+
+::: tip نکته
+با وارد کردن دستور زیر `shortId` دریافت کنید و آن را در اینباند ریلیتی خود قرار بدید. 
+
+قرار دادن `ShortId` و همچنین `SpiderX` در اینباند ریلیتی اختیاری است و نبودن آن‌ها مشکلی ایجاد نخواهد کرد.
+
+```bash 
+openssl rand -hex 8
 ```
 :::
 
