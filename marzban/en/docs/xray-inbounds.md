@@ -32,10 +32,10 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -75,10 +75,10 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -120,10 +120,10 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -136,6 +136,26 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
     ]
   }
 }
+```
+:::
+
+::: tip Tip
+To get the `privateKey`, use the following command and place it in your Reality Inbound.
+
+There is no need to add the `publicKey` as it will be generated automatically.
+
+```bash 
+docker exec marzban-marzban-1 xray x25519
+```
+:::
+
+::: tip Tip
+To get the `shortId`, use the following command and place it in your Reality Inbound.
+
+Including `ShortId` and `SpiderX` in your Reality Inbound is optional and their absence will not cause any issues.
+
+```bash 
+openssl rand -hex 8
 ```
 :::
 
