@@ -34,7 +34,7 @@ bash <(wget -qO- https://raw.githubusercontent.com/DigneZzZ/marzban_core_change/
 4. Извлекаем содержимое и удаляем  архив.
 
     ```bash
-    unzip Xray-linux-64.zip && rm Xray-linux-64.zip
+    unzip Xray-linux-64.zip && rm Xray-linux-64.zip && sudo chmod +x xray
     ```
 
 

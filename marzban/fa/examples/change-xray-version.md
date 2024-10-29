@@ -42,6 +42,7 @@ wget https://github.com/XTLS/xray-core/releases/latest/download/Xray-linux-64.zi
 ```bash
 unzip Xray-linux-64.zip
 rm Xray-linux-64.zip
+sudo chmod +x xray
 ```
 
 ## تغییر هسته مرزبان
