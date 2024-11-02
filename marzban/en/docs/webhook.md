@@ -69,7 +69,9 @@ DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/xxxxxxx"
 
 - Here’s an example using `Python` and `Flask` to set up a server that verifies Marzban webhook notifications.
 
-```
+::: details code example
+::: code-group
+```code
 from flask import Flask, request, jsonify
 import hmac
 import hashlib
@@ -104,10 +106,13 @@ def webhook():
 if __name__ == '__main__':
     app.run(port=5000)
 ```
+:::
 
 ## Example request sent from Marzban:
 
-```
+::: details request example
+::: code-group
+```code
 Headers:
 Host: 0.0.0.0:9000
 User-Agent: python-requests/2.28.1
@@ -123,3 +128,4 @@ Content-Type: application/json
 Body:
 {"username": "marzban_test_user", "action": "user_updated", "enqueued_at": 1680506457.636369, "tries": 0}
 ```
+:::
