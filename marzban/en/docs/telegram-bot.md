@@ -1,48 +1,43 @@
 ---
-title: ربات تلگرام
+title: Telegram Bot 
 ---
 
+# Telegram Bot
 
-# ربات تلگرام
+Using this guide, you can set up the Marzban Telegram bot to manage your users not only through the Marzban panel but also via the Telegram bot. Some of the bot's features are listed down below.
 
-به کمک این آموزش، شما می‌توانید ربات تلگرام مرزبان را راه‌اندازی کنید تا علاوه بر پنل مرزبان از طریق ربات تلگرام نیز بتوانید کاربرهای خود را مدیریت کنید. برخی از قابلیت‌های ربات تلگرام شامل موارد زیر می‌شوند.
+- Panel statistics with more details, such as download and upload traffic, and real-time download and upload speed
+- The ability to make changes for all users, such as adding or reducing the number of days or allocated data limit
+- Deleting all expired users or users that their data limit is reached
+- Disabling or enabling an inbound for all users
+- Creating users by user-templates 
+- Subscrption last user agent 
+- Restarting `Xray`
 
-- آمار پنل با جزئیات بیشتر، مانند میزان دانلود و آپلود، سرعت لحظه‌ای دانلود و آپلود
-- امکان ایجاد تغییر روی همه کاربرها مانند اضافه یا کم کردن تعداد روز‌ها یا حجم تعیین شده
-- حذف کردن همه کاربرهای منقضی شده یا کاربرهایی که حجم آن‌ها به پایان رسیده
-- برداشتن تیک اینباند به خصوص یا گذاشتن تیک آن برای همه کاربرها
-- ساخت کاربر از طریق قالب از پیش تعیین شده
-- ریستارت کردن Xray
+## Setup
 
-## راه‌اندازی ربات تلگرام
+`1`You need to create a Telegram bot through [BotFather](https://t.me/BotFather) and copy the bot token to use it in the next step.
 
-1. شما باید یک ربات از طریق https://t.me/BotFather  بسازید و توکن ربات را کپی کنید تا در مرحله بعد از آن استفاده کنید.
+`2` Since access to this bot will only be available to you or a limited list of administrators, you need to specify the Telegram IDs of those who are authorized to use it. To get your own Telegram ID, refer to the [UserInfoBot](https://t.me/userinfobot).
 
-2. از آنجایی که دسترسی به این ربات تنها برای شما یا لیست محدودی از مدیران در دسترس خواهد بود، باید شناسه تلگرام افرادی که مجاز به استفاده از آن هستند را مشخص کنید. برای دریافت شناسه تلگرام خود به این ربات https://t.me/userinfobot رجوع کنید. 
-<br>
-
-::: tip  نکته 
-اگر قصد دارید که لاگ‌های پنل جدا باشد یک کانال ایجاد کنید در آن یک متن بفرستید و متن را برای همان رباتی که در مرحله دوم گفته شده فوروارد کنید تا آیدی کانال را دریافت کنید، برای اینکه لاگ‌ها به کانال فرستاده بشه ربات تلگرام باید عضو کانال و ادمین باشد.
+::: tip Tip 
+If you want the panel logs to be separate, create a channel and send a message in it, then forward that message to the bot mentioned in step two to receive the channel ID. To ensure the logs are sent to the channel, the Telegram bot must be a member and an admin of the channel.
 :::
 
-<br>
-3. اکنون باید تمام متغیرها را در مرزبان مشخص کنید، برای این کار باید متغیرها را در فایل .env با برداشتن کامنت # اول آن‌ها و گذاشتن مقادیر خواسته شده در فایل تنظیم کنید.
+`3` Now you need to define all the variables in Marzban. To do this, you need to enable the variables in the `.env` file by removing the leading `#` comments from them and entering the required values in the file.
 
+| Variables                    |                  Usage                                                      |
+|------------------------------|-----------------------------------------------------------------------------|
+| `TELEGRAM_API_TOKEN`         | The token for the Telegram bot                                              |       
+| `TELEGRAM_ADMIN_ID` | The ID number of the admin in Telegram (if you need multiple admins to access the bot, specify their IDs separated by commas)                                                                       |
+| `TELEGRAM_LOGGER_CHANNEL_ID` | The ID number of the channel for panel logs, if desired                     |  
+| `TELGRAM_DEFAULT_VLESS_FLOW`  | Sets the default flow for the Vless protocol in the Telegram bot           |    
+| `TELEGRAM_PROXY_URL`       | Runs the bot through a proxy (if Telegram servers are blocked on your server) |
 
-| متغیرها                    |  معنی  |
-|----------------:|-----------:|
-| `TELEGRAM_API_TOKEN`           | توکن ربات تلگرام|       
-| `TELEGRAM_ADMIN_ID`|آیدی عددی ادمین در تلگرام (اگر نیاز به دسترسی چند ادمین به ربات دارید، آیدی آن‌ها را مشخص کرده و با کاما از هم جدا کنید.)|
-| `TELEGRAM_LOGGER_CHANNEL_ID` | آیدی عددی کانال برای لاگ‌های پنل در صورت تمایل        |  
-| `TELGRAM_DEFAULT_VLESS_FLOW`  | تعیین Flow پیش‌فرض برای پروتکل Vless در ربات تلگرام  |    
-| `TELEGRAM_PROXY_URL`       | اجرای ربات از طریق پروکسی (در صورتی که در سرور شما سرورهای تلگرام مسدود شده‌اند.) |
-
-<br>
-
-4. پس از قرار دادن مقدار‌های خواسته شده، با دستور زیر مرزبان را ریستارت کنید تا تغییرات اعمال شود.
+`4` Then, restart Marzban using the following command to apply the changes.
 
   ```bash
   marzban restart
   ```
 
-  در نهایت پس از ریستارت کردن مرزبان رباتی که پیش‌تر ساخته بودید با وارد کردن دستور start در دسترس شما خواهد بود.
+- Finally, The bot will be available to you by entering the `/start` command.
