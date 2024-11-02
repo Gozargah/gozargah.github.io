@@ -28,10 +28,13 @@ WEBHOOK_SECRET = "something-very-very-secret"
 
 - Now, Marzban will send POST requests to this URL when a specific user event occurs.
 
-- Also, using the following variable, the notification queue is checked every `30` seconds and then sent to the webhook.
-
+- Using the following variable, the notification queue is checked every `30` seconds and then sent to the webhook.
 ```env
 JOB_SEND_NOTIFICATIONS_INTERVAL = 30
+```
+- Using the variable below, you can specify the Discord `URL` for the webhook.
+```env
+DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/xxxxxxx"
 ```
 
 ## **Step 2: Processing Incoming Notifications**
