@@ -283,7 +283,7 @@ marzban cli subscription [OPTIONS] COMMAND [ARGS]...
 **2. آپشن‌ها**
 
 `--help`
-- برای دیدن راهنما کامند `completion subscription` استفاده می‌شود.
+- برای دیدن راهنما کامند `subscription` استفاده می‌شود.
 ```
 marzban cli subscription --help
 ```
@@ -446,6 +446,7 @@ marzban cli user list --status [active|disabled|limited|expired|on_hold]
 ```
 
 `--admin, --owner TEXT `
+- کاربران یک ادمین را نمایش میدهد، به جای عبارت `TEXT` یوزرنیم ادمین موردنظر را وارد کنید.
 ```
 marzban cli user list --admin TEXT
 ```
