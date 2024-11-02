@@ -58,25 +58,21 @@ DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/xxxxxxx"
 
 **انواع رویدادها:**
 
-قسمت `action` ممکن است دارای مقادیر زیر باشد
+- قسمت `action` ممکن است دارای مقادیر زیر باشد
 
-`user_created`: زمانی که یک کاربر ایجاد می‌شود.
-
-`user_updated`: زمانی که جزئیات کاربر به‌روزرسانی می‌شود.
-
-`user_deleted`: زمانی که یک کاربر حذف می‌شود.
-
-`user_limited`: زمانی که حجم کاربر به پایان میرسد.
-
-`user_expired`: زمانی که حساب کاربر منقضی می‌شود.
-
-`user_disabled` / `user_enabled`: زمانی که یک کاربر غیرفعال یا فعال می‌شود.
+- `user_created`: زمانی که یک کاربر ایجاد می‌شود.
+- `user_updated`: زمانی که جزئیات کاربر به‌روزرسانی می‌شود.
+- `user_deleted`: زمانی که یک کاربر حذف می‌شود.
+- `user_limited`: زمانی که حجم کاربر به پایان میرسد.
+- `user_expired`: زمانی که حساب کاربر منقضی می‌شود.
+- `user_disabled` / `user_enabled`: زمانی که یک کاربر غیرفعال یا فعال می‌شود.
 
 ## **مرحله سوم: کد نمونه برای دریافت یک وب‌هوک**
 
 - در اینجا یک مثال با استفاده از `Python` و `Flask` برای راه‌اندازی یک سرور که اعلان‌های وب‌هوک مرزبان را تأیید می‌کند آورده شده است.
-
-```
+::: details کد نمونه
+::: code-group
+```code
 from flask import Flask, request, jsonify
 import hmac
 import hashlib
@@ -111,10 +107,13 @@ def webhook():
 if __name__ == '__main__':
     app.run(port=5000)
 ```
+:::
 
 ## نمونه‌ای از درخواست ارسال شده از مرزبان:
 
-```
+::: details نمونه درخواست
+::: code-group 
+```code
 Headers:
 Host: 0.0.0.0:9000
 User-Agent: python-requests/2.28.1
@@ -130,3 +129,4 @@ Content-Type: application/json
 Body:
 {"username": "marzban_test_user", "action": "user_updated", "enqueued_at": 1680506457.636369, "tries": 0}
 ```
+:::
