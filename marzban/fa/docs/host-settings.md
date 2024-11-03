@@ -13,6 +13,7 @@
 - ALPN (h2, http/1.1)
 - Fingerprint
 - Fragment pattern
+- Noise pattern
 - Allow Insecure
 - Mux
 - Random UserAgent
