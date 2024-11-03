@@ -6,7 +6,7 @@ title: Marzban Node
 
 Marzban Node allows you to distribute traffic load among different servers and enables the use of servers with various locations. Using this guide, you can configure and set up the Marzban Node on one or more side servers and connect them to the Marzban panel so that you can utilize these servers in your configurations. You will also see how to connect a node to multiple Marzban panels down below.
 
-## Setup Marzban Node (Script)
+## Quick Installation (Recommended)
 
 - Install Marzban-node on your server using this command.
 ```bash
@@ -31,7 +31,7 @@ marzban-node help
 Marzban-node commands are thoroughly explained in [Marzban Script](https://gozargah.github.io/marzban/en/docs/marzban-script) document.
 :::
 
-## Setup Marzban Node (Manual)
+## Manual Installation (Advanced)
 
 - After logging into the node server terminal, first update the server with the following command and install necessary programs.
 ```bash
