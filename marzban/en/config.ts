@@ -37,6 +37,7 @@ export const config = {
       items: [
         { text: 'How to generate SSL', link: '/en/examples/issue-ssl-certificate' },
         { text: 'Activating SSL in Marzban', link: '/en/examples/marzban-ssl' },
+        { text: 'Obtain Wildcard SSL', link: '/en/examples/wildcard-ssl' },
         { text: 'Activating TLS', link: '/en/examples/xray-tls-inbound' },
         { text: 'REALITY guide', link: '/en/examples/all-on-one-port' },
         { text: 'Cloudflare Warp setup', link: '/en/examples/warp' },

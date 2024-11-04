@@ -24,7 +24,7 @@ title: کوئری‌ های کاربردی SQL
 
 ## لیست کوئری‌ های کاربردی SQL
 
-- لیست کاربرانی که اشتراک آن‌ها در یک روز تعیین شده تمام می‌شود
+- لیست کاربرانی که اشتراک آن‌ها در یک روز تعیین شده تمام می‌شود.
 ```sql
 SELECT * FROM users 
 WHERE expire >= UNIX_TIMESTAMP('2024-06-13 00:00:00') 
@@ -35,7 +35,7 @@ WHERE expire >= UNIX_TIMESTAMP('2024-06-13 00:00:00')
 در واقع با این کوئری، ما لیست یوزرهایی که `13` ژوئن اشتراک آن‌ها تمام می‌شود را می‌بینیم، تاریخ اولی ملاک هست.
 :::
 
-- لیست کاربرانی که تا تاریخ مشخصی زمانشان به اتمام میرسد
+- لیست کاربرانی که تا تاریخ مشخصی زمانشان به اتمام میرسد.
 ```sql
 SELECT * FROM users WHERE expire < UNIX_TIMESTAMP('2024-03-10') and status = 'active';
 ```
@@ -126,7 +126,7 @@ WHERE datediff(now(), sub_updated_at) > 10 AND status = 'active' ORDER BY LastUp
 در کوئری بالا جای عدد `10` تعداد روز دلخواه را بگذارید. 
 :::
 
-- لیست کاربرانی که اینباند غیرفعال دارند
+- لیست کاربرانی که اینباند غیرفعال دارند.
 ```sql
 SELECT users.username, proxies.id, exclude_inbounds_association.inbound_tag FROM users INNER JOIN proxies 
 ON proxies.user_id = users.id INNER JOIN exclude_inbounds_association 

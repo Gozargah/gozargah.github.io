@@ -9,9 +9,9 @@ Using this tutorial, you can enable subscription links in Marzban. The subscript
 
 ## Enabling Subscription Link
 
-1. To enable the subscription link, first, you need to follow this tutorial [How to generate SSL](https://gozargah.github.io/marzban/examples/issue-ssl-certificate) to generate an SSL certificate for your domain. Then, follow the instructions on this tutorial [Activating SSL in Marzban](https://gozargah.github.io/marzban/examples/marzban-ssl) to activate SSL in Marzban so that your Marzban dashboard and subscription link will be accessible via `https` which provides encrypted data transfer for enhanced security.
+`1` To enable the subscription link, first, you need to follow this tutorial [How to generate SSL](https://gozargah.github.io/marzban/examples/issue-ssl-certificate) to generate an SSL certificate for your domain. Then, follow the instructions on this tutorial [Activating SSL in Marzban](https://gozargah.github.io/marzban/examples/marzban-ssl) to activate SSL in Marzban so that your Marzban dashboard and subscription link will be accessible via `https` which provides encrypted data transfer for enhanced security.
 
-2. If you do not intend to separate the domain for panel and the subscription link, activating SSL will automatically enable the subscription link. However, if you want to have separate domains for each, you need to obtain a Multi SSL certificate so that the certificate works for both your domains. Also, you need to uncomment the following code in the `.env` by removing the initial #, then specify your desired subdomain for the subscription link.
+`2` If you do not intend to separate the domain for panel and the subscription link, activating SSL will automatically enable the subscription link. However, if you want to have separate domains for each, you need to obtain a Multi SSL certificate so that the certificate works for both your domains. Also, you need to uncomment the following code in the `.env` by removing the initial #, then specify your desired subdomain for the subscription link.
 
 ```env
 XRAY_SUBSCRIPTION_URL_PREFIX = https://YOUR_DOMAIN:PORT
@@ -21,7 +21,7 @@ XRAY_SUBSCRIPTION_URL_PREFIX = https://YOUR_DOMAIN:PORT
 If you have assigned a port other than 443 for your panel, it is necessary to include the panel port in the above variable. Additionally, If you are using the Telegram bot, it's essential to specify the above variable. Otherwise, If you copy the user's sub-link via the Telegram bot, the format will be incorrect.
 :::
 
-3. Finally, to apply changes, restart Marzban using the following command.
+`3` Finally, to apply changes, restart Marzban using the following command.
 
 ```bash
 marzban restart
@@ -37,20 +37,20 @@ Some of the subscription link variables are explained in the [Configuration](htt
 
 The subscription page allows you to have a custom page for placing various clients regarding different operating systems and tutorials related to them. A sample subscription page developed by one of the Marzban community members is introduced below.
 
-1. Download the subscription page template using the following command.
+`1` Download the subscription page template using the following command.
 
 ```bash
 sudo wget -N -P /var/lib/marzban/templates/subscription/  https://raw.githubusercontent.com/x0sina/marzban-sub/main/index.html
 ```
 
-2. Then, uncomment the following values in the `.env` file located in the `/opt/marzban/` directory by removing the initial #.
+`2` Then, uncomment the following values in the `.env` file located in the `/opt/marzban/` directory by removing the initial #.
 
 ```env
 CUSTOM_TEMPLATES_DIRECTORY="/var/lib/marzban/templates/"
 SUBSCRIPTION_PAGE_TEMPLATE="subscription/index.html"
 ```
 
-3. Finally, to apply changes, restart Marzban using the following command.
+`3` Finally, to apply changes, restart Marzban using the following command.
 
 ```bash
 marzban restart
