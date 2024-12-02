@@ -27,7 +27,7 @@ sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/
 ```
 
 ::: tip نکته
-رمز برای دیتابیس `MySQL` در حین راه‌اندازی از شما پرسیده خواهد شد، پیشنهاد می‌شود برای حفظ امنیت دیتابیس خود رمز نسبتا قوی لنتخاب کنید، همچنین می‌توانید اینتر را بزنید تا یک رمز بصورت رندوم تعیین شود.
+رمز برای دیتابیس `MySQL` در حین راه‌اندازی از شما پرسیده خواهد شد، پیشنهاد می‌شود برای حفظ امنیت دیتابیس خود رمز نسبتا قوی انتخاب کنید، همچنین می‌توانید اینتر را بزنید تا یک رمز بصورت رندوم تعیین شود.
 :::
 
 ::: tip نکته
@@ -198,7 +198,7 @@ marzban down && marzban up
 اگر از [اسکریپت بک‌آپ](https://gozargah.github.io/marzban/fa/examples/backup) استفاده می‌کنید، لازم هست پس مهاجرت به `MySQL` اسکریپت بک‌آپ را مجدد اجرا کنید، در غیر این صورت بک‌آپ دیتابیس `MySQL` را در فایل بک‌آپ نخواهید داشت.
 :::
 
-## تغییر رمز پنل phpMyAdmin
+## تغییر رمز phpMyAdmin
 
 `1` ابتدا به پنل مدیریت دیتابیس خودتون که بصورت پیش فرض روی پورت `8010` ران شده لاگین کنید.
 
@@ -220,7 +220,7 @@ marzban down && marzban up
 پیشنهاد می‌شود پورت پیش‌فرض پنل مدیریت دیتابیس `phpMyAdmin` را به پورت دیگری تغییر دهید تا یک قدم در جهت حفظ امنیت دیتابیس خود بردارید.
 :::
 
-## راه‌اندازی سرویس phpMyAdmin برای سرورهای ARM
+## راه‌اندازی phpMyAdmin برای سرورهای ARM
 
 - اگر معماری `CPU` سرور شما `ARM` باشد که شامل `arm64` یا `aarch64` است، و سرویس `phpMyAdmin` را با نمونه بالا فعال سازی کردین، در لاگ های مرزبان که با دستور `marzban logs` قابل مشاهده است ارورهایی را خواهید دید که مربوط به ساپورت نشدن `phpMyAdmin` برای `CPU` سرور شماست. همچنین اگر دستور `marzban status` را بزنید، سرویس `phpMyAdmin` در حالت `restarting` قرار دارد. 
 
@@ -276,6 +276,89 @@ marzban restart
 ```bash
 marzban status
 ```
+
+## راه‌اندازی phpMyAdmin به صورت HTTPS
+
+- ابتدا با دستور زیر هاپروکسی را روی سرور خود نصب کنید.
+```bash
+apt update
+apt install -y haproxy
+```
+
+::: details پیکربندی HAProxy
+این پیکر بندی را به انتهای فایل هاپروکسی که در `/etc/haproxy/haproxy.cfg` قرار دارد اضافه کنید.
+
+```cfg
+frontend https_front
+    bind *:8010 ssl crt /etc/ssl/certs/haproxy.pem
+    default_backend http_back
+
+backend https_back
+    server phpmyadmin 127.0.0.1:80 check
+```
+:::
+
+- هاپروکسی را ری‌استارت کنید.
+```bash
+sudo service haproxy restart
+```
+
+- سپس با دستور زیر فایل `Cert` و `Key` سرتیفیکت دامنه خود را تبدیل به یک فایل کنید.
+
+```bash
+cat /your-cert-path/fullchain.pem /your-key-path/key.pem > /etc/ssl/certs/haproxy.pem
+```
+
+- سپس بخش مربوط به سرویس `phpMyAdmin` را مطابق پیکربندی زیر قرار دهید.
+::: details پیکربندی داکر
+
+::: code-group
+```yml{28-34} [docker-compose.yml]
+services:
+  marzban:
+    image: gozargah/marzban:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    volumes:
+      - /var/lib/marzban:/var/lib/marzban
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    command: --bind-address=127.0.0.1 --mysqlx-bind-address=127.0.0.1 --disable-log-bin
+    environment:
+      MYSQL_DATABASE: marzban
+    volumes:
+      - /var/lib/marzban/mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    env_file: .env
+    network_mode: host
+    environment:
+      PMA_HOST: 127.0.0.1
+      UPLOAD_LIMIT: 1024M
+    depends_on:
+      - mysql
+    ports:
+      - "8010:80"
+```
+:::
+
+- مرزبان را ری‌استارت کنید.
+```bash
+marzban restart
+```
+
+::: tip نکته
+پورت `80` روی سرور مستر شما نباید توسط سرویس دیگری درگیر باشد.
+:::
 
 ## رفع ارور موقع خروجی گرفتن از دیتابیس SQLite
 
