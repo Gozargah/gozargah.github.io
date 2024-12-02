@@ -44,6 +44,7 @@ export const config = {
         { text: 'Rules configuration', link: '/en/examples/blocking-rules' },
         { text: 'All on one port', link: '/en/examples/all-on-one-port' },
         { text: 'MySQL setup', link: '/en/examples/mysql' },
+        { text: 'MariaDB setup', link: '/en/examples/mariadb' },
         { text: 'Practical SQL queries', link: '/en/examples/mysql-queries' },
         { text: 'Backup', link: '/en/examples/backup' },
         { text: 'Change Xray-core', link: '/en/examples/change-xray-version' },

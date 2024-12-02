@@ -43,6 +43,7 @@ export const config = {
         { text: 'Настройка правил', link: '/ru/examples/blocking-rules' },
         { text: 'Все на одном порту', link: '/ru/examples/all-on-one-port' },
         { text: 'Настройка MySQL', link: '/ru/examples/mysql' },
+        { text: 'Настройка MariaDB', link: '/ru/examples/mariadb' },
         { text: 'Практичные SQL-запросы', link: '/ru/examples/mysql-queries' },
         { text: 'Резервное копирование', link: '/ru/examples/backup' },
         { text: 'Изменение версии Xray-core', link: '/ru/examples/change-xray-version' },

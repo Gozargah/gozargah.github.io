@@ -46,6 +46,7 @@ export const config: DefaultTheme.Config = {
         { text: 'مسدودسازی سایت ها', link: '/fa/examples/blocking-rules' },
         { text: 'همه چیز روی یک پورت', link: '/fa/examples/all-on-one-port' },
         { text: 'راه‌اندازی MySQL', link: '/fa/examples/mysql' },
+        { text: 'راه‌اندازی MariaDB', link: '/fa/examples/mariadb' },
         { text: 'کوئری های کاربردی SQL', link: '/fa/examples/mysql-queries' },
         { text: 'بک‌آپ گرفتن', link: '/fa/examples/backup' },
         { text: 'تغییر ورژن Xray-core', link: '/fa/examples/change-xray-version' },
