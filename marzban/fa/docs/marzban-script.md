@@ -8,30 +8,63 @@ title: اسکریپت مرزبان
 
 ## راه‌اندازی پنل مرزبان
 
-- با دستور زیر مرزبان را روی سرور خود نصب کنید.
+- با دستور زیر مرزبان را با دیتابیس `SQLite` روی سرور خود نصب کنید.
 ```bash
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
 ```
+- با دستور زیر مرزبان را با دیتابیس `MySQL` روی سرور خود نصب کنید.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql
+```
+- با دستور زیر مرزبان را با دیتابیس `MariaDB` روی سرور خود نصب کنید.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb
+```
+::: tip نکته
+- اگر تعداد کاربرهای شما کم است دیتابیس `SQLite` برای شما مناسب است، اما برای تعداد کاربرهای زیاد حتما پیشنهاد می‌شود مرزبان را با دیتابیس `MySQL` راه‌اندازی کنید.
+:::
+::: tip نکته
+- فعلا توضیحات لازم در خصوص دیتابیس `MariaDB` و همچنین اسکریپت بک‌آپ برای آن وجود ندارد، در نتیجه فقط در صورتی استفاده کنید که دانش کافی برای استفاده از آن را دارید.
+:::
+- دستور زیر یک نمونه برای نصب ورژن خاصی از مرزبان با دیتابیس `SQLite` است.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install v0.5.2
+```
+- دستور زیر یک نمونه برای نصب ورژن خاصی از مرزبان با دیتابیس `MySQL` است.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql --version v0.5.2
+```
+- دستور زیر یک نمونه برای نصب ورژن خاصی از مرزبان با دیتابیس `MariaDB` است.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --version v0.5.2
+```
+::: warning توجه
+دیتابیس MySQL در نسخه `v0.3.2` و بالاتر پشتیبانی می‌شود.
+:::
+- با دستور زیر ورژن دولوپر مرزبان را با دیتابیس `SQLite` روی سرور خود نصب کنید.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install dev
+```
+- با دستور زیر ورژن دولوپر مرزبان را با دیتابیس `MySQL` روی سرور خود نصب کنید.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql --dev
+```
+- با دستور زیر ورژن دولوپر مرزبان را با دیتابیس `MariaDB` روی سرور خود نصب کنید.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --dev
+```
+::: warning توجه
+- ورژن دولوپر مرزبان مداوم در حال تغییر و آزمایش است، از این رو فقط برای کسانی پیشنهاد می‌شود که دانش برنامه‌نویسی دارند، پس اگر کاربر ساده هستید این ورژن را نصب نکنید چراکه ممکنه تغییرات باعث ایجاد باگ در عملکرد پنل و همینطور دیتابیس شما بشود.
+:::
 - با دستور زیر فقط اسکریپت را نصب کنید تا کامندهای مرزبان را داشته باشید.
 ```bash
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install-script
-```
-- دستور زیر یک نمونه برای نصب ورژن خاصی از مرزبان است.
-```bash
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install v0.5.2
 ```
 ::: tip نکته
 - برای دیدن همه کامندهای مرزبان از کامند زیر استفاده کنید.
 ```bash
 marzban help
 ```
-:::
-- با دستور زیر ورژن دولوپر مرزبان را روی سرور خود نصب کنید.
-```bash
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install dev
-```
-::: warning توجه
-- ورژن دولوپر مرزبان مداوم در حال تغییر و آزمایش است، از این رو فقط برای کسانی پیشنهاد می‌شود که دانش برنامه‌نویسی دارند، پس اگر کاربر ساده هستید این ورژن را نصب نکنید چراکه ممکنه تغییرات باعث ایجاد باگ در عملکرد پنل و همینطور دیتابیس شما بشود.
 :::
 
 ## راه‌اندازی مرزبان نود
@@ -92,6 +125,14 @@ marzban update
 - با استفاده از دستور زیر مرزبان را از سرور خود پاک کنید.
 ```
 marzban uninstall 
+```
+- با استفاده از دستور زیر داکر مرزبان را ویرایش کنید.
+```
+marzban edit 
+```
+- با استفاده از دستور زیر فایل `.env` مرزبان را ویرایش کنید.
+```
+marzban edit-env
 ```
 - با استفاده از دستور زیر ورژن هسته `Xray` مرزبان را تغییر دهید.
 ```

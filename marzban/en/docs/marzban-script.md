@@ -8,30 +8,63 @@ In this section, you can see scripts in order to setup Marzban or Marzban-node.
 
 ## Setup Marzban Panel  
 
-- Install Marzban on your server using this command.
+- Install Marzban with the `SQLite` database on your server using this command.
 ```bash
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
 ```
-- Or you can only install this script (marzban command) on your server by using this command.
+- Install Marzban with the `MySQL` database on your server using this command.
 ```bash
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install-script
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql
 ```
-- This is an example for installing a specific version.
+- Install Marzban with the `MariaDB` database on your server using this command.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb
+```
+::: tip Tip
+- If you have a small number of users, the `SQLite` database is suitable for you. However, for a large number of users, it is strongly recommended to set up Marzban with the `MySQL` database.
+:::
+::: tip Tip
+- Currently, there is no detailed explanation for the `MariaDB` database or its backup script. Therefore, only use it if you have sufficient knowledge of working with it.
+:::
+- This is an example for installing a specific version of Marzban with the `SQLite` database.
 ```bash
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install v0.5.2
+```
+- This is an example for installing a specific version of Marzban with the `MySQL` database.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql --version v0.5.2
+```
+- - This is an example for installing a specific version of Marzban with the `MariaDB` database.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --version v0.5.2
+```
+::: warning Warning
+- MySQL database is supported in version `v0.3.2` and later.
+:::
+- To install the developer version of Marzban with the `SQLite` database on your server, use the following command.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install dev
+```
+- To install the developer version of Marzban with the `MySQL` database on your server, use the following command.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mysql --dev
+```
+- To install the developer version of Marzban with the `MariaDB` database on your server, use the following command.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb --dev
+```
+::: warning Warning
+- The developer version of Marzban is constantly changing and under testing, so it is only recommended for those with programming knowledge. If you are a simple user, do not install this version as the changes may cause bugs in the performance of the panel and your database.
+:::
+- You can only install this script (marzban command) on your server by using this command.
+```bash
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install-script
 ```
 ::: tip Tip
 - Use the following command to view all Marzban commands.
 ```bash
 marzban help
 ```
-:::
-- To install the developer version of Marzban on your server, use the following command.
-```bash
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install dev
-```
-::: warning Warning
-- The developer version of Marzban is constantly changing and under testing, so it is only recommended for those with programming knowledge. If you are a simple user, do not install this version as the changes may cause bugs in the performance of the panel and your database.
 :::
 
 ## Setup Marzban-node 
@@ -92,6 +125,14 @@ marzban update
 - Delete Marzban from your server using this command.
 ```
 marzban uninstall 
+```
+- Edit Marzban's Docker configuration using this command.
+```
+marzban edit 
+```
+- - Edit Marzban's `.env` file using this command.
+```
+marzban edit-env
 ```
 - Change `Xray` core version of Marzban using this command.
 ```

@@ -37,19 +37,24 @@ WHERE expire >= UNIX_TIMESTAMP('2024-06-13 00:00:00')
 
 - لیست کاربرانی که تا تاریخ مشخصی زمانشان به اتمام میرسد.
 ```sql
-SELECT * FROM users WHERE expire < UNIX_TIMESTAMP('2024-03-10') and status = 'active';
+SELECT * FROM users 
+WHERE expire < UNIX_TIMESTAMP('2024-03-10') 
+  AND status = 'active';
 ```
 
 ::: tip نکته
 فرضا `7` مارس هست توی کوئری بالا `10` مارس تعیین شده پس تمام کاربرانی که `3` روز از زمان آنها باقی مانده را خروجی میدهد. 
 :::
 
-- لیست کاربرانی که کمتر از `2` گیگابایت از حجم شان باقی مانده
+- لیست کاربرانی که کمتر از `2` گیگابایت از حجم شان باقی مانده است.
 ```sql
-SELECT * FROM users WHERE (data_limit - used_traffic) < (2*1024*1024*1024) and status = 'active' and data_limit IS NOT NULL;
+SELECT * FROM users 
+WHERE data_limit - used_traffic < (2 * 1024 * 1024 * 1024)  
+  AND status = 'active' 
+  AND data_limit IS NOT NULL
 ```
 
-- لیست کاربرانی که `90` درصد حجم خود را مصرف کرده‌اند
+- لیست کاربرانی که `90` درصد حجم خود را مصرف کرده‌اند.
 ```sql
 SELECT * FROM users
 WHERE used_traffic >= 0.9 * data_limit
@@ -110,6 +115,15 @@ FROM users
 WHERE TIMESTAMPDIFF(MINUTE, now(), online_at) = 0;
 ```
 
+- مشاهده کاربران آفلاین به مدت 24 ساعت یا بیشتر
+```sql
+SELECT username, TIMESTAMPDIFF(HOUR, online_at, NOW()) AS LastOnlineHours
+FROM users
+WHERE TIMESTAMPDIFF(HOUR, online_at, NOW()) >= 24
+  AND status = 'active'
+ORDER BY LastOnlineHours DESC;
+```
+
 - لیست کاربرانی که در `1` روز اخیر لینک سابسکریپشن خود را آپدیت کردند.
 ```sql
 SELECT username, datediff(now(), sub_updated_at) as LastUpdate FROM users
@@ -133,7 +147,7 @@ ON proxies.user_id = users.id INNER JOIN exclude_inbounds_association
 ON exclude_inbounds_association.proxy_id = proxies.id ORDER BY users.username;
 ```
 
-- لیست کاربرانی که پروتکل `Vmess` برای آن‌ها غیر فعال است
+- لیست کاربرانی که پروتکل `Vmess` برای آن‌ها غیر فعال است.
 ```sql
 SELECT users.username FROM users 
 WHERE users.username not in (SELECT users.username FROM users LEFT JOIN proxies ON proxies.user_id = users.id 
@@ -212,12 +226,12 @@ delete from users where datediff(now(),from_unixtime(expire))> 30
 در خصوص مورد بالا باید تیک `enable foreign key checks` خاموش باشد.
 :::
 
-- حذف همه کاربرانی که غیرفعال شده‌اند
+- حذف همه کاربرانی که غیرفعال شده‌اند.
 ```sql
 delete from users where status = 'disabled'
 ```
 
-- کاربرانی که پروتکل `Vless` را فعال دارند اگر `Flow`  برای آن‌ها ست نشده باشه برای آن‌ها ست می‌کنه
+- کاربرانی که پروتکل `Vless` را فعال دارند اگر `Flow`  برای آن‌ها ست نشده باشه برای آن‌ها ست می‌کند.
 ```sql
 UPDATE proxies
 SET settings = JSON_SET(settings, '$.flow', 'xtls-rprx-vision')
@@ -236,7 +250,7 @@ FROM users;
 DELETE FROM proxies WHERE type = "VMess"
 ```
 
-- فعال کردن پروتوکل `Vmess` برای کاربران یک ادمین خاص 
+- فعال کردن پروتکل `Vmess` برای کاربران یک ادمین خاص 
 ```sql
 INSERT INTO proxies (user_id, type,  settings) SELECT id, "VMess", CONCAT("{""id"": """, CONVERT(UUID() , CHAR) , """}") 
 FROM users inner join admins ON  users.admin_id = admins.id 
@@ -359,9 +373,11 @@ EVERY 1 WEEK STARTS '2024-05-03 00:00:00' ON COMPLETION NOT PRESERVE ENABLE
 DO TRUNCATE node_user_usages
 ```
 
-- ایونت روزانه برای ست کردن `Flow` چنانچه فراموش کنید برای کاربر بگذارید
+- ایونت روزانه برای ست کردن `Flow` چنانچه فراموش کنید برای کاربر بگذارید.
 ```sql
-CREATE DEFINER=`root`@`%` EVENT `SetFlow` ON SCHEDULE EVERY 1 DAY STARTS '2024-06-01 01:00:00' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE proxies SET settings = JSON_SET(settings, '$.flow', 'xtls-rprx-vision') WHERE type = 'VLESS' AND JSON_UNQUOTE(JSON_EXTRACT(settings, '$.flow')) = '';
+CREATE DEFINER=`root`@`%` EVENT `SetFlow` ON SCHEDULE EVERY 1 DAY STARTS '2024-06-01 01:00:00' ON COMPLETION NOT PRESERVE ENABLE DO 
+UPDATE proxies SET settings = JSON_SET(settings, '$.flow', 'xtls-rprx-vision') 
+WHERE type = 'VLESS' AND JSON_UNQUOTE(JSON_EXTRACT(settings, '$.flow')) = ''; 
 ```
 
 ::: tip نکته

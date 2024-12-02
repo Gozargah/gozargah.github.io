@@ -21,7 +21,7 @@ MySQL در نسخه `v0.3.2` و بالاتر پشتیبانی می‌شود.
 - باید یک سرویس برای MySQL ایجاد کنید. برای این کار، فایل `docker-compose.yml` به شکل زیر تغییر دهید.
 
 ::: code-group
-```yml{9-10,12-20} [docker-compose.yml]
+```yml{9-10,12-21} [docker-compose.yml]
 services:
   marzban:
     image: gozargah/marzban:latest
@@ -38,6 +38,7 @@ services:
     restart: always
     env_file: .env
     network_mode: host
+    command: --bind-address=127.0.0.1 --mysqlx-bind-address=127.0.0.1 --disable-log-bin
     environment:
       MYSQL_DATABASE: marzban
     volumes:
