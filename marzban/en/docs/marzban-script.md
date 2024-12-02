@@ -21,7 +21,7 @@ sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --database mariadb
 ```
 ::: tip Tip
-- If you have a small number of users, the `SQLite` database is suitable for you. However, for a large number of users, it is strongly recommended to set up Marzban with the `MySQL` database.
+- If you have a small number of users and nodes, the `SQLite` database is suitable for you. However, for a large number of users and nodes, it is strongly recommended to set up Marzban with the `MySQL` database. `SQLite` is always single-connection, and if you have many users and nodes, it will lead to more connections to the database, which will likely cause your database to lock.
 :::
 ::: tip Tip
 - Currently, there is no detailed explanation for the `MariaDB` database or its backup script. Therefore, only use it if you have sufficient knowledge of working with it.
@@ -43,7 +43,7 @@ sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/
 :::
 - To install the developer version of Marzban with the `SQLite` database on your server, use the following command.
 ```bash
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install dev
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --dev
 ```
 - To install the developer version of Marzban with the `MySQL` database on your server, use the following command.
 ```bash
@@ -139,7 +139,7 @@ marzban edit-env
 marzban core-update 
 ```
 ::: tip Tip
-By entering the above command, only the last five versions of the `Xray` core will be displayed. If you intend to use a specific version of the `Xray` core, you need to enter the letter `m` and then enter your desired version as shown below
+By entering the above command, only the last `10` versions of the `Xray` core will be displayed. If you intend to use a specific version of the `Xray` core, you need to enter the letter `m` and then enter your desired version as shown below
 ```
 v1.8.24
 ```
