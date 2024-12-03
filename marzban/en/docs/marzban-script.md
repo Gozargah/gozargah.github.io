@@ -130,9 +130,17 @@ marzban uninstall
 ```
 marzban edit 
 ```
-- - Edit Marzban's `.env` file using this command.
+- Edit Marzban's `.env` file using this command.
 ```
 marzban edit-env
+```
+- Setup Marzban backup service using this command.
+```
+marzban backup-service
+```
+- Take an immediate backup using this command.
+```
+marzban backup
 ```
 - Change `Xray` core version of Marzban using this command.
 ```
