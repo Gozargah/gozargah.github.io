@@ -28,7 +28,7 @@ sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/
 :::
 - دستور زیر یک نمونه برای نصب ورژن خاصی از مرزبان با دیتابیس `SQLite` است.
 ```bash
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install v0.5.2
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --version v0.5.2
 ```
 - دستور زیر یک نمونه برای نصب ورژن خاصی از مرزبان با دیتابیس `MySQL` است.
 ```bash

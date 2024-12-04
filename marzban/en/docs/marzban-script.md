@@ -28,7 +28,7 @@ sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/
 :::
 - This is an example for installing a specific version of Marzban with the `SQLite` database.
 ```bash
-sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install v0.5.2
+sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install --version v0.5.2
 ```
 - This is an example for installing a specific version of Marzban with the `MySQL` database.
 ```bash
