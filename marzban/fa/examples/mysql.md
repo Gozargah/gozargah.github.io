@@ -291,7 +291,7 @@ apt install -y haproxy
 ```cfg
 frontend https_front
     bind *:8010 ssl crt /etc/ssl/certs/haproxy.pem
-    default_backend http_back
+    default_backend https_back
 
 backend https_back
     server phpmyadmin 127.0.0.1:80 check
