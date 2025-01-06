@@ -158,6 +158,19 @@ WHERE proxies.type = 'VMESS');
  در خصوص کوئری بالا اگر قصد دارید پروتکل‌های دیگر را چک کنید فقط اسم پروتکل را عوض کنید و حتما حروف بزرگ باشد.
 :::
 
+- لیست کاربرانی که از یک نود خاص استفاده کرده‌اند به ترتیب بیشترین مصرف به کمترین مصرف
+```sql
+SELECT users.id, users.username, SUM(node_user_usages.used_traffic) AS total_used_traffic
+FROM node_user_usages
+INNER JOIN users ON node_user_usages.user_id = users.id
+WHERE node_user_usages.node_id = 100
+GROUP BY users.id, users.username
+ORDER BY total_used_traffic DESC;
+```
+::: tip نکته
+جای عدد `100` عدد نود آیدی را از تیبل `nodes` پیدا کرده و جایگزین کنید.
+:::
+
 ## اسکریپت های کاربردی SQL
 اسکریپت های `SQL` بر خلاف کوئری ها به جای خروجی دادن به شما در دیتابیس تغییر ایجاد می‌کنند.
 
@@ -278,6 +291,18 @@ WHERE type = 'VMess' and proxies.id in (
 در خصوص فعال یا غیرفعال کردن پروتکل‌ها برای سایر پروتکل‌ها خودتون می‌تونین جای `VMess` قرار بدید و وارد کنید. همچنین جای `admin1` یوزنیم ادمین مورد نظر خود را قرار بدید و وارد کنید.
 :::
 
+- کوئری برای فعال کردن پروتکل تروجان
+```sql
+INSERT INTO proxies (TYPE, user_id, settings) 
+SELECT 'trojan' AS TYPE, id, CONCAT( '{"password": "', SUBSTRING( CONCAT( CHAR(FLOOR(65 + (RAND() * 26))), CHAR(FLOOR(97 + (RAND() * 26))), CHAR(FLOOR(48 + (RAND() * 10))), CONVERT(SHA2(RAND(), 256) USING utf8mb4)), 1, 22 ), '", "flow": ""}' ) AS settings FROM users WHERE id in ( select id from users where id not in ( select user_id from proxies where type = 'trojan' ) );
+```
+
+- کوئری برای فعال کردن پروتکل شدوساکس
+```sql
+INSERT INTO proxies (TYPE, user_id, settings) 
+SELECT 'Shadowsocks' AS TYPE, id, CONCAT( '{"password": "', SUBSTRING( CONCAT( CHAR(FLOOR(65 + (RAND() * 26))), CHAR(FLOOR(97 + (RAND() * 26))), CHAR(FLOOR(48 + (RAND() * 10))), CONVERT(SHA2(RAND(), 256) USING utf8mb4)), 1, 22 ), '", "method": "aes-128-gcm"}' ) AS settings FROM users WHERE id in ( select id from users where id not in ( select user_id from proxies where type = 'Shadowsocks' ) );
+```
+
 - فعال کردن یک اینباند خاص برای کاربران همه ادمین‌ها سودو و غیر سودو
 ```sql
 DELETE FROM exclude_inbounds_association 
@@ -397,12 +422,129 @@ WHERE type = 'VLESS' AND JSON_UNQUOTE(JSON_EXTRACT(settings, '$.flow')) = '';
 
 - تریگر برای جلوگیری از حذف اکانت توسط ادمین‌های خاص
 ```sql
-CREATE TRIGGER admin_delete BEFORE DELETE ON users FOR EACH ROW IF OLD.admin_id IN (100, 200, 300) THEN
-    SIGNAL SQLSTATE '45000'    SET MESSAGE_TEXT = 'Deletion not allowed.';
-END IF
+DELIMITER //
+
+CREATE TRIGGER admin_delete
+BEFORE DELETE ON users
+FOR EACH ROW
+BEGIN
+    IF OLD.admin_id IN (100, 200, 300) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Deletion not allowed.';
+    END IF;
+END //
+
+DELIMITER ;
 ```
 برای غیرفعال کردن تریگر‌ها مثل ایونت‌ها دکمه `Drop` را بزنید غیرفعال می‌شود. 
 
 ::: tip نکته
 دقت کنین داخل پرانتز برای مثال سه تا آیدی ذکر شده ، این بستگی به شما داره که بخواید روی چندتا از ادمین‌هاتون این تریگر را اعمال کنید، آیدی ادمین مورد نظرتون را از تیبل‌های دیتابیس پیدا کرده و جایگزین کنید.
 :::
+
+- تریگر برای غیرفعال کردن دکمه ریست حجم برای ادمین‌ها
+```sql
+DELIMITER //
+
+CREATE TRIGGER admin_edit_permission 
+BEFORE UPDATE ON users 
+FOR EACH ROW 
+BEGIN
+    IF NEW.used_traffic <> OLD.used_traffic AND NEW.used_traffic = 0 THEN
+        IF OLD.admin_id IN (3, 4) THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Edit is not allowed.';
+        END IF;    
+    END IF;
+END;
+//
+
+DELIMITER ;
+```
+
+- تریگر برای تعیین حجم برای ادمین‌ها
+
+```sql
+DELIMITER //
+
+CREATE TRIGGER Limit_Admin_TotalData
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    DECLARE total_data_limit BIGINT;
+
+    -- Calculate the total data limit of all users created by the admin
+    SELECT SUM(data_limit) INTO total_data_limit
+    FROM users
+    WHERE admin_id = 1;
+
+    -- Check if the total data limit exceeds or equals 1 TB
+    IF total_data_limit >= (1 * 1024 * 1024 * 1024 * 1024) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Admin has reached the total data limit.';
+    END IF;
+END //
+
+DELIMITER ;
+```
+
+::: tip نکته
+این تریگر حجم معین شده را برای ادمین موردنظر محدود می‌کند نه حجم مصرفی، به این معنا که جمع کل حجم تعیین شده برای کاربرهای ادمین باید کمتر یا مساوی با لیمیت تعیین شده توسط شما باشد. حجم پیش فرض در تریگر 1 ترابایت تعیین شده که با تغییر عدد 1 می‌توانید آن را تغییر دهید.
+:::
+
+::: tip نکته
+دقت کنید اگر چند ادمین دارید و قصد دارید برای هر کدام لیمیت متفاوت تعیین کنید، باید این تریگر را با ادمین آیدی موردنظر و همچنین نام متفاوت وارد کنید چون دو تریگر هم نام را نمی‌توانید وارد کنید.
+:::
+
+- تریگر برای تعیین لیمیت تعداد کاربرهایی که ادمین می‌تواند ایجاد کند.
+```sql
+DELIMITER //
+
+CREATE TRIGGER Limit_Admin_UserCreation
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    DECLARE user_count INT;
+
+    -- Calculate the number of users created by the admin
+    SELECT COUNT(*) INTO user_count
+    FROM users
+    WHERE admin_id = 1;
+
+    -- Check if the number of users created by the admin exceeds the limit
+    IF user_count = 100 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Admin has reached the limit of users.';
+    END IF;
+END //
+
+DELIMITER ;
+```
+
+::: tip نکته
+در تریگر بالا لیمیت 100 تعیین شده که می‌توانید تعداد دلخواه خود و همچنین ادمین آیدی مورد نظر را جایگزین کرده بعد وارد کنید.
+:::
+
+- تریگر برای تعیین پیشوند یوزرنیم برای ادمین‌ها
+```sql
+DELIMITER //
+
+CREATE TRIGGER Add_Prefix_To_Username
+BEFORE INSERT ON users
+FOR EACH ROW
+BEGIN
+    -- Check if the admin_id is one of the specific admins
+    IF NEW.admin_id IN (50, 100) THEN
+        -- Check if the username does not already start with the prefix
+        IF LEFT(NEW.username, LENGTH('prefix_')) != 'prefix_' THEN
+            SET NEW.username = CONCAT('prefix_', NEW.username);
+        END IF;
+    END IF;
+END //
+
+DELIMITER ;
+```
+
+::: tip نکته
+تریگر بالا پیشوند مورد نظر شما را برای کاربرهایی که ادمین ایجاد می‌کند قرار می‌دهد، دقت کنید پیشوند فقط برای کاربرهای جدید اعمال می‌شود. پیشوند مورد نظر خود را جای کلمه `prefix` قرار دهید بعد وارد کنید.
+::: 
