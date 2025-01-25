@@ -171,6 +171,36 @@ ORDER BY total_used_traffic DESC;
 جای عدد `100` عدد نود آیدی را از تیبل `nodes` پیدا کرده و جایگزین کنید.
 :::
 
+-  مجموع حجم‌های تعیین شده توسط ادمین‌ها بر حسب ترابایت
+```sql
+SELECT admins.username, SUM(users.data_limit) / 1099511627776 AS total_data_limit_tb
+FROM users
+LEFT JOIN admins ON users.admin_id = admins.id
+GROUP BY admins.username;
+```
+
+-  مجموع حجم‌های تعیین شده توسط ادمین‌ها بر حسب گیگابایت
+```sql
+SELECT admins.username, SUM(users.data_limit) / 1073741824 AS total_data_limit_gb
+FROM users
+LEFT JOIN admins ON users.admin_id = admins.id
+GROUP BY admins.username;
+```
+
+- کاربرهایی که محدودیت زمان ندارند
+```sql
+SELECT id, username
+FROM users
+WHERE expire IS NULL;
+```
+
+- کاربرهایی که محدودیت حجم ندارند
+```sql
+SELECT id, username
+FROM users
+WHERE data_limit IS NULL;
+```
+
 ## اسکریپت های کاربردی SQL
 اسکریپت های `SQL` بر خلاف کوئری ها به جای خروجی دادن به شما در دیتابیس تغییر ایجاد می‌کنند.
 
@@ -179,6 +209,10 @@ ORDER BY total_used_traffic DESC;
 UPDATE users SET users.admin_id = 3
 WHERE users.admin_id = 6;
 ```
+
+::: tip نکته
+در نمونه بالا کاربران ادمینی که آیدی او در تیبل دیتابیس 6 هست به ادمینی که آیدی او 3 هست منتقل شده است.
+:::
 
 - غیر فعال کردن تمام کاربران یک ادمین خاص
 ```sql
@@ -487,6 +521,34 @@ END //
 
 DELIMITER ;
 ```
+
+```sql
+DELIMITER //
+
+CREATE TRIGGER Limit_Admin_TotalData_Update
+BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+    DECLARE total_data_limit BIGINT;
+
+    -- Calculate the total data limit of all users created by the admin
+    SELECT SUM(data_limit) INTO total_data_limit
+    FROM users
+    WHERE admin_id = 1;
+
+    -- Check if the total data limit exceeds or equals 1 TB
+    IF total_data_limit >= (1 * 1024 * 1024 * 1024 * 1024) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Admin has reached the total data limit.';
+    END IF;
+END //
+
+DELIMITER ;
+```
+
+::: tip نکته
+تریگر اول برای ایجاد محدودیت هنگام ساخت کاربر و تریگر دوم برای ایجاد محدودیت هنگام ویرایش هست، در نتیجه اگر قصد دارید برای ادمین محدودیت حجم بگذارید، لازم است هر دو تریگر را متناسب با میزان محدودیت دلخواه وارد کنید.
+:::
 
 ::: tip نکته
 این تریگر حجم معین شده را برای ادمین موردنظر محدود می‌کند نه حجم مصرفی، به این معنا که جمع کل حجم تعیین شده برای کاربرهای ادمین باید کمتر یا مساوی با لیمیت تعیین شده توسط شما باشد. حجم پیش فرض در تریگر 1 ترابایت تعیین شده که با تغییر عدد 1 می‌توانید آن را تغییر دهید.

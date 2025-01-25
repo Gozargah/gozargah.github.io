@@ -52,7 +52,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql:latest
+    image: mysql:lts
     restart: always
     env_file: .env
     network_mode: host
@@ -81,7 +81,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql:latest
+    image: mysql:lts
     restart: always
     env_file: .env
     network_mode: host
@@ -245,7 +245,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql:latest
+    image: mysql:lts
     restart: always
     env_file: .env
     network_mode: host
@@ -326,7 +326,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql:latest
+    image: mysql:lts
     restart: always
     env_file: .env
     network_mode: host
