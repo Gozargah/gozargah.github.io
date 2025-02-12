@@ -21,6 +21,7 @@ export const config = {
       text: 'Документация',
       items: [
         { text: 'Xray входящих', link: '/ru/docs/xray-inbounds' },
+        { text: 'Core Settings', link: '/ru/docs/core-settings' },
         { text: 'Настройки хоста', link: '/ru/docs/host-settings' },
         { text: 'Подписки', link: '/ru/docs/subscription' },
         { text: 'Узел Marzban ✨', link: '/ru/docs/marzban-node' },
