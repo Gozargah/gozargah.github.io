@@ -8,6 +8,51 @@ title: اینباندهای Xray
 
 ## Reality
 
+::: details VLESS XHTTP REALITY
+::: code-group
+```json
+{
+  "tag": "VLESS XHTTP REALITY",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+     "mode": "auto",
+  },
+    "security": "reality",
+    "realitySettings": {
+      "show": false,
+      "dest": "google.com:443",
+      "xver": 0,
+      "serverNames": [
+        "example.com",
+        ""
+      ],
+      "privateKey": "read the notes down below",
+      "SpiderX": "/",
+      "shortIds": [
+        "read the notes down below"
+      ]
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
 ::: details VLESS TCP REALITY
 ::: code-group
 ```json
@@ -981,6 +1026,36 @@ openssl rand -hex 8
 
 ## VLESS NoTLS 
 
+::: details VLESS XHTTP NoTLS
+::: code-group
+```json
+{
+  "tag": "VLESS XHTTP NoTLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+      "mode": "auto"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
 ::: details VLESS HTTPUpgrade NoTLS
 ::: code-group
 ```json
@@ -1814,11 +1889,15 @@ openssl rand -hex 8
 
 ## نکته‌ها
 
-::: tip نکته اول
+::: tip نکته
+ترنزمیشن `gRPC` و همچنین ترنزمیشن `H2` فقط تا ورژن `v1.8.24` هسته `Xray` پشتیبانی می‌شوند و در ورژن‌های بالاتر این دو ترنزمیشن حذف شده‌اند و به جای آن‌ها ترنزمیشن `XHTTP` جایگزین شده است.
+:::
+
+::: tip نکته
 اگر از کلودفلر سرتیفیکیت دریافت کردید بخش `ocspStapling` را از اینباند خود حذف کنید.
 :::
 
-::: tip نکته دوم
+::: tip نکته
 اگر از `Fallback` استفاده می‌کنید، لازم هست تا اول تگ اینباند فالبک خود را در `.env` ست کنید.
 ```env
 # XRAY_FALLBACKS_INBOUND_TAG = "INBOUND_X"
@@ -1829,7 +1908,7 @@ marzban restart
 ```
 :::
 
-::: tip نکته سوم
+::: tip نکته
 اگر قصد استفاده از 2 یا چند دامین و یا ساب دامین را دارید می‌توانید مثل نمونه زیر چندین سرتیفیکت را داخل اینباند قرار بدید.
 ```
             "certificates": [

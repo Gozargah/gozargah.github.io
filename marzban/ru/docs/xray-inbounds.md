@@ -8,6 +8,51 @@ title: Xray входящих
 
 ## Reality
 
+::: details VLESS XHTTP REALITY
+::: code-group
+```json
+{
+  "tag": "VLESS XHTTP REALITY",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+     "mode": "auto",
+  },
+    "security": "reality",
+    "realitySettings": {
+      "show": false,
+      "dest": "google.com:443",
+      "xver": 0,
+      "serverNames": [
+        "example.com",
+        ""
+      ],
+      "privateKey": "read the notes down below",
+      "SpiderX": "/",
+      "shortIds": [
+        "read the notes down below"
+      ]
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
 ::: details VLESS TCP REALITY
 ::: code-group
 ```json
@@ -959,7 +1004,37 @@ title: Xray входящих
 ```
 :::
 
-## VLESS NoTLS 
+## VLESS NoTLS
+
+::: details VLESS XHTTP NoTLS
+::: code-group
+```json
+{
+  "tag": "VLESS XHTTP NoTLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+      "mode": "auto"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
 
 ::: details VLESS HTTPUpgrade NoTLS
 ::: code-group

@@ -8,6 +8,51 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
 
 ## Reality
 
+::: details VLESS XHTTP REALITY
+::: code-group
+```json
+{
+  "tag": "VLESS XHTTP REALITY",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+     "mode": "auto",
+  },
+    "security": "reality",
+    "realitySettings": {
+      "show": false,
+      "dest": "google.com:443",
+      "xver": 0,
+      "serverNames": [
+        "example.com",
+        ""
+      ],
+      "privateKey": "read the notes down below",
+      "SpiderX": "/",
+      "shortIds": [
+        "read the notes down below"
+      ]
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
 ::: details VLESS TCP REALITY
 ::: code-group
 ```json
@@ -981,6 +1026,36 @@ openssl rand -hex 8
 
 ## VLESS NoTLS 
 
+::: details VLESS XHTTP NoTLS
+::: code-group
+```json
+{
+  "tag": "VLESS XHTTP NoTLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+      "mode": "auto"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
 ::: details VLESS HTTPUpgrade NoTLS
 ::: code-group
 ```json
@@ -1814,11 +1889,15 @@ openssl rand -hex 8
 
 ## Notes
 
-::: tip First Tip
+::: tip Tip
+`gRPC` and `H2` transmissions are only supported up to version `v1.8.24` of the Xray core. In later versions, these two transmissions have been removed, and `XHTTP` transmission has replaced them.
+:::
+
+::: tip Tip
 If you have received your SSL certificate from Cloudflare, remove the `ocspStapling` section from your inbound configuration.
 :::
 
-::: tip Second Tip
+::: tip Tip
 If you are using `Fallback`, you need to first set the fallback inbound tag in your `.env` file.
 ```env
 # XRAY_FALLBACKS_INBOUND_TAG = "INBOUND_X"
@@ -1829,7 +1908,7 @@ marzban restart
 ```
 :::
 
-::: tip Third Tip
+::: tip Tip
 If you want to use multiple domains or subdomains, you can set multiple certificates in the inbound, as shown in the example below.
 ```
             "certificates": [
