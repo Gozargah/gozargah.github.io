@@ -30,9 +30,9 @@ jobs:
         run: |
           mkdir -p dist/marzban
           cp -r marzban/.vitepress/dist/* dist/marzban
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
