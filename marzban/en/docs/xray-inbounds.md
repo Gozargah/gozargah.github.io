@@ -206,6 +206,49 @@ openssl rand -hex 8
 
 ## VLESS TLS
 
+::: details VLESS XHTTP TLS
+::: code-group
+```json
+{
+  "tag": "VLESS XHTTP TLS",
+  "listen": "0.0.0.0",
+  "port": 443,
+  "protocol": "vless",
+  "settings": {
+    "clients": [],
+    "decryption": "none"
+  },
+  "streamSettings": {
+    "network": "xhttp",
+    "xhttpSettings": {
+      "mode": "auto"
+    },
+    "security": "tls",
+    "tlsSettings": {
+      "serverName": "SERVER_NAME",
+      "certificates": [
+        {
+          "ocspStapling": 3600,
+          "certificateFile": "/var/lib/marzban/certs/fullchain.pem",
+          "keyFile": "/var/lib/marzban/certs/key.pem"
+        }
+      ],
+      "minVersion": "1.2",
+      "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  }
+}
+```
+:::
+
 ::: details VLESS HTTPUpgrade TLS
 ::: code-group
 ```json
@@ -1042,7 +1085,8 @@ openssl rand -hex 8
     "network": "xhttp",
     "xhttpSettings": {
       "mode": "auto"
-    }
+      },
+      "security": "none"
   },
   "sniffing": {
     "enabled": true,
@@ -1890,7 +1934,7 @@ openssl rand -hex 8
 ## Notes
 
 ::: tip Tip
-`gRPC` and `H2` transmissions are only supported up to version `v1.8.24` of the Xray core. In later versions, these two transmissions have been removed, and `XHTTP` transmission has replaced them.
+`H2` transmission is only supported up to version `v1.8.24` of the Xray core. In later versions, this transmission has been removed, and `XHTTP` transmission has replaced it.
 :::
 
 ::: tip Tip
