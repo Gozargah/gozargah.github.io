@@ -23,7 +23,7 @@ In this document we'll try to add every Xray inbound that you can use on Marzban
   "streamSettings": {
     "network": "xhttp",
     "xhttpSettings": {
-     "mode": "auto",
+     "mode": "auto"
   },
     "security": "reality",
     "realitySettings": {

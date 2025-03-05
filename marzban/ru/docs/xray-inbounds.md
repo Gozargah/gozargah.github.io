@@ -23,7 +23,7 @@ title: Xray входящих
   "streamSettings": {
     "network": "xhttp",
     "xhttpSettings": {
-     "mode": "auto",
+     "mode": "auto"
   },
     "security": "reality",
     "realitySettings": {
