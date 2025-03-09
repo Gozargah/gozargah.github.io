@@ -1,10 +1,10 @@
 ---
-title: Xray входящих 
+title: Входящие соединения Xray
 ---
 
-# Xray входящих 
+# Входящие соединения Xray
 
-В этом документе мы постараемся добавить каждый входящий трафик Xray, который вы можете использовать на Marzban.
+В этом документе мы постараемся перечислить все входящие соединения `Xray`, которые можно использовать в Marzban.
 
 ## Reality
 
@@ -77,10 +77,10 @@ title: Xray входящих
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -120,10 +120,10 @@ title: Xray входящих
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -165,10 +165,10 @@ title: Xray входящих
         "example.com",
         ""
       ],
-      "privateKey": "AJPbj4ftkYhB_KG1amEVLG4NK51pdmsCGH6ScU6w62Q",
+      "privateKey": "read the notes down below",
       "SpiderX": "/example",
       "shortIds": [
-        "ea1058117be12087"
+        "read the notes down below"
       ]
     }
   },
@@ -181,6 +181,26 @@ title: Xray входящих
     ]
   }
 }
+```
+:::
+
+::: tip Примечание
+Получите `privateKey`, выполнив следующую команду, и поместите его в ваше входящее соединение Reality.
+
+Нет необходимости указывать `publicKey`, так как он будет сгенерирован автоматически.
+
+```bash 
+docker exec marzban-marzban-1 xray x25519
+```
+:::
+
+::: tip Примечание
+Получите `shortId`, выполнив следующую команду, и поместите его в ваше входящее соединение Reality.
+
+Указание `ShortId` и `SpiderX` в входящем соединении Reality является необязательным, и их отсутствие не создаст проблем.
+
+```bash 
+openssl rand -hex 8
 ```
 :::
 
@@ -1047,7 +1067,7 @@ title: Xray входящих
 ```
 :::
 
-## VLESS NoTLS
+## VLESS NoTLS 
 
 ::: details VLESS XHTTP NoTLS
 ::: code-group
@@ -1908,5 +1928,44 @@ title: Xray входящих
         "network": "tcp,udp"
     }
 }
+```
+:::
+
+## Примечания
+
+::: tip Примечание
+Транспорт `H2` поддерживается только до версии `v1.8.24` ядра `Xray`. В более новых версиях этот транспорт был удален и заменен на транспорт `XHTTP`.
+:::
+
+::: tip Примечание
+Если вы получили сертификат от Cloudflare, удалите секцию `ocspStapling` из вашего входящего соединения.
+:::
+
+::: tip Примечание
+Если вы используете `Fallback`, необходимо сначала установить тег входящего соединения fallback в файле `.env`.
+```env
+# XRAY_FALLBACKS_INBOUND_TAG = "INBOUND_X"
+```
+Найдите эту строку в файле `.env`, удалите `#` в начале, чтобы раскомментировать её, затем замените значение `INBOUND_X` на тег вашего входящего соединения fallback. После этого перезапустите Marzban следующей командой для применения изменений:
+```bash
+marzban restart
+```
+:::
+
+::: tip Примечание
+Если вы хотите использовать 2 или более доменов или поддоменов, вы можете добавить несколько сертификатов в входящее соединение, как показано в примере ниже:
+```
+            "certificates": [
+              {
+                "ocspStapling": 3600,
+                "certificateFile": "/var/lib/marzban/certs/domain1.com/fullchain.pem",
+                "keyFile": "/var/lib/marzban/certs/domain1.com/key.pem"
+              },
+              {
+                "ocspStapling": 3600,
+                "certificateFile": "/var/lib/marzban/certs/domain2.com/fullchain.pem",
+                "keyFile": "/var/lib/marzban/certs/domain2.com/key.pem"
+              }
+            ],
 ```
 :::
