@@ -1,92 +1,92 @@
 ---
-title: Installation
+title: Установка
 ---
 
-# Marzban Installation
+# Установка Marzban
 
 
-## Quick Installation (Recommended)
-::: tip Pre-installation Notes
-By running the quick installation command:
-- Docker will be installed on your machine and Marzban will be executed using Docker.
-- The `marzban` command will be available on your machine.
-- Marzban data will be stored in the `/var/lib/marzban` directory.
-- Marzban application files (`docker-compose.yml` and `.env`) will be stored in the `/opt/marzban` directory.
+## Быстрая установка (рекомендуется)
+::: tip Примечания перед установкой
+При выполнении команды быстрой установки:
+- Docker будет установлен на вашу машину, и Marzban будет запущен с помощью Docker.
+- Команда `marzban` будет доступна на вашей машине.
+- Данные Marzban будут храниться в директории `/var/lib/marzban`.
+- Файлы приложения Marzban (`docker-compose.yml` и `.env`) будут храниться в директории `/opt/marzban`.
 :::
-First, execute the following command.
+Сначала выполните следующую команду.
 
 ```bash
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
 ```
-
-::: tip After Installation
-- The Marzban logs will be displayed, and you can stop it by pressing `Ctrl+C`.
-- The dashboard will be running on port 8000 by default, and you can access it through `http://YOUR_SERVER_IP:8000/dashboard/`.
+::: tip После установки
+- Будут отображаться логи Marzban, которые можно остановить, нажав `Ctrl+C`.
+- Панель управления по умолчанию будет запущена на порту 8000, и вы можете получить к ней доступ по адресу `http://YOUR_SERVER_IP:8000/dashboard/`.
 :::
 
-Next, create a sudo admin by executing the following command.
+Затем создайте администратора с правами sudo (главного администратора), выполнив следующую команду.
 ```bash
 marzban cli admin create --sudo
 ```
 
-Now you can log in to the Marzban dashboard using the username and password you have set.
+Теперь вы можете войти в панель управления Marzban, используя имя пользователя и пароль, которые вы указали.
 
-To view the Marzban script guide, you can execute the following command:
+Кроме того, вы можете просмотреть справку по скрипту Marzban, выполнив следующую команду.
 ```bash
 marzban --help
 ```
 
-To modify the default settings, you can open the `/opt/marzban/.env` file and change the desired variables. Then, restart Marzban using the following command.
+Чтобы изменить настройки по умолчанию, вы можете открыть файл `/opt/marzban/.env`, изменить нужные переменные и перезапустить Marzban с помощью следующей команды.
 
-::: details Editing the file with nano
-The easiest way to edit the `.env` file is to use the `nano` editor. Open the file with the following command.
+::: details Редактирование файла с помощью nano
+Самый простой способ редактирования файла `.env` - использование редактора `nano`.
+Откройте файл с помощью следующей команды.
 ```bash
 nano /opt/marzban/.env
 ```
-Apply your changes and save the file by pressing `Ctrl+s`. Then, exit the editor by pressing `Ctrl+x`.
+Внесите изменения и сохраните файл, нажав `Ctrl+s`. Затем выйдите из редактора, нажав `Ctrl+x`.
 :::
 ```bash
 marzban restart
 ```
 
-To view the list of variables, refer to the [Configuration](configuration.md) section.
+Чтобы просмотреть список переменных, обратитесь к разделу [Конфигурация](configuration.md).
 
-## Manual Installation (Advanced)
+## Ручная установка (продвинутая)
 
-::: warning Attention
-Manual installation of the Marzban is not recommended for non-professionals. If you have the patience to study the documentation or are familiar with the programming environment and Linux, try installing this way.
+::: warning Внимание
+Ручная установка Marzban не рекомендуется для неопытных пользователей. Если у вас есть терпение читать документацию или вы знакомы с программированием и Linux, попробуйте этот метод установки.
 
-Also, in manual installation, the Marzban script is not available and you need to be familiar with `git` for updates.
+Также при ручной установке скрипт Marzban недоступен, и для обновления вам нужно знать, как использовать `git`.
 :::
 
-First, you need to install Xray on your machine.
-It is recommended to do this with the [Xray-install](https://github.com/XTLS/Xray-install) script.
+Сначала вам нужно установить Xray на вашу машину.
+Рекомендуется сделать это с помощью скрипта [Xray-install](https://github.com/XTLS/Xray-install).
 
 ```bash
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
 ```
 
-Then clone the project and install the prerequisites.
-::: warning Attention
-Marzban is compatible with Python 3.8 and higher versions. If possible, Python 3.10 is recommended.
+Затем клонируйте проект и установите зависимости.
+::: warning Внимание
+Marzban совместим с Python 3.8 и более новыми версиями.
+По возможности рекомендуется Python 3.10.
 :::
 
-::: details Install pip
-If the pip command is not installed on your machine, install it by running the following command.
-
+::: details Установка pip
+Если команда `pip` не установлена на вашей машине, установите ее, выполнив следующую команду.
 ```bash
 wget -qO- https://bootstrap.pypa.io/get-pip.py | python3 -
 ```
 :::
 
-
-::: details Install in virtualenv If you are a programmer and are familiar with the virtual environment, it is recommended to use [Virtualenv](https://pypi.org/project/virtualenv/)
+::: details Установка в virtualenv
+Если вы программист и знакомы с виртуальными окружениями, рекомендуется использовать [Virtualenv](https://pypi.org/project/virtualenv/).
 ```bash
 python3 -m pip install virtualenv
 python3 -m virtualenv .venv
-# activation
+# активация
 source .venv/bin/activate
-# deactivation
+# деактивация
 deactivate
 ```
 :::
@@ -97,19 +97,18 @@ cd Marzban
 python3 -m pip install -r requirements.txt
 ```
 
-Now to build the database, run the following command.
+Теперь для создания базы данных выполните следующую команду.
 ```bash
 alembic upgrade head
 ```
 
-Create a copy of the `.env.example` file named `.env`. You can use this file to set environment variables. For more information, see the [Configuration](configuration.md) section.
+Создайте копию файла `.env.example` с именем `.env`. Вы можете использовать этот файл для установки переменных окружения. Для получения дополнительной информации см. раздел [Конфигурация](configuration.md).
 
 ```bash
 cp .env.example .env
 ```
 
-To use `marzban-cli`, you need to link it to a file in your `$PATH`, make it executable, and install its auto-completion:
-
+Чтобы использовать `marzban-cli`, вы должны связать его с файлом в вашем `$PATH`, сделать его исполняемым и установить автозавершение:
 
 ```bash
 sudo ln -s $(pwd)/marzban-cli.py /usr/bin/marzban-cli
@@ -117,31 +116,30 @@ sudo chmod +x /usr/bin/marzban-cli
 marzban-cli completion install
 ```
 
-To create a sudo admin (superuser) with `marzban-cli`, run the following command.
+Чтобы создать администратора с правами sudo (главного администратора) с помощью `marzban-cli`, выполните следующую команду.
+
 ```bash
 marzban-cli admin create --sudo
 ```
 
-Now you can run Marzban by running the following command.
+Теперь вы можете запустить Marzban, выполнив следующую команду.
 
 ```bash
 python3 main.py
 ```
-Marzban will run on port 8000 by default. (You can change it by changing the value of `UVICORN_PORT`.)
+Marzban по умолчанию будет запущен на порту 8000. (Вы можете изменить это, изменив значение `UVICORN_PORT`.)
 
-
-::: details Install the Marzban service in systemctl
-To install the Marzban service, you can use the install_service.sh script in the Marzban files.
-
+::: details Установка службы Marzban в systemctl
+Для установки службы Marzban вы можете использовать скрипт `install_service.sh` из файлов Marzban.
 ```bash
 sudo chmod +x install_service.sh
 sudo ./install_service.sh
-# enable and start marzban service
+# включение и запуск службы marzban
 sudo systemctl enable --now marzban.service
 ```
 :::
 
-::: details Marzban with Nginx (SSL enabled)
+::: details Marzban за nginx
 ```nginx
 server {
     listen 443 ssl http2;
@@ -159,4 +157,4 @@ server {
     }
 }
 ```
-:::
+::: 

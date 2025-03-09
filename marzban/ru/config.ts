@@ -1,14 +1,16 @@
-export const config = {
+import { DefaultTheme } from 'vitepress'
+
+export const config: DefaultTheme.Config = {
   sidebar: [
     {
-      text: 'Обзор',
+      text: 'Введение',
       items: [
         {
-          text: 'Введение',
+          text: 'Знакомство с Marzban',
           link: '/ru/docs/introduction',
         },
         {
-          text: 'Начало работы',
+          text: 'Установка',
           link: '/ru/docs/installation',
         },
         {
@@ -20,32 +22,33 @@ export const config = {
     {
       text: 'Документация',
       items: [
-        { text: 'Xray входящих', link: '/ru/docs/xray-inbounds' },
+        { text: 'Входящие соединения Xray', link: '/ru/docs/xray-inbounds' },
+        { text: 'Настройки ядра', link: '/ru/docs/core-settings' },
         { text: 'Настройки хоста', link: '/ru/docs/host-settings' },
-        { text: 'Подписки', link: '/ru/docs/subscription' },
-        { text: 'Узел Marzban ✨', link: '/ru/docs/marzban-node' },
-        { text: 'Telegram-бот', link: '/ru/docs/telegram-bot' },
+        { text: 'Подписка', link: '/ru/docs/subscription' },
+        { text: 'Marzban-ноды ✨', link: '/ru/docs/marzban-node' },
+        { text: 'Телеграм-бот', link: '/ru/docs/telegram-bot' },
         { text: 'Marzban Scrips', link: '/ru/docs/marzban-script' },
-        { text: 'CLI', link: '/ru/docs/marzban-cli' },
+        { text: 'Командная строка (CLI)', link: '/ru/docs/marzban-cli' },
         { text: 'API', link: '/ru/docs/api' },
         { text: 'Webhook', link: '/ru/docs/webhook' },
       ],
     },
     {
-      text: 'Учебники',
+      text: 'Руководства',
       items: [
-        { text: 'Как сгенерировать SSL', link: '/ru/examples/issue-ssl-certificate' },
-        { text: 'Активация SSL в Marzban', link: '/ru/examples/marzban-ssl' },
+        { text: 'Получение SSL-сертификата', link: '/ru/examples/issue-ssl-certificate' },
+        { text: 'Включение SSL в Marzban', link: '/ru/examples/marzban-ssl' },
         { text: 'Получение Wildcard SSL', link: '/ru/examples/wildcard-ssl' },
-        { text: 'Активация TLS', link: '/ru/examples/xray-tls-inbound' },
-        { text: 'Руководство REALITY', link: '/ru/examples/all-on-one-port' },
-        { text: 'Настройка Cloudflare Warp', link: '/ru/examples/warp' },
-        { text: 'Настройка правил', link: '/ru/examples/blocking-rules' },
-        { text: 'Все на одном порту', link: '/ru/examples/all-on-one-port' },
+        { text: 'Включение TLS', link: '/ru/examples/xray-tls-inbound' },
+        { text: 'Настройка REALITY', link: '/ru/examples/all-on-one-port' },
+        { text: 'Активация Cloudflare Warp', link: '/ru/examples/warp' },
+        { text: 'Блокировка сайтов', link: '/ru/examples/blocking-rules' },
+        { text: 'Всё на одном порту', link: '/ru/examples/all-on-one-port' },
         { text: 'Настройка MySQL', link: '/ru/examples/mysql' },
         { text: 'Настройка MariaDB', link: '/ru/examples/mariadb' },
-        { text: 'Практичные SQL-запросы', link: '/ru/examples/mysql-queries' },
-        { text: 'Резервное копирование', link: '/ru/examples/backup' },
+        { text: 'Полезные SQL-запросы', link: '/ru/examples/mysql-queries' },
+        { text: 'Создание резервных копий', link: '/ru/examples/backup' },
         { text: 'Изменение версии Xray-core', link: '/ru/examples/change-xray-version' },
       ],
     },
@@ -57,19 +60,29 @@ export const config = {
   ],
 
   footer: {
-    message: 'Распространяется под лицензией AGPL-3.0.',
-    copyright: 'Авторское право © 2023-настоящее время Gozargah',
+    message: 'Выпущено под лицензией AGPL-3.0',
+    copyright: 'Разработано рабочей группой Gozargah',
   },
   editLink: {
-    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/marzban/ru/:path',
-    text: 'Отредактировать эту страницу на GitHub',
+    pattern: 'https://github.com/gozargah/gozargah.github.io/edit/master/marzban/:path',
+    text: 'Редактировать эту страницу на GitHub',
   },
+  outlineTitle: 'Содержание страницы',
+  returnToTopLabel: 'Вернуться наверх',
+  docFooter: {
+    prev: 'Предыдущая страница',
+    next: 'Следующая страница',
+  },
+  sidebarMenuLabel: 'Меню',
   notFound: {
-    title: 'СТРАНИЦА НЕ НАЙДЕНА',
-    quote: 'Но если вы не измените свое направление и продолжите искать, вы можете оказаться там, куда направляетесь.',
-    linkText: 'Перейти к документации',
-    linkLabel: '/marzban/en',
+    title: 'Страница не найдена',
+    quote: 'Для просмотра документации вернитесь на главную страницу. Для поиска нужной информации вы можете использовать функцию поиска.',
+    linkText: 'Читать документацию',
+    linkLabel: '/marzban/ru',
   },
+  darkModeSwitchLabel: 'Оформление',
+  darkModeSwitchTitle: 'Тёмное',
+  lightModeSwitchTitle: 'Светлое',
 }
 
-export default config
+export default config 
