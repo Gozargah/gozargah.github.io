@@ -42,7 +42,7 @@ services:
     environment:
       MYSQL_DATABASE: marzban
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
 ```
 :::
 
@@ -71,7 +71,7 @@ services:
     environment:
       MYSQL_DATABASE: marzban
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -115,7 +115,7 @@ MYSQL_ROOT_PASSWORD = DB_PASSWORD
 marzban restart
 ```
 
-از این پس، اطلاعات مرزبان در MySQL (در مسیر `/var/lib/marzban/mysql`) ذخیره خواهد شد.
+از این پس، اطلاعات مرزبان در MySQL (در مسیر `/var/lib/mysql/marzban`) ذخیره خواهد شد.
 
 
 ## مهاجرت به MySQL (انتقال اطلاعات)

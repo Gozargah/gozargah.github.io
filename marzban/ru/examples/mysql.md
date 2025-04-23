@@ -47,15 +47,15 @@ docker volume create mysql
 
 ### MySQL
 ```shell
-docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mysql:8.3 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-redo-log-capacity=134217728 --disable-log-bin --mysqlx=OFF
+docker run -d --rm --name mysql -v /var/lib/mysql/marzban:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mysql:8.3 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-redo-log-capacity=134217728 --disable-log-bin --mysqlx=OFF
 ```
 ### MariaDB
 ```shell
-docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mariadb:lts --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-log-file-size=67108864
+docker run -d --rm --name mysql -v /var/lib/mysql/marzban:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban mariadb:lts --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --innodb-log-file-size=67108864
 ```
 ### Percona
 ```shell
-docker run -d --rm --name mysql -v /var/lib/marzban/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban percona/percona-server:8.2 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --disable-log-bin --innodb-redo-log-capacity=134217728 --mysqlx=OFF
+docker run -d --rm --name mysql -v /var/lib/mysql/marzban:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=super-puper-password -e MYSQL_ROOT_HOST=127.0.0.1 -e MYSQL_DATABASE=marzban -e MYSQL_PASSWORD=super-password -e MYSQL_USER=marzban percona/percona-server:8.2 --character_set_server=utf8mb4 --collation_server=utf8mb4_unicode_ci --disable-log-bin --innodb-redo-log-capacity=134217728 --mysqlx=OFF
 ```
  
 
@@ -110,7 +110,7 @@ services:
       - --innodb-open-files=1024
       - --innodb-buffer-pool-size=268435456
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
 volumes:
   mysql:
     external: true
@@ -141,7 +141,7 @@ services:
       - --innodb-open-files=1024
       - --innodb-buffer-pool-size=268435456
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
 volumes:
   mysql:
     external: true
@@ -174,7 +174,7 @@ services:
       - --innodb-open-files=1024
       - --innodb-buffer-pool-size=268435456
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
 
 ```
 
@@ -310,7 +310,7 @@ services:
     environment:
       MYSQL_DATABASE: marzban
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
 
   phpmyadmin:
     image: arm64v8/phpmyadmin:latest
