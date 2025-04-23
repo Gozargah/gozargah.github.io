@@ -76,7 +76,7 @@ services:
       - --slow_query_log_file=/var/lib/mysql/slow.log # Logs slow queries for troubleshooting
       - --long_query_time=2                       # Defines slow query threshold as 2 seconds
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       start_period: 10s
@@ -132,7 +132,7 @@ services:
       - --slow_query_log_file=/var/lib/mysql/slow.log # Logs slow queries for troubleshooting
       - --long_query_time=2                       # Defines slow query threshold as 2 seconds
     volumes:
-      - /var/lib/marzban/mysql:/var/lib/mysql
+      - /var/lib/mysql/marzban:/var/lib/mysql
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       start_period: 10s
@@ -187,7 +187,7 @@ MYSQL_PASSWORD=DB_PASSWORD
 marzban restart
 ```
 
-از این پس، اطلاعات مرزبان در MariaDB (در مسیر `/var/lib/marzban/mysql`) ذخیره خواهد شد.
+از این پس، اطلاعات مرزبان در MariaDB (در مسیر `/var/lib/mysql/marzban`) ذخیره خواهد شد.
 
 
 ## مهاجرت به MariaDB (انتقال اطلاعات)
