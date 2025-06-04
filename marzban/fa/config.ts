@@ -45,6 +45,8 @@ export const config: DefaultTheme.Config = {
         { text: 'فعال‌سازی Cloudflare Warp', link: '/fa/examples/warp' },
         { text: 'مسدودسازی سایت ها', link: '/fa/examples/blocking-rules' },
         { text: 'همه چیز روی یک پورت', link: '/fa/examples/all-on-one-port' },
+        { text: 'راه‌اندازی TimescaleDB', link: '/fa/examples/timescaledb' },
+        { text: 'راه‌اندازی PostgreSQL', link: '/fa/examples/postgresql' },      
         { text: 'راه‌اندازی MySQL', link: '/fa/examples/mysql' },
         { text: 'راه‌اندازی MariaDB', link: '/fa/examples/mariadb' },
         { text: 'کوئری های کاربردی SQL', link: '/fa/examples/mysql-queries' },

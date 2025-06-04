@@ -43,6 +43,8 @@ export const config = {
         { text: 'Cloudflare Warp setup', link: '/en/examples/warp' },
         { text: 'Rules configuration', link: '/en/examples/blocking-rules' },
         { text: 'All on one port', link: '/en/examples/all-on-one-port' },
+        { text: 'TimescaleDB setup', link: '/en/examples/timescaledb' }, 
+        { text: 'PostgreSQL setup', link: '/en/examples/postgresql' },  
         { text: 'MySQL setup', link: '/en/examples/mysql' },
         { text: 'MariaDB setup', link: '/en/examples/mariadb' },
         { text: 'Practical SQL queries', link: '/en/examples/mysql-queries' },
