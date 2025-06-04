@@ -1,8 +1,8 @@
 ---
-title: Core Settings
+title: Core
 ---
 
-# Core Settings
+# Core
 
 Since Marzban panel is based on the `Xray-core`, this document aims to explain the practical aspects of `Xray` that you can use in the `Core Settings` section of the panel, so you will be familiar with it's useful features.
 

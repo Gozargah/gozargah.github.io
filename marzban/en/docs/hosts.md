@@ -1,4 +1,8 @@
-# Host Settings 
+---
+title: Hosts
+---
+
+# Hosts
 
 The purpose of host settings is to customize configurations.
 With host settings, you can create specific configurations for each inbound. Each configuration can have its own settings. The following fields can be modified in host settings.
