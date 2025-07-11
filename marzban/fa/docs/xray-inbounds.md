@@ -476,7 +476,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "httpupgrade",
@@ -519,7 +520,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "splithttpSettings": {
@@ -564,7 +566,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -606,7 +609,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -648,7 +652,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -689,7 +694,8 @@ openssl rand -hex 8
   "port": 2083,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -744,7 +750,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -786,7 +793,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -965,7 +973,8 @@ openssl rand -hex 8
   "listen": "@vmess-tcp",
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1021,7 +1030,8 @@ openssl rand -hex 8
   "listen": "@vmess-ws",
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1045,7 +1055,8 @@ openssl rand -hex 8
   "listen": "@trojan-ws",
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1278,7 +1289,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vless",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1309,7 +1321,8 @@ openssl rand -hex 8
   "port": 2095,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "httpupgrade",
@@ -1340,7 +1353,8 @@ openssl rand -hex 8
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "splithttp",
@@ -1414,7 +1428,8 @@ openssl rand -hex 8
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1444,7 +1459,8 @@ openssl rand -hex 8
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -1474,7 +1490,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1505,7 +1522,8 @@ openssl rand -hex 8
   "port": 8080,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1535,7 +1553,8 @@ openssl rand -hex 8
   "port": 8080,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -1565,7 +1584,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1652,7 +1672,8 @@ openssl rand -hex 8
   "listen": "@vmess-ws",
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1766,7 +1787,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1810,7 +1832,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1845,7 +1868,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1889,7 +1913,8 @@ openssl rand -hex 8
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
