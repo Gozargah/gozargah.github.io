@@ -456,7 +456,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "httpupgrade",
@@ -499,7 +500,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "splithttpSettings": {
@@ -544,7 +546,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -586,7 +589,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -628,7 +632,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -669,7 +674,8 @@ title: Xray входящих
   "port": 2083,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -724,7 +730,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -766,7 +773,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -945,7 +953,8 @@ title: Xray входящих
   "listen": "@vmess-tcp",
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1001,7 +1010,8 @@ title: Xray входящих
   "listen": "@vmess-ws",
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1025,7 +1035,8 @@ title: Xray входящих
   "listen": "@trojan-ws",
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1258,7 +1269,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vless",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1289,7 +1301,8 @@ title: Xray входящих
   "port": 2095,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "httpupgrade",
@@ -1320,7 +1333,8 @@ title: Xray входящих
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "splithttp",
@@ -1394,7 +1408,8 @@ title: Xray входящих
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1424,7 +1439,8 @@ title: Xray входящих
   "port": 8080,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -1454,7 +1470,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1485,7 +1502,8 @@ title: Xray входящих
   "port": 8080,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1515,7 +1533,8 @@ title: Xray входящих
   "port": 8080,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "grpc",
@@ -1545,7 +1564,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1632,7 +1652,8 @@ title: Xray входящих
   "listen": "@vmess-ws",
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1746,7 +1767,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1790,7 +1812,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "vmess",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
@@ -1825,7 +1848,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "tcp",
@@ -1869,7 +1893,8 @@ title: Xray входящих
   "port": 443,
   "protocol": "trojan",
   "settings": {
-    "clients": []
+    "clients": [],
+    "decryption": "none"
   },
   "streamSettings": {
     "network": "ws",
