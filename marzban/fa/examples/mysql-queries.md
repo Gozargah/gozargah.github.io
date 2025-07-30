@@ -108,13 +108,6 @@ WHERE status = 'active' GROUP By SUBSTR(sub_last_user_agent ,1,9)
 ORDER By SUBSTR(sub_last_user_agent ,1,9);
 ```
 
-- مشاهده کاربران آنلاین و تعداد آن‌ها
-```sql
-SELECT username
-FROM users
-WHERE TIMESTAMPDIFF(MINUTE, now(), online_at) = 0;
-```
-
 - مشاهده کاربران آفلاین به مدت 24 ساعت یا بیشتر
 ```sql
 SELECT username, TIMESTAMPDIFF(HOUR, online_at, NOW()) AS LastOnlineHours

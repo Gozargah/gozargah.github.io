@@ -57,6 +57,7 @@ export const config: DefaultTheme.Config = {
         { text: 'کوئری های کاربردی SQL', link: '/fa/examples/mysql-queries' },
         { text: 'بک‌آپ گرفتن', link: '/fa/examples/backup' },
         { text: 'تغییر ورژن Xray-core', link: '/fa/examples/change-xray-version' },
+        { text: 'سوال‌های پرتکرار', link: '/fa/examples/faq' },
       ],
     },
   ],
