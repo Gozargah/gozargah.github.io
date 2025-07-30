@@ -47,6 +47,7 @@ export const config = {
         { text: 'Практичные SQL-запросы', link: '/ru/examples/mysql-queries' },
         { text: 'Резервное копирование', link: '/ru/examples/backup' },
         { text: 'Изменение версии Xray-core', link: '/ru/examples/change-xray-version' },
+        { text: 'FAQ', link: '/ru/examples/faq' },     
       ],
     },
   ],
