@@ -1,47 +1,47 @@
 ---
-title: ساخت گواهی SSL
+title: SSL certificate
 ---
 
-# ساخت گواهی SSL
-آموزش های پایین مربوط به دریافت گواهی SSL برای استفاده در مرزبان است.
+# SSL certificate
+The following instructions are related to obtaining an SSL certificate for use in Marzban.
 
-::: warning توجه
-فایل های گواهی باید در آدرس `/var/lib/marzban/certs` در دسترس باشند تا مرزبان بتواند به آنها دسترسی داشته باشد.
+::: warning Note
+Certificate files must be accessible at `/var/lib/marzban/certs` so that Marzban can access them.
 
-در تمام مثال های پایین، فایل ها در این آدرس نصب خواهند شد.
+In the following examples, the files will be installed at this address.
 :::
 
-::: warning توجه
-شما باید قبل از اقدام به دریافت گواهی SSL، رکورد های DNS دامنه را ثبت کرده باشید.
+::: warning Note
+Before obtaining an SSL certificate, you must register your domain's DNS records.
 :::
 
-## دریافت گواهی با acme.sh
+## Receiving a certificate with acme.sh
 
-- به دلیل استفاده از روش standalone با دستور زیر socat را نصب کتید.
+- To use the standalone method, install socat using the following command.
 
 ```bash
 apt install curl socat -y
 ```
 
-::: tip نکته
-در صورتی که socat را قبلا نصب کرده‌اید، دیگر نیازی به انجام این مرحله نیست.
+::: tip Note
+If you have already installed socat, you do not need to perform this step.
 :::
 
-- با دستور زیر، [acme.sh](https://github.com/acmesh-official/acme.sh) را نصب کنید.
+- With the following configuration, install [acme.sh](https://github.com/acmesh-official/acme.sh).
 
-`YOUR_EMAIL` را به ایمیل خود تغییر دهید.
+`YOUR_EMAIL` Change it to your email address.
 
-::: tip نکته
-در صورتی که acme.sh را قبلا نصب کرده‌اید، دیگر نیازی به انجام این مرحله نیست.
+::: tip Note
+If you have already installed acme.sh, you do not need to perform this step.
 :::
 
 ```bash
 curl https://get.acme.sh | sh -s email=YOUR_EMAIL
 ```
 
-- برای دریافت گواهی، دستورات زیر را به ترتیب اجرا کنید.
+- To receive a certificate, please follow the steps below.
 
-`YOUR_DOMAIN` را به دامنه یا ساب‌دامنه‌ی مورد نظر خود تغییر دهید.
+`YOUR_DOMAIN` Replace this with your own domain or subdomain.
 
 ```bash
 
@@ -56,43 +56,42 @@ mkdir -p /var/lib/marzban/certs
 
 ```
 
-## دریافت گواهی دامنه ثبت شده بر کلودفلر
+## Receipt of registered mail on Cloudflare
 
-- اگر دامنه بر روی کلودفلر ثبت شده و روش های بالا پاسخگو نبود، از حالت دستی استفاده کنید
+- If Damneh is registered on Cloudflare and the above methods do not work, use the manual method.
 
-  `example.com` را به دامنه خود تغییر دهید
+  `example.com` Change it to your own domain name.
 
-  - بعد از نصب acme مراحل زیر را اجرا کنید
- 
+   - After installing Acme, perform the following steps
 ```
 curl https://get.acme.sh
 ```
 
-1. قدم اول:
+1. First step:
 ```
 ~/.acme.sh/acme.sh --issue -d example.com --dns \
  --yes-I-know-dns-manual-mode-enough-go-ahead-please
 ```
-- بعد از اجرا دو مقدار مانند عکس زیر به شما داده میشود
+- After completing the two steps shown below, you will be given the following amount.
 
   ![image](https://github.com/Gozargah/gozargah.github.io/assets/67644313/538c8341-fa77-4b06-96a4-73c29f3e0ded)
 
-2. قدم دوم:
-به کلودفلر رفته و یک رکورد از تایپ txt ایجاد کنید و مقادیر را مانند عکس زیر وارد کنید
+2. Front foot:
+Go to Notepad and create a txt file and enter the amounts as shown in the image below.
 
 ![image](https://github.com/Gozargah/gozargah.github.io/assets/67644313/dad9c59a-da1f-440b-aa6e-ad524aff212a)
 
-3. قدم سوم:
-  با دستور زیر سرتیفیکیت را دریافت کنید
+3. Sum:
+  Please obtain the following certificate
 ```
 ~/.acme.sh/acme.sh --renew -d example.com \
   --yes-I-know-dns-manual-mode-enough-go-ahead-please
 ```
 
-- در آخر فایل سرتیفیکیت دامین شما در آدرس زیر
+- In the last file, your certificate is at the following address
 
 `/root/.acme.sh/example.com_ecc/fullchain.cer`
 
-- و فایل پرایوت کی در آدرس زیر ذخیره میشود
+- The file is stored at the following address
 
 `/root/.acme.sh/example.com_ecc/example.com.key`
