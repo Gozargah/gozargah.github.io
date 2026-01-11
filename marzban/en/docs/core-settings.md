@@ -72,7 +72,7 @@ The inbounds specified in the `Core Settings` define the proxies for in Marzban.
         ""
       ],
       "privateKey": "oNDJxLaAiXojgAcdW5gzwuQB_gMYL0DXfRnqswUKvTE",
-      "publicKey": "oVRY8h7Njgw25j3CNhaJVMUys378tTvecrSRbrB3gyo"
+      "publicKey": "oVRY8h7Njgw25j3CNhaJVMUys378tTvecrSRbrB3gyo",
       "shortIds": [
         "2ebd6e17dec6a5d9"
       ]
