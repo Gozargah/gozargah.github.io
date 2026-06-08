@@ -142,14 +142,15 @@ sudo systemctl enable --now marzban.service
 ::: details مرزبان پشت nginx
 ```nginx
 server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
     server_name marzban.example.com;
 
     ssl_certificate      /etc/letsencrypt/live/example.com/fullchain.pem;
     ssl_certificate_key  /etc/letsencrypt/live/example.com/privkey.pem;
 
-    location ~* /(dashboard|api|docs|redoc|openapi.json) {
+    location ~* /(dashboard|api|docs|redoc|openapi.json|sub|assets|statics) {
         proxy_pass http://0.0.0.0:8000;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
